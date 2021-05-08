@@ -208,7 +208,7 @@ int main()
 	// 2- After reading the stirng clear the status bar
 	// 3- print on the status bar "You Entered" then print the string
 	string m = pIn->GetSrting(pOut);
-
+	pOut->PrintMessage("You Entered: "+m);
 
 	pIn->GetPointClicked(x, y);	//Wait for any click
 	pOut->ClearDrawArea();
