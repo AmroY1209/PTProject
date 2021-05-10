@@ -7,4 +7,6 @@ Abdulrahman Ibrahim Mohamed El-Husseiny
     ID: 1190
 Youssef Mohamed Mahmoud Mohamed Shaaban
     ID: 1190202
-Hello TEAm
+
+me7tageen ne3mel 2 icons kaman: load w zoom in/zoom out, momken nel8y etneen men el bonus elly homma 
+move w resize w rotate w send back bring front, we n7ot badalha undo w redo 3ashan dool b 5% welly ablohom b 5%
