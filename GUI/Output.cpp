@@ -6,8 +6,8 @@ Output::Output()
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
 
-	UI.width = 1300;
-	UI.height = 700;
+	UI.width = 1530;
+	UI.height = 800;
 	UI.wx = 5;
 	UI.wy = 5;
 
@@ -87,6 +87,15 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_LINE] = "images\\menuItems\\Menu_Line.jpg";
 	MenuItemImages[ITM_TRIA] = "images\\menuItems\\Menu_Tria.jpg";
 	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\Menu_Circ.jpg";
+	MenuItemImages[ITM_FILL] = "images\\MenuItems\\Menu_Fill.jpg";
+	MenuItemImages[ITM_DRAWCOL] = "images\\MenuItems\\Menu_DrawCol.jpg";
+	MenuItemImages[ITM_BKCOl] = "images\\MenuItems\\Menu_BKCol.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Del.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Move.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Menu_Resize.jpg";
+	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\Menu_Rotate.jpg";
+	MenuItemImages[ITM_STOB] = "images\\MenuItems\\Menu_StoB.jpg";
+	MenuItemImages[ITM_STOF] = "images\\MenuItems\\Menu_StoF.jpg";
 	MenuItemImages[ITM_COPY] = "images\\MenuItems\\Menu_Copy.jpg";
 	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\Menu_Paste.jpg";
 	MenuItemImages[ITM_CUT] = "images\\MenuItems\\Menu_Cut.jpg";

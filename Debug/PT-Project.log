@@ -1,0 +1,9 @@
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+  Output.cpp
+C:\Users\Abdo\OneDrive - Cairo University - Students\Documents\ass\prog\zzPROJECT\phaze1\Paint-Phase1\PTProject_Phase1\GUI\Output.cpp(243,32): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
+  Input.cpp
+  Generating Code...
+  Compiling...
+  TestCode.cpp
+  Generating Code...
+  PT-Project.vcxproj -> C:\Users\Abdo\OneDrive - Cairo University - Students\Documents\ass\prog\zzPROJECT\phaze1\Paint-Phase1\PTProject_Phase1\.\Debug\PT Project.exe
