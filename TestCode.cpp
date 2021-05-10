@@ -263,19 +263,51 @@ int main()
 			break;
 
 		case CHNG_FILL_CLR:
+			pOut->PrintMessage("Action: Change fill color , Click anywhere");
+			break;
+
+		case CHNG_BK_CLR:
 			pOut->PrintMessage("Action: Change background color , Click anywhere");
 			break;
 
+		case MOVE:
+			pOut->PrintMessage("Action: Move a selected object to a selected position, Click anywhere");
+			break;
+
+		case RESIZE:
+			pOut->PrintMessage("Action: Change size of a selected object , Click anywhere");
+			break;
+
+		case ROTATE:
+			pOut->PrintMessage("Action: Rotate a selected object , Click anywhere");
+			break;
+
+		case SEND_BACK:
+			pOut->PrintMessage("Action: Send a selected object to the back of drawing area, Click anywhere");
+			break;
+
+		case BRNG_FRNT:
+			pOut->PrintMessage("Action: Bring a selected object to the front of drawing area, Click anywhere");
+			break;
+
+		case SAVE:
+			pOut->PrintMessage("Action: Save a selected object , Click anywhere");
+			break;
+
+		case DEL:
+			pOut->PrintMessage("Action: Delete a selected object , Click anywhere");
+			break;
+
 		case STATUS:
-			pOut->PrintMessage("Action: a click on the Status Bar, Click anywhere");
+			pOut->PrintMessage("Action: A click on the Status Bar, Click anywhere");
 			break;
 
 		case DRAWING_AREA:
-			pOut->PrintMessage("Action: a click on the Drawing Area, Click anywhere");
+			pOut->PrintMessage("Action: A click on the Drawing Area, Click anywhere");
 			break;
 
 		case EMPTY:
-			pOut->PrintMessage("Action: a click on empty area in the Design Tool Bar, Click anywhere");
+			pOut->PrintMessage("Action: A click on empty area in the Design Tool Bar, Click anywhere");
 			break;
 
 		case TO_DRAW:
@@ -288,8 +320,16 @@ int main()
 			pOut->CreatePlayToolBar();
 			break;
 
-		case PNH:
-			pOut->PrintMessage("Action: a click on Play and Hide, Click anywhere");
+		case PBYC:
+			pOut->PrintMessage("Action: A click on pick by color, Click anywhere");
+			break;
+
+		case PBYS:
+			pOut->PrintMessage("Action: A click on pick by size, Click anywhere");
+			break;
+
+		case PBYB:
+			pOut->PrintMessage("Action: A click on pick by both, Click anywhere");
 			break;
 
 		case EXIT:

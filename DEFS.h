@@ -13,15 +13,15 @@ enum ActionType //The actions supported (you can add more if needed)
 	CHNG_DRAW_CLR,	//Change the drawing color
 	CHNG_FILL_CLR,	//Change the filling color
 	CHNG_BK_CLR,	//Change background color
-	DEL,			//Delete a figure(s)
-	COPY,           //Copy an item to Clipboard
-	PASTE,          //Paste an item from Clipboard
-	CUT,            //Cut an item and have it in Clipboard
 	MOVE,			//Move a figure(s)
 	RESIZE,			//Resize a figure(s)
 	ROTATE,			//Rotate a figure(s)
 	SEND_BACK,		//Send a figure to the back of all figures
 	BRNG_FRNT,		//Bring a figure to the front of all figures
+	DEL,			//Delete a figure(s)
+	COPY,           //Copy an item to Clipboard
+	PASTE,          //Paste an item from Clipboard
+	CUT,            //Cut an item and have it in Clipboard
 	SAVE,			//Save the whole graph to a file
 	LOAD,			//Load a graph from a file
 	EXIT,			//Exit the application
@@ -33,7 +33,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,		//Switch interface to Play mode
 
-	PNH             //Play and hide mode
+	PBYS,           //Pick by shape
+	PBYC,			//Pick by color
+	PBYB			//Pick by both
 };
 
 struct Point	//To be used for figures points
