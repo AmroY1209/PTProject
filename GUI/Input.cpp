@@ -59,6 +59,7 @@ ActionType Input::GetUserAction() const
 			case ITM_DRAWCOL: return CHNG_DRAW_CLR;
 			case ITM_FILL: return CHNG_FILL_CLR;
 			case ITM_BKCOL: return CHNG_BK_CLR;
+			case ITM_SELECT: return SELECT;
 			case ITM_MOVE: return MOVE;
 			case ITM_RESIZE: return RESIZE;
 			case ITM_DEL: return DEL;

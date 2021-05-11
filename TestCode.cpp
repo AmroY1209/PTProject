@@ -254,6 +254,10 @@ int main()
 			pOut->PrintMessage("Action: Paste the last copied/cut figures, Click anywhere");
 			break;
 
+		case SELECT:
+			pOut->PrintMessage("Action: Select a figure, Click anywhere");
+			break;
+
 		case CUT:
 			pOut->PrintMessage("Action: Cut the selected figures, Click anywhere");
 			break;
