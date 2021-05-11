@@ -24,16 +24,16 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_DRAWCOL,	//Change Draw color in menu
 	ITM_FILL,		//Change fill color in menu
 	ITM_BKCOL,		//Change background color in menu
-	ITM_MOVE,		//Move item in the drawing area in menu
 	ITM_RESIZE,		//Resize a drawing area item in menu
-	ITM_ROTATE,		//Rotate an item by 90/180/270 degrees in menu
-	ITM_STOB,		//Send item to back
-	ITM_STOF,		//Send item to front
+	ITM_ZOOMIN,     //Zoom in item in menu
+	ITM_ZOOMOUT,    //Zoom out item in menu
+	ITM_MOVE,		//Move item in the drawing area in menu
 	ITM_DEL,		//Delete an item
 	ITM_COPY,       //Copy item in menu
 	ITM_PASTE,      //Paste item in menu
 	ITM_CUT,        //Cut item in menu
 	ITM_SAVE,       //Save item in menu
+	ITM_LOAD,       //Load item in menu
 	ITM_PLAY,       //Go to Play toolbar in menu
 	ITM_EXIT,		//Exit item
 	
@@ -47,9 +47,10 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_PBYS,           //pick by shape play mode
-	ITM_PBYC,			//pick by color
-	ITM_PBYB,			//pick by both
+	ITM_BYTYPE,         //pick the same shapes
+	ITM_BYCOLOR,	    //pick the same colour
+	ITM_BOTH,			//pick the same shapes and colour
+	ITM_BYAREA,         //Pick the largest(smallest) area and so on
 	ITM_DRAW,           //Go to Draw toolbar in menu
 	PLAY_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 	

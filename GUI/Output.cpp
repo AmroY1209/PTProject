@@ -90,16 +90,16 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_DRAWCOL] = "images\\MenuItems\\Menu_DrawCol.jpg";
 	MenuItemImages[ITM_FILL] = "images\\MenuItems\\Menu_Fill.jpg";
 	MenuItemImages[ITM_BKCOL] = "images\\MenuItems\\Menu_BKCol.jpg";
-	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Move.jpg";
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Menu_Resize.jpg";
-	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\Menu_Rotate.jpg";
-	MenuItemImages[ITM_STOB] = "images\\MenuItems\\Menu_StoB.jpg";
-	MenuItemImages[ITM_STOF] = "images\\MenuItems\\Menu_StoF.jpg";
+	MenuItemImages[ITM_ZOOMIN] = "images\\MenuItems\\Menu_Zoom_In.jpg";
+	MenuItemImages[ITM_ZOOMOUT] = "images\\MenuItems\\Menu_Zoom_Out.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Del.jpg";
+	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Move.jpg";
 	MenuItemImages[ITM_COPY] = "images\\MenuItems\\Menu_Copy.jpg";
 	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\Menu_Paste.jpg";
 	MenuItemImages[ITM_CUT] = "images\\MenuItems\\Menu_Cut.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\Menu_Play.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
@@ -127,10 +127,11 @@ void Output::CreatePlayToolBar() const
 	UI.InterfaceMode = MODE_PLAY;
 
 	string MenuItemImages[PLAY_ITM_COUNT];
-	MenuItemImages[ITM_PBYS] = "images\\MenuItems\\Menu_Cut.jpg";
-	MenuItemImages[ITM_PBYC] = "images\\MenuItems\\Menu_Cut.jpg";
-	MenuItemImages[ITM_PBYB] = "images\\MenuItems\\Menu_Cut.jpg";
-	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_BYTYPE] = "images\\MenuItems\\Menu_By_Type.jpg";
+	MenuItemImages[ITM_BYCOLOR] = "images\\MenuItems\\Menu_By_Color.jpg";
+	MenuItemImages[ITM_BOTH] = "images\\MenuItems\\Menu_By_Both.jpg";
+	MenuItemImages[ITM_BYAREA] = "images\\MenuItems\\Menu_By_Area.jpg";
+	MenuItemImages[ITM_DRAW] = "images\\MenuItems\\Menu_Draw.jpg";
 
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
 	{

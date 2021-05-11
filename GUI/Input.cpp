@@ -61,14 +61,14 @@ ActionType Input::GetUserAction() const
 			case ITM_BKCOL: return CHNG_BK_CLR;
 			case ITM_MOVE: return MOVE;
 			case ITM_RESIZE: return RESIZE;
-			case ITM_ROTATE: return ROTATE;
-			case ITM_STOB: return SEND_BACK;
-			case ITM_STOF: return BRNG_FRNT;
 			case ITM_DEL: return DEL;
 			case ITM_COPY: return COPY;
 			case ITM_PASTE: return PASTE;
 			case ITM_CUT: return CUT;
 			case ITM_SAVE: return SAVE;
+			case ITM_LOAD: return LOAD;
+			case ITM_ZOOMIN: return ZOOM_IN;
+			case ITM_ZOOMOUT: return ZOOM_OUT;
 			case ITM_PLAY: return TO_PLAY;
 			case ITM_EXIT: return EXIT;	
 			
@@ -97,9 +97,10 @@ ActionType Input::GetUserAction() const
 
 			switch (ClickedItemOrder)
 			{
-			case ITM_PBYS: return PBYS;
-			case ITM_PBYC: return PBYC;
-			case ITM_PBYB: return PBYB;
+			case ITM_BYTYPE: return BY_TYPE;
+			case ITM_BYCOLOR: return BY_COLOR;
+			case ITM_BOTH: return BY_BOTH;
+			case ITM_BYAREA: return BY_AREA;
 			case ITM_DRAW: return TO_DRAW;
 
 			default: return EMPTY;	//A click on empty place in design toolbar

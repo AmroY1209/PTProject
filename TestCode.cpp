@@ -231,71 +231,59 @@ int main()
 		switch (ActType)
 		{
 		case DRAW_RECT:
-			pOut->PrintMessage("Action: Draw a Rectangle , Click anywhere");
+			pOut->PrintMessage("Action: Draw a Rectangle, Click anywhere");
 			break;
 
 		case DRAW_LINE:
-			pOut->PrintMessage("Action: Draw a Line , Click anywhere");
+			pOut->PrintMessage("Action: Draw a Line, Click anywhere");
 			break;
 
 		case DRAW_CIRC:
-			pOut->PrintMessage("Action: Draw a Circle , Click anywhere");
+			pOut->PrintMessage("Action: Draw a Circle, Click anywhere");
 			break;
 
 		case DRAW_TRI:
-			pOut->PrintMessage("Action: Draw a Triangle , Click anywhere");
+			pOut->PrintMessage("Action: Draw a Triangle, Click anywhere");
 			break;
 
 		case COPY:
-			pOut->PrintMessage("Action: Copying an item to Clipboard");
+			pOut->PrintMessage("Action: Copy the selected figures, Click anywhere");
 			break;
 
 		case PASTE:
-			pOut->PrintMessage("Action: Pasting an item from Clipboard");
+			pOut->PrintMessage("Action: Paste the last copied/cut figures, Click anywhere");
 			break;
 
 		case CUT:
-			pOut->PrintMessage("Action: Cutting an item and moving it to Clipboard");
+			pOut->PrintMessage("Action: Cut the selected figures, Click anywhere");
 			break;
 
 		case CHNG_DRAW_CLR:
-			pOut->PrintMessage("Action: Change the drawing color , Click anywhere");
+			pOut->PrintMessage("Action: Change the drawing color, Click anywhere");
 			break;
 
 		case CHNG_FILL_CLR:
-			pOut->PrintMessage("Action: Change fill color , Click anywhere");
+			pOut->PrintMessage("Action: Change the fill color, Click anywhere");
 			break;
 
 		case CHNG_BK_CLR:
-			pOut->PrintMessage("Action: Change background color , Click anywhere");
+			pOut->PrintMessage("Action: Change the background color, Click anywhere");
 			break;
 
 		case MOVE:
-			pOut->PrintMessage("Action: Move a selected object to a selected position, Click anywhere");
+			pOut->PrintMessage("Action: Move the selected object to a selected position, Click anywhere");
 			break;
 
 		case RESIZE:
-			pOut->PrintMessage("Action: Change size of a selected object , Click anywhere");
-			break;
-
-		case ROTATE:
-			pOut->PrintMessage("Action: Rotate a selected object , Click anywhere");
-			break;
-
-		case SEND_BACK:
-			pOut->PrintMessage("Action: Send a selected object to the back of drawing area, Click anywhere");
-			break;
-
-		case BRNG_FRNT:
-			pOut->PrintMessage("Action: Bring a selected object to the front of drawing area, Click anywhere");
+			pOut->PrintMessage("Action: Change size of a selected object, Click anywhere");
 			break;
 
 		case SAVE:
-			pOut->PrintMessage("Action: Save a selected object , Click anywhere");
+			pOut->PrintMessage("Action: Save to a file, Click anywhere");
 			break;
 
 		case DEL:
-			pOut->PrintMessage("Action: Delete a selected object , Click anywhere");
+			pOut->PrintMessage("Action: Delete the selected object, Click anywhere");
 			break;
 
 		case STATUS:
@@ -307,7 +295,7 @@ int main()
 			break;
 
 		case EMPTY:
-			pOut->PrintMessage("Action: A click on empty area in the Design Tool Bar, Click anywhere");
+			pOut->PrintMessage("Action: A click on an empty area in the Designed Tool Bar, Click anywhere");
 			break;
 
 		case TO_DRAW:
@@ -320,16 +308,32 @@ int main()
 			pOut->CreatePlayToolBar();
 			break;
 
-		case PBYC:
-			pOut->PrintMessage("Action: A click on pick by color, Click anywhere");
+		case BY_COLOR:
+			pOut->PrintMessage("Action: Pick figures by Color, Click anywhere");
 			break;
 
-		case PBYS:
-			pOut->PrintMessage("Action: A click on pick by size, Click anywhere");
+		case BY_TYPE:
+			pOut->PrintMessage("Action: Pick figures by Type, Click anywhere");
 			break;
 
-		case PBYB:
-			pOut->PrintMessage("Action: A click on pick by both, Click anywhere");
+		case BY_BOTH:
+			pOut->PrintMessage("Action: Pick figures by both Type and Color, Click anywhere");
+			break;
+
+		case BY_AREA:
+			pOut->PrintMessage("Action: Pick figures by Area, Click anywhere");
+			break;
+
+		case ZOOM_IN:
+			pOut->PrintMessage("Action: Zoom in, Click anywhere");
+			break;
+
+		case ZOOM_OUT:
+			pOut->PrintMessage("Action: Zoom out, Click anywhere");
+			break;
+
+		case LOAD:
+			pOut->PrintMessage("Action: Load a saved graph from a file, Click anywhere");
 			break;
 
 		case EXIT:
