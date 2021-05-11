@@ -9,18 +9,17 @@
 
 enum GUI_MODE	//Graphical user interface mode
 {
-	MODE_DRAW,	//Drawing mode (startup mode)
-	MODE_PLAY	//Playing mode
+	MODE_DRAW,			//Drawing mode (startup mode)
+	MODE_PLAY,			//Playing mode
+	MODE_ADDITEM		//Add an item
 };
 
 enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
-	ITM_RECT,		//Recangle item in menu
-	ITM_LINE,       //Line item in menu
-	ITM_TRIA,       //Triangle item in menu
-	ITM_CIRC,		//Circle item in menu
+	
+	ITM_DRAWITEM,	//Add items
 	ITM_DRAWCOL,	//Change Draw color in menu
 	ITM_FILL,		//Change fill color in menu
 	ITM_BKCOL,		//Change background color in menu
@@ -57,7 +56,18 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 	
 };
 
+enum DrawFigureItem	//Items of figure list
+{
+	//Note: Items are ordered here as they appear in menu
+	//If you want to change the menu items order, change the order here
 
+	ITM_RECT,		//Draw a rectangle
+	ITM_LINE,		//Draw a line
+	ITM_TRIA,		//Draw a triangle
+	ITM_CIRC,		//Draw a circle
+	ITM_BACK,		//Return to draw item
+	ADD_ITM_COUNT	//no. of "draw item" items
+};
 
 
 

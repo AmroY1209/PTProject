@@ -10,6 +10,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_RECT,		//Draw Rectangle
 	DRAW_TRI,		//Draw Triangle
 	DRAW_CIRC,		//Draw Circle
+	DRAW_ITEM,		//Draw an item
 	CHNG_DRAW_CLR,	//Change the drawing color
 	CHNG_FILL_CLR,	//Change the filling color
 	CHNG_BK_CLR,	//Change background color
@@ -32,6 +33,7 @@ enum ActionType //The actions supported (you can add more if needed)
 
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,		//Switch interface to Play mode
+	TO_ADDITEM,		//Switch interface to Add item mode
 
 	BY_TYPE,            //Pick the same shapes
 	BY_COLOR,			//Pick the same colour

@@ -83,10 +83,7 @@ void Output::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
-	MenuItemImages[ITM_LINE] = "images\\menuItems\\Menu_Line.jpg";
-	MenuItemImages[ITM_TRIA] = "images\\menuItems\\Menu_Tria.jpg";
-	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\Menu_Circ.jpg";
+	MenuItemImages[ITM_DRAWITEM] = "images\\MenuItems\\Menu_Add.jpg";
 	MenuItemImages[ITM_DRAWCOL] = "images\\MenuItems\\Menu_DrawCol.jpg";
 	MenuItemImages[ITM_FILL] = "images\\MenuItems\\Menu_Fill.jpg";
 	MenuItemImages[ITM_BKCOL] = "images\\MenuItems\\Menu_BKCol.jpg";
@@ -145,6 +142,28 @@ void Output::CreatePlayToolBar() const
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::CreateDrawItemsToolbar() const
+{
+	ClearToolbarArea();
+	UI.InterfaceMode = MODE_ADDITEM;
+
+	string MenuItemImages[ADD_ITM_COUNT];
+	MenuItemImages[ITM_RECT] = "images\\MenuItems\\Menu_Rect.jpg";
+	MenuItemImages[ITM_LINE] = "images\\menuItems\\Menu_Line.jpg";
+	MenuItemImages[ITM_TRIA] = "images\\menuItems\\Menu_Tria.jpg";
+	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\Menu_Circ.jpg";
+	MenuItemImages[ITM_BACK] = "images\\MenuItems\\Menu_Return.jpg";
+
+	for (int i = 0; i < ADD_ITM_COUNT; i++)
+	{
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DIMGREY, 7);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+/// //////////////////////////////////////////////////////////////////////////////////////
 
 void Output::ClearDrawArea() const
 {

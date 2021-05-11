@@ -6,7 +6,6 @@
 int main()
 {
 	int x, y;
-
 	//Create Input and Output objects to test
 	Output* pOut = new Output();;
 	Input* pIn = pOut->CreateInput();
@@ -305,6 +304,11 @@ int main()
 		case TO_DRAW:
 			pOut->PrintMessage("Action: Switch to Draw Mode, creating Draw tool bar");
 			pOut->CreateDrawToolBar();
+			break;
+
+		case TO_ADDITEM:
+			pOut->PrintMessage("Action: Switch to add item menu, choose one of the figures: ");
+			pOut->CreateDrawItemsToolbar();
 			break;
 
 		case TO_PLAY:
