@@ -6,7 +6,7 @@ Output::Output()
 	//Initialize user interface parameters
 	UI.InterfaceMode = MODE_DRAW;
 
-	UI.width = 1580; //sa8rt el gui
+	UI.width = 1500; 
 	UI.height = 800;
 	UI.wx = 5;
 	UI.wy = 5;
