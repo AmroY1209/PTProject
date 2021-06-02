@@ -1,9 +1,9 @@
 #include "ApplicationManager.h"
 
-
+//HARAAAAMM
 int main()
 {
-	//lol
+
 	ActionType ActType;
 	//Create an object of ApplicationManager
 	ApplicationManager AppManager;
