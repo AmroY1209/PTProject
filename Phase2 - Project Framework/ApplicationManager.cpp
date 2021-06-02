@@ -1,6 +1,8 @@
 #include "ApplicationManager.h"
 #include "Actions\AddRectAction.h"
-
+#include "Actions\AddTriAction.h"
+#include "Actions\AddLineAction.h"
+#include "Actions\AddCircAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -38,19 +40,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DRAW_LINE:
-		//pAct = new AddLineAction(this);
+		pAct = new AddLineAction(this);
 		break;
 
 	case DRAW_TRI:
-		//pAct = new AddTriAction(this);
+		pAct = new AddTriAction(this);
 		break;
 
 	case DRAW_CIRC:
-		//pAct = new AddCircAction(this);
-		break;
-
-	case DRAW_ITEM:	//Draw an item    //MESH 3AREF LEHA LAZMA WLA EH
-		//pAct = new AddITEMAction(this);
+		pAct = new AddCircAction(this);
 		break;
 
 	case CHNG_DRAW_CLR: //Change the drawing color
@@ -109,12 +107,42 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		//pAct = new Zoom_OUTAction(this);
 		break;
 
+	case TO_ADDITEM:
+		pOut->CreateDrawItemsToolbar();
+		break;
+
 	case EXIT:			//Exit the application
 		//pAct = new EXITAction(this);
 		break;
 		
 	case STATUS:	//a click on the status bar ==> no action
 		return;
+
+	case DRAWING_AREA:    //a click on the drawing area ==> no action   
+		break;
+
+	case EMPTY:    //a click on an empty area in the designed tool bar ==> no action
+		break;
+
+	case TO_PLAY:    //Switch to Play Mode, creating Play tool bar
+		pOut->CreatePlayToolBar();
+		break;
+
+	case TO_DRAW:    //Switch to Draw Mode, creating Draw tool bar
+		pOut->CreateDrawToolBar();
+		break;
+
+	case BY_TYPE:    //Pick figures by Type, for play mode
+		break;
+
+	case BY_COLOR:    //Pick figures by Color, for play mode
+		break;
+
+	case BY_BOTH:    //Pick figures by both Type and Color, for play mode
+		break;
+
+	case BY_AREA:    //Pick figures by Area, for play mode
+		break;
 	}
 	
 	//Execute the created action

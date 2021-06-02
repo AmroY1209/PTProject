@@ -1,6 +1,6 @@
 #include "ApplicationManager.h"
 
-//HARAAAAMM
+
 int main()
 {
 
@@ -13,7 +13,7 @@ int main()
 		//Read user action
 		ActType = AppManager.GetUserAction();
 
-		//Exexute the action
+		//Execute the action
 		AppManager.ExecuteAction(ActType);
 
 		//Update the interface
