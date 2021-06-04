@@ -3,6 +3,17 @@
 #include "Actions\AddTriAction.h"
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircAction.h"
+#include "Actions\SelectAction.h"
+#include "Figures/CCircle.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CLine.h"
+#include "Figures/CTriangle.h"
+
+
+
+
+
+int CFigure::ID = 0;
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -10,12 +21,13 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
+
 	FigCount = 0;
-		
+	SelecFigCount = 0;
+
 	//Create an array of figure pointers and set them to NULL		
-	for(int i=0; i<MaxFigCount; i++)
-		FigList[i] = NULL;	
+	for (int i = 0; i < MaxFigCount; i++)
+		FigList[i] = NULL;
 }
 
 //==================================================================================//
@@ -24,14 +36,14 @@ ApplicationManager::ApplicationManager()
 ActionType ApplicationManager::GetUserAction() const
 {
 	//Ask the input to get the action from the user.
-	return pIn->GetUserAction();		
+	return pIn->GetUserAction();
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType) 
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
-	
+
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
@@ -64,7 +76,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SELECT:		//Select an item
-		//pAct = SELECTAction(this);
+		pAct = new SelectAction(this);
 		break;
 
 	case MOVE:			//Move a figure(s)
@@ -114,7 +126,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case EXIT:			//Exit the application
 		//pAct = new EXITAction(this);
 		break;
-		
+
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 
@@ -144,9 +156,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case BY_AREA:    //Pick figures by Area, for play mode
 		break;
 	}
-	
+
 	//Execute the created action
-	if(pAct != NULL)
+	if (pAct != NULL)
 	{
 		pAct->Execute();//Execute
 		delete pAct;	//Action is not needed any more ==> delete it
@@ -160,44 +172,133 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if(FigCount < MaxFigCount )
-		FigList[FigCount++] = pFig;	
+	if (FigCount < MaxFigCount)
+		FigList[FigCount++] = pFig;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure *ApplicationManager::GetFigure(int x, int y) const // ll select
+void ApplicationManager::printinfo(CFigure* pI)
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		if (SelecFigCount == 1)
+		{
+			SelectedFigList[i]->print(pOut);
+		}
+		else if (SelecFigCount > 1)
+		{
+			pOut->PrintInteger(SelecFigCount);
+		}
+
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Add a selected figure to an array 
+void ApplicationManager::AddSelectedFigure(CFigure* s)
+{
+	if (SelecFigCount < MaxSelecCount)
+		SelectedFigList[SelecFigCount++] = s;
+}
+////////////////////////////////////////////////////////////////////////////////////
+CFigure* ApplicationManager::GetSelectedFigs()
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		return SelectedFigList[i];
+	}
+}
+
+int ApplicationManager::GetSelectedCount()
+{
+	return SelecFigCount;
+}
+
+void ApplicationManager::UNSelectFigure(CFigure * s)
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		if (SelectedFigList[i] = s)
+		{
+			SelectedFigList[i] = SelectedFigList[SelecFigCount - 1];
+			SelecFigCount--;
+			break;
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////
+
+CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
+	for (int i = 0; i < FigCount; i++)
+	{
+		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]);
+		if (C != NULL)
+		{
+			if (FigList[i]->checkLoc(x, y))
+				return FigList[i];
+		}
 
+		C = dynamic_cast<CCircle*>(FigList[i]);
+		if (C != NULL)
+		{
+			if (FigList[i]->checkLoc(x, y))
+				return FigList[i];
+		}
+
+		C = dynamic_cast<CTriangle*>(FigList[i]);
+		if (C != NULL)
+		{
+			if (FigList[i]->checkLoc(x, y))
+				return FigList[i];
+		}
+
+		C = dynamic_cast<CLine*>(FigList[i]);
+		if (C != NULL)
+		{
+			if (FigList[i]->checkLoc(x, y))
+				return FigList[i];
+		}
+
+	}
 
 	///Add your code here to search for a figure given a point x,y	
 
 	return NULL;
 }
+
+
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{	
-	for(int i=0; i<FigCount; i++)
+{
+	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
-Input *ApplicationManager::GetInput() const
-{	return pIn; }
+Input* ApplicationManager::GetInput() const
+{
+	return pIn;
+}
 //Return a pointer to the output
-Output *ApplicationManager::GetOutput() const
-{	return pOut; }
+Output* ApplicationManager::GetOutput() const
+{
+	return pOut;
+}
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
 {
-	for(int i=0; i<FigCount; i++)
+	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
 	delete pIn;
 	delete pOut;
-	
+
 }

@@ -12,3 +12,38 @@ void CLine::Draw(Output* pOut) const
 	//Call Output::DrawLine to draw a line on the screen	
 	pOut->DrawLine(StartingPoint, EndPoint, FigGfxInfo, Selected);
 }
+
+
+void CLine::print(Output* pOut)
+{
+	int length = sqrt((StartingPoint.x - EndPoint.x) * (StartingPoint.x - EndPoint.x) + (StartingPoint.y - EndPoint.y) * (StartingPoint.y - EndPoint.y));
+
+	string strl;
+	strl = to_string(MYid);
+	strl += " - (";
+	strl += to_string(StartingPoint.x);
+	strl += ", ";
+	strl += to_string(StartingPoint.y);
+	strl += ") - (";
+	strl += to_string(EndPoint.x);
+	strl += ", ";
+	strl += to_string(EndPoint.y);
+	strl += ") - ";
+	strl += to_string(length);
+
+
+	pOut->PrintMessage(strl);
+}
+
+
+bool CLine::checkLoc(int x, int y)
+{
+	float check1 = sqrt((x - StartingPoint.x) * (x - StartingPoint.x) + (y - StartingPoint.y) * (y - StartingPoint.y));
+	float check2 = sqrt((x - EndPoint.x) * (x - EndPoint.x) + (y - EndPoint.y) * (y - EndPoint.y));
+	float line = sqrt((StartingPoint.x - EndPoint.x) * (StartingPoint.x - EndPoint.x) + (StartingPoint.y - EndPoint.y) * (StartingPoint.y - EndPoint.y));
+	if ((check1 + check2) == line)
+	{
+		return true;
+	}
+	else return false;
+}
