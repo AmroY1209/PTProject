@@ -11,11 +11,31 @@ DeleteAction::DeleteAction(ApplicationManager* pApp):Action(pApp)
 
 void DeleteAction::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
-
-	//selectedFig = pOut->;
+	selectedFig = pManager->GetSelectedFigs();
+	selecFigCount = pManager->GetSelectedCount();
 }
-void Execute();
+
+void DeleteAction::Execute()
+{
+	Output* pOut = pManager->GetOutput();
+
+	ReadActionParameters();
+
+	//3lashan nbd2 lazm n3ml cheeck
+	if (selectedFig[0] == NULL)
+	{
+		pOut->PrintMessage("Invalid! select figure first");
+	}
+	else
+	{
+		for (int i = 0; i < selecFigCount; i++)
+		{
+
+		}
+	}
+	
+
+
+}
+
 DeleteAction::~DeleteAction(){}

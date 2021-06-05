@@ -56,3 +56,17 @@ bool CRectangle::checkLoc(int x, int y)
 	else return false;
 
 }
+
+void CRectangle::Move(int x, int y)
+{
+	Corner2.x = x - Corner1.x + Corner2.x; Corner2.y = y - Corner1.y + Corner2.y;
+	Corner1.x = x; Corner1.y = y;
+}
+
+Point CRectangle::getFirstPt()
+{
+	Point P;
+	P.x = Corner1.x;
+	P.y = Corner1.y;
+	return P;
+}

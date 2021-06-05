@@ -48,3 +48,17 @@ bool CLine::checkLoc(int x, int y)
 	}
 	else return false;
 }
+
+void CLine::Move(int x, int y)
+{
+	EndPoint.x = x - StartingPoint.x + EndPoint.x; EndPoint.y = y - StartingPoint.y + EndPoint.y;
+	StartingPoint.x = x; StartingPoint.y = y;
+}
+
+Point CLine::getFirstPt()
+{
+	Point P;
+	P.x = StartingPoint.x;
+	P.y = StartingPoint.y;
+	return P;
+}

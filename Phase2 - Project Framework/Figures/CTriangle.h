@@ -15,6 +15,9 @@ public:
 	void print(Output* pOut);
 	bool checkLoc(int x, int y);
 	float getarea(Point, Point, int, int);
+
+	 Point getFirstPt() ;
+	void Move(int x, int y) ;        //Move the figure
 };
 
 #endif

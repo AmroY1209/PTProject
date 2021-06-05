@@ -39,7 +39,7 @@ public:
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 
-	CFigure* GetSelectedFigs();
+	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
 
 	// -- Interface Management Functions

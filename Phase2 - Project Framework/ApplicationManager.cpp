@@ -4,10 +4,15 @@
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions\MoveAction.h"
+#include "Actions\DeleteAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
 #include "Figures/CTriangle.h"
+
+
+
 
 
 int CFigure::ID = 0;
@@ -78,7 +83,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case MOVE:			//Move a figure(s)
-		//pAct = new MOVEAction(this);
+		pAct = new MoveAction(this);
 		break;
 
 	case RESIZE:		//Resize a figure(s)
@@ -86,7 +91,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:			//Delete a figure(s)
-		//pAct = new DElAction(this);
+		pAct = new DeleteAction(this);
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -199,12 +204,9 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 		SelectedFigList[SelecFigCount++] = s;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetSelectedFigs()
+CFigure* *ApplicationManager::GetSelectedFigs()
 {
-	for (int i = 0; i < SelecFigCount; i++)
-	{
-		return SelectedFigList[i];
-	}
+	return SelectedFigList;
 }
 
 int ApplicationManager::GetSelectedCount()

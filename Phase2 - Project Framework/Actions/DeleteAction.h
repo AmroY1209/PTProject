@@ -8,8 +8,8 @@ class DeleteAction : public Action
 {
 private:
 	int DelID;
-	CFigure* selectedFig;
-	CFigure* selecFigCount;
+	CFigure* *selectedFig;
+	int selecFigCount;
 
 
 public:

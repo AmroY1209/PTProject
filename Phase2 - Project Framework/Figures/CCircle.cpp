@@ -17,7 +17,7 @@ void CCircle::Draw(Output* pOut) const
 void CCircle::print(Output* pOut)
 {
 	float radius = sqrt((Center.x - Radius.x) * (Center.x - Radius.x) + (Center.y - Radius.y) * (Center.y - Radius.y));
-	int Area = 3.14 * (radius)*(radius);
+	int Area = 3.14 * (radius) * (radius);
 
 	string strl;
 	strl = "Figure ID: ";
@@ -30,7 +30,7 @@ void CCircle::print(Output* pOut)
 	strl += to_string(radius);
 	strl += "  Area: ";
 	strl += to_string(Area);
-	
+
 
 	pOut->PrintMessage(strl);
 }
@@ -48,4 +48,15 @@ bool CCircle::checkLoc(int x, int y)
 	{
 		return false;
 	}
+}
+
+void CCircle::Move(int x, int y)
+{
+	Radius.x = x - Center.x + Radius.x; Radius.y = y - Center.y + Radius.y;
+	Center.x = x; Center.y = y;
+}
+
+Point CCircle::getFirstPt()
+{
+	return Center;
 }

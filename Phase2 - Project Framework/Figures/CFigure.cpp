@@ -37,5 +37,3 @@ bool CFigure::checkLoc(int x, int y)
 {
 	return true;
 }
-
-
