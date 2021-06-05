@@ -78,3 +78,11 @@ Point CTriangle::getFirstPt()
 	P.y = Corner1.y;
 	return P;
 }
+
+Point CTriangle::getLastPt()
+{
+	Point P;
+	P.x = Corner3.x;
+	P.y = Corner3.y;
+	return P;
+}
