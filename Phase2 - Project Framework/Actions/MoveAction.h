@@ -10,8 +10,7 @@ class MoveAction : public Action
 {
 	Point P;
 	int SelecFigCount;
-	CFigure** SelectedFigList;
-	int DistX, DistY;
+	CFigure** SelectedFigList; //Array of pointers
 
 public:
 	MoveAction(ApplicationManager* pmanager);

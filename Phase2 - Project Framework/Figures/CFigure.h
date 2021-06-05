@@ -28,6 +28,7 @@ public:
 	virtual bool checkLoc(int x, int y);
 
 	virtual Point getFirstPt() = 0;
+	virtual Point getLastPt() = 0;
 	virtual void Move(int x, int y) = 0;        //Move the figure
 
 

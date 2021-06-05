@@ -70,3 +70,11 @@ Point CRectangle::getFirstPt()
 	P.y = Corner1.y;
 	return P;
 }
+
+Point CRectangle::getLastPt()
+{
+	Point P;
+	P.x = Corner2.x;
+	P.y = Corner2.y;
+	return P;
+}

@@ -17,6 +17,7 @@ public:
 	float getarea(Point, Point, int, int);
 
 	 Point getFirstPt() ;
+	 Point getLastPt();
 	void Move(int x, int y) ;        //Move the figure
 };
 

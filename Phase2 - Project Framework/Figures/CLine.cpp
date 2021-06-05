@@ -62,3 +62,11 @@ Point CLine::getFirstPt()
 	P.y = StartingPoint.y;
 	return P;
 }
+
+Point CLine::getLastPt()
+{
+	Point P;
+	P.x = EndPoint.x;
+	P.y = EndPoint.y;
+	return P;
+}

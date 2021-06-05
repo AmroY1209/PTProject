@@ -16,6 +16,7 @@ public:
 	bool checkLoc(int x, int y);
 
 	 Point getFirstPt() ;
+	 Point getLastPt();
 	 void Move(int x, int y) ;        //Move the figure
 };
 
