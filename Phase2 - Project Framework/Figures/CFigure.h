@@ -29,6 +29,7 @@ public:
 	virtual GfxInfo GetGFXINFO();  //Gets graphical info
 
 	virtual Point getFirstPt() = 0;
+	virtual Point getLastPt() = 0;
 	virtual void Move(int x, int y) = 0;        //Move the figure
 
 

@@ -97,3 +97,10 @@ int CRectangle::GetHeight_Rect()
 	else
 		return (-h);
 }
+Point CRectangle::getLastPt()
+{
+	Point P;
+	P.x = Corner2.x;
+	P.y = Corner2.y;
+	return P;
+}

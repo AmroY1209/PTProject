@@ -32,12 +32,15 @@ void MoveAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	if (SelecFigCount != 0)
 	{
+		Point Dist;
+		Dist.x = P.x - SelectedFigList[0]->getFirstPt().x;
+		Dist.y = P.y - SelectedFigList[0]->getFirstPt().y;
 		SelectedFigList[0]->Move(P.x, P.y);
 		Point newPosition;
 		for (int i = 1; i < SelecFigCount; i++)
 		{
-			newPosition.x = P.x - SelectedFigList[i]->getFirstPt().x;
-			newPosition.y = P.y - SelectedFigList[i]->getFirstPt().y;
+			newPosition.x = (SelectedFigList[i]->getFirstPt().x) + Dist.x;
+			newPosition.y = (SelectedFigList[i]->getFirstPt().y) + Dist.y;
 			SelectedFigList[i]->Move(newPosition.x, newPosition.y);
 		}
 	}

@@ -60,3 +60,8 @@ Point CCircle::getFirstPt()
 {
 	return Center;
 }
+
+Point CCircle::getLastPt()
+{
+	return Radius;
+}
