@@ -17,6 +17,7 @@ public:
 	Point getFirstPt();
 	Point getLastPt();
 	void Move(int x, int y);        //Move the figure
+	void Resize(string scale);					//Resize the figure
 };
 
 #endif

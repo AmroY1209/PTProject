@@ -65,3 +65,27 @@ Point CCircle::getLastPt()
 {
 	return Radius;
 }
+
+void CCircle::Resize(string scale)
+{
+	if (scale == "1/4" || scale == "quarter")
+	{
+		Radius.x = (Radius.x - Center.x) / 4 + Center.x;
+		Radius.y = (Radius.y - Center.y) / 4 + Center.y;
+	}
+	else if (scale == "1/2" || scale == "half")
+	{
+		Radius.x = (Radius.x - Center.x) / 2 + Center.x;
+		Radius.y = (Radius.y - Center.y) / 2 + Center.y;
+	}
+	else if (scale == "2" || scale == "double")
+	{
+		Radius.x = (Radius.x - Center.x) * 2 + Center.x;
+		Radius.y = (Radius.y - Center.y) * 2 + Center.y;
+	}
+	else if (scale == "4" || scale == "quadruple")
+	{
+		Radius.x = (Radius.x - Center.x) * 4 + Center.x;
+		Radius.y = (Radius.y - Center.y) * 4 + Center.y;
+	}
+}

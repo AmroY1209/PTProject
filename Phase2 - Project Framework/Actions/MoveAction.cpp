@@ -2,6 +2,8 @@
 #include "Action.h"
 #include "..\Figures\CFigure.h"
 #include "../DEFS.h"
+#include "../ApplicationManager.h"
+#include "Action.h"
 
 MoveAction::MoveAction(ApplicationManager* pApp) : Action(pApp)
 {}

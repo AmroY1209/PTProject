@@ -16,6 +16,7 @@ public:
 	 Point getFirstPt() ;
 	 Point getLastPt();
 	 void Move(int x, int y) ;        //Move the figure
+	 void Resize(string scale);					//Resize the figure
 
 
 	Point GetP1_Rect();   //Gets coordinates of corner point 1

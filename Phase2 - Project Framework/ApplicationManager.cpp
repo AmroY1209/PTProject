@@ -7,6 +7,7 @@
 #include "Actions/CopyAction.h"
 #include "Actions/PasteAction.h"
 #include "Actions\MoveAction.h"
+#include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
@@ -89,7 +90,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case RESIZE:		//Resize a figure(s)
-		//pAct = new RESIZEAction(this);
+		pAct = new ResizeAction(this);
 		break;
 
 	case DEL:			//Delete a figure(s)
