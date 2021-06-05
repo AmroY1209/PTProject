@@ -22,6 +22,8 @@ public:
 	virtual int GetWidth();
 	//Get height of rectangle which the line is inscribed in
 	virtual int GetHeight();
+
+	~AddLineAction();
 };
 
 #endif

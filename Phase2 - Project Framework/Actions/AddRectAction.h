@@ -27,6 +27,7 @@ public:
 	//Get height of rectangle drawn
 	virtual int GetHeight();*/
 	
+	~AddRectAction();
 };
 
 #endif

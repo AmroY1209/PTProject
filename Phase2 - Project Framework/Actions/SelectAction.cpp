@@ -3,7 +3,6 @@
 
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
-#include "..\GUI\UI_Info.h"
 
 SelectAction::SelectAction(ApplicationManager* pApp) :Action(pApp)
 {}
@@ -18,7 +17,7 @@ void SelectAction::ReadActionParameters()
 
 	//get point clicked 
 	pIn->GetPointClicked(P.x, P.y); //need validations 
-	
+
 
 	pOut->ClearStatusBar();
 }
@@ -48,11 +47,13 @@ void SelectAction::Select_Fig()
 	pManager->AddSelectedFigure(selectedFig); //add fig to the list
 
 	pManager->printinfo(selectedFig);
-
 }
 void SelectAction::un_Select()
 {
-	selectedFig->SetSelected(false); //selected
+	selectedFig->SetSelected(false); //unselected
 	pManager->UNSelectFigure(selectedFig); //add fig to the list
 	pManager->printinfo(selectedFig);
 }
+
+SelectAction::~SelectAction() {} //destructor 
+

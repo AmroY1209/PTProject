@@ -6,6 +6,8 @@
 #include "Actions\SelectAction.h"
 #include "Actions/CopyAction.h"
 #include "Actions/PasteAction.h"
+#include "Actions\MoveAction.h"
+#include "Actions\DeleteAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -31,6 +33,7 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
 }
+
 
 //==================================================================================//
 //								Actions Related Functions							//
@@ -82,7 +85,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case MOVE:			//Move a figure(s)
-		//pAct = new MOVEAction(this);
+		pAct = new MoveAction(this);
 		break;
 
 	case RESIZE:		//Resize a figure(s)
@@ -90,7 +93,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:			//Delete a figure(s)
-		//pAct = new DElAction(this);
+		pAct = new DeleteAction(this);
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -188,6 +191,7 @@ void ApplicationManager::printinfo(CFigure* pI)
 		}
 		else if (SelecFigCount > 1)
 		{
+			pOut->PrintMessage("Number of selected figure: ");
 			pOut->PrintInteger(SelecFigCount);
 		}
 
@@ -202,12 +206,9 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 		SelectedFigList[SelecFigCount++] = s;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetSelectedFigs()
+CFigure* *ApplicationManager::GetSelectedFigs()
 {
-	for (int i = 0; i < SelecFigCount; i++)
-	{
-		return SelectedFigList[i];
-	}
+	return SelectedFigList;
 }
 
 int ApplicationManager::GetSelectedCount()
@@ -215,13 +216,14 @@ int ApplicationManager::GetSelectedCount()
 	return SelecFigCount;
 }
 
-void ApplicationManager::UNSelectFigure(CFigure * s)
+void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
 	{
-		if (SelectedFigList[i] = s)
+		if (SelectedFigList[i] == s) //[1 2 3 ]4 ] 
 		{
 			SelectedFigList[i] = SelectedFigList[SelecFigCount - 1];
+			SelectedFigList[SelecFigCount - 1] = NULL;
 			SelecFigCount--;
 			break;
 		}
@@ -300,6 +302,8 @@ ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
+	for (int i = 0; i < SelecFigCount; i++)
+		delete SelectedFigList[i];
 	delete pIn;
 	delete pOut;
 

@@ -65,3 +65,4 @@ int AddRectAction::GetHeight()
 	else
 		return (-h);
 }*/
+AddRectAction::~AddRectAction(){}

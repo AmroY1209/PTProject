@@ -1,4 +1,4 @@
-#ifndef CCircle_H
+ #ifndef CCircle_H
 #define CCircle_H
 
 #include "CFigure.h"
@@ -13,6 +13,9 @@ public:
 	virtual void Draw(Output* pOut) const;
 	void print(Output* pOut);
 	bool checkLoc(int x, int y);
+
+	Point getFirstPt();
+	void Move(int x, int y);        //Move the figure
 };
 
 #endif

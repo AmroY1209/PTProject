@@ -63,3 +63,5 @@ int AddLineAction::GetHeight()
 	else
 		return (-h);
 }
+
+AddLineAction::~AddLineAction(){}

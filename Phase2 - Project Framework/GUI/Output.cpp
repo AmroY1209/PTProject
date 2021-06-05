@@ -194,11 +194,9 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 
 void Output::PrintInteger(int i) const	//Prints AN INTEGER ANA MEZAWDHA ~ABDO / HASHISH
 {
-	ClearStatusBar();	//First clear the status bar
-
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawInteger(10, UI.height - (int)(UI.StatusBarHeight / 1.5), i);
+	pWind->DrawInteger(220, UI.height - (int)(UI.StatusBarHeight / 1.5), i);
 }
 
 
