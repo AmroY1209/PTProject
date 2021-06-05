@@ -43,6 +43,8 @@ void MoveAction::Execute()
 			newPosition.y = (SelectedFigList[i]->getFirstPt().y) + Dist.y;
 			SelectedFigList[i]->Move(newPosition.x, newPosition.y);
 		}
+		pOut->ClearDrawArea();
+		pManager->UpdateInterface();
 	}
 	else
 	{
