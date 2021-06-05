@@ -26,6 +26,7 @@ public:
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	void HighLightClr();	//changes the figure's filling color
 	virtual bool checkLoc(int x, int y);
+	virtual GfxInfo GetGFXINFO();  //Gets graphical info
 
 	virtual Point getFirstPt() = 0;
 	virtual Point getLastPt() = 0;

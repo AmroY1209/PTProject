@@ -24,6 +24,11 @@ private:
 	Input* pIn;
 	Output* pOut;
 
+	CFigure* Clipboard;      //Clipboard which the selected figures will be copied/cut to
+	bool IsInClipboard;      //Used to check that there is a figure in clipboard or not
+	bool IsFigCut;           //To know whether the figure in Clipboard is cut or copied
+
+
 public:
 	ApplicationManager();
 	~ApplicationManager();
@@ -47,6 +52,13 @@ public:
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	virtual void printinfo(CFigure* s);
+
+	// -- Clipboard Functions
+	void SetClipboard(CFigure*);
+	CFigure* GetClipboard();
+	void SetIsFigCut(bool);
+	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
+
 };
 
 #endif

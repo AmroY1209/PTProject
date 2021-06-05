@@ -57,7 +57,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
       <TypeLibraryName>.\Release/graphics_prj.tlb</TypeLibraryName>
-      <HeaderFileName />
+      <FerFileName />
     </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -132,6 +132,9 @@
     <ClCompile Include="Actions\AddCircAction.cpp" />
     <ClCompile Include="Actions\AddLineAction.cpp" />
     <ClCompile Include="Actions\AddTriAction.cpp" />
+    <ClCompile Include="Actions\CopyAction.cpp" />
+    <ClCompile Include="Actions\CutAction.cpp" />
+    <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
@@ -185,6 +188,9 @@
     <ClInclude Include="Actions\AddCircAction.h" />
     <ClInclude Include="Actions\AddLineAction.h" />
     <ClInclude Include="Actions\AddTriAction.h" />
+    <ClInclude Include="Actions\CopyAction.h" />
+    <ClInclude Include="Actions\CutAction.h" />
+    <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\SelectAction.h" />

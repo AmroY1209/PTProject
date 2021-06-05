@@ -166,6 +166,13 @@
     <ClCompile Include="Actions\SelectAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\CopyAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PasteAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\CutAction.cpp">
     <ClCompile Include="Actions\DeleteAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -280,6 +287,13 @@
     <ClInclude Include="Actions\SelectAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\CopyAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PasteAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\CutAction.h">
     <ClInclude Include="Actions\DeleteAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
