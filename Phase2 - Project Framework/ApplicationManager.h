@@ -46,6 +46,8 @@ public:
 
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
+	void clearselcFig();
+	void removeFig(int id);
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input

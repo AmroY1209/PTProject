@@ -6,13 +6,15 @@
 #include "..\GUI\Output.h"
 
 
-DeleteAction::DeleteAction(ApplicationManager* pApp):Action(pApp)
+DeleteAction::DeleteAction(ApplicationManager* pApp) :Action(pApp)
 {}
 
 void DeleteAction::ReadActionParameters()
 {
 	selectedFig = pManager->GetSelectedFigs();
-	selecFigCount = pManager->GetSelectedCount();
+
+	SelecFigCount = pManager->GetSelectedCount();
+
 }
 
 void DeleteAction::Execute()
@@ -21,21 +23,28 @@ void DeleteAction::Execute()
 
 	ReadActionParameters();
 
-	//3lashan nbd2 lazm n3ml cheeck
 	if (selectedFig[0] == NULL)
 	{
-		pOut->PrintMessage("Invalid! select figure first");
+		pOut->PrintMessage("Invalid Action: please select figure first");
 	}
 	else
 	{
-		for (int i = 0; i < selecFigCount; i++)
+		for (int i = 0; i < SelecFigCount; i++)
 		{
+			DelID = selectedFig[i]->getID();
+
+			pManager->removeFig(DelID);
+
+			delete selectedFig[i];
 
 		}
+		pManager->clearselcFig();
+		pOut->PrintMessage("Figure Deleted");
+		pOut->ClearDrawArea();
+		pManager->UpdateInterface();
 	}
-	
 
 
 }
 
-DeleteAction::~DeleteAction(){}
+DeleteAction::~DeleteAction() {}

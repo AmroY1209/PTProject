@@ -16,8 +16,17 @@ void CFigure::SetSelected(bool s)
 bool CFigure::IsSelected() const
 {	return Selected; }
 
+
+void CFigure::SetID(int id)
+{
+	ID = id;
+}
+
+
 int CFigure::getID()
-{	return ID;	}
+{
+	return MYid;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
 {	FigGfxInfo.DrawClr = Dclr; }
