@@ -20,6 +20,7 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	int getID();
+	void SetID(int);
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	virtual void print(Output* pOut);
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
