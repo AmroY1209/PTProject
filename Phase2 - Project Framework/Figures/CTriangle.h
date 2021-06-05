@@ -14,6 +14,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	void print(Output* pOut);
 	bool checkLoc(int x, int y);
+	float getarea(Point, Point, int, int);
 };
 
 #endif

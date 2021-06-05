@@ -10,9 +10,6 @@
 #include "Figures/CTriangle.h"
 
 
-
-
-
 int CFigure::ID = 0;
 
 //Constructor
@@ -29,6 +26,7 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
 }
+
 
 //==================================================================================//
 //								Actions Related Functions							//
@@ -186,6 +184,7 @@ void ApplicationManager::printinfo(CFigure* pI)
 		}
 		else if (SelecFigCount > 1)
 		{
+			pOut->PrintMessage("Number of selected figure: ");
 			pOut->PrintInteger(SelecFigCount);
 		}
 
@@ -213,13 +212,14 @@ int ApplicationManager::GetSelectedCount()
 	return SelecFigCount;
 }
 
-void ApplicationManager::UNSelectFigure(CFigure * s)
+void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
 	{
-		if (SelectedFigList[i] = s)
+		if (SelectedFigList[i] == s) //[1 2 3 ]4 ] 
 		{
 			SelectedFigList[i] = SelectedFigList[SelecFigCount - 1];
+			SelectedFigList[SelecFigCount - 1] = NULL;
 			SelecFigCount--;
 			break;
 		}
@@ -298,6 +298,8 @@ ApplicationManager::~ApplicationManager()
 {
 	for (int i = 0; i < FigCount; i++)
 		delete FigList[i];
+	for (int i = 0; i < SelecFigCount; i++)
+		delete SelectedFigList[i];
 	delete pIn;
 	delete pOut;
 

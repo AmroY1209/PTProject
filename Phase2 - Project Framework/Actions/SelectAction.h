@@ -10,8 +10,9 @@ class SelectAction : public Action
 private:
 
 	Point P; //point clicked
-	CFigure* selectedFig; //pointer to selected fiqure 
+	CFigure* selectedFig; //pointer to selected fiqure
 
+	
 public:
 
 	SelectAction(ApplicationManager* pApp);
@@ -20,6 +21,6 @@ public:
 	virtual void Execute();
 	void Select_Fig();
 	void un_Select();
-
+	~SelectAction();
 };
 #endif

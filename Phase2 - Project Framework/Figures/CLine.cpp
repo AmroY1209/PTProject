@@ -19,16 +19,17 @@ void CLine::print(Output* pOut)
 	int length = sqrt((StartingPoint.x - EndPoint.x) * (StartingPoint.x - EndPoint.x) + (StartingPoint.y - EndPoint.y) * (StartingPoint.y - EndPoint.y));
 
 	string strl;
-	strl = to_string(MYid);
-	strl += " - (";
+	strl = "Figure ID: ";
+	strl += to_string(MYid);
+	strl += " -  Starting Point: (";
 	strl += to_string(StartingPoint.x);
 	strl += ", ";
 	strl += to_string(StartingPoint.y);
-	strl += ") - (";
+	strl += ") - End Point: (";
 	strl += to_string(EndPoint.x);
 	strl += ", ";
 	strl += to_string(EndPoint.y);
-	strl += ") - ";
+	strl += ") - Length: ";
 	strl += to_string(length);
 
 
@@ -38,10 +39,10 @@ void CLine::print(Output* pOut)
 
 bool CLine::checkLoc(int x, int y)
 {
-	float check1 = sqrt((x - StartingPoint.x) * (x - StartingPoint.x) + (y - StartingPoint.y) * (y - StartingPoint.y));
-	float check2 = sqrt((x - EndPoint.x) * (x - EndPoint.x) + (y - EndPoint.y) * (y - EndPoint.y));
+	float check1 = sqrt(((x)-StartingPoint.x) * ((x)-StartingPoint.x) + ((y)-StartingPoint.y) * ((y)-StartingPoint.y));
+	float check2 = sqrt(((x)-EndPoint.x) * ((x)-EndPoint.x) + ((y)-EndPoint.y) * ((y)-EndPoint.y));
 	float line = sqrt((StartingPoint.x - EndPoint.x) * (StartingPoint.x - EndPoint.x) + (StartingPoint.y - EndPoint.y) * (StartingPoint.y - EndPoint.y));
-	if ((check1 + check2) == line)
+	if (((check1 + check2) <= (line + 10)) && ((check1 + check2) >= (line - 10)))
 	{
 		return true;
 	}

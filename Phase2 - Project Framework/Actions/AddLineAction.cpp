@@ -45,3 +45,5 @@ void AddLineAction::Execute()
 	//Add the line to the list of figures
 	pManager->AddFigure(R);
 }
+
+AddLineAction::~AddLineAction(){}
