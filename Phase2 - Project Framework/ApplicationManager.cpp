@@ -4,6 +4,8 @@
 #include "Actions\AddLineAction.h"
 #include "Actions\AddCircAction.h"
 #include "Actions\SelectAction.h"
+#include "Actions/CopyAction.h"
+#include "Actions/PasteAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -92,11 +94,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case COPY:           //Copy an item to Clipboard
-		//pAct = new COPYAction(this);
+		pAct = new CopyAction(this);
 		break;
 
 	case PASTE:         //Paste an item from Clipboard
-		//pAct = new PASTEAction(this);
+		pAct = new PasteAction(this);
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
@@ -301,4 +303,30 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 
+}
+
+//=================================================================================//
+//                 Clipboard used for Copy, Cut & Paste Functions                  //
+//=================================================================================//
+void ApplicationManager::SetClipboard(CFigure* fig)
+{
+	IsInClipboard = true;
+	Clipboard = fig;
+}
+CFigure* ApplicationManager::GetClipboard()
+{
+	if (IsInClipboard)
+		return Clipboard;
+	else
+		return NULL;
+}
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::SetIsFigCut(bool b)
+{
+	IsFigCut = b;
+}
+////////////////////////////////////////////////////////////////////
+bool ApplicationManager::GetIsFigCut()
+{
+	return IsFigCut;
 }

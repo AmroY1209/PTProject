@@ -56,3 +56,13 @@ bool CRectangle::checkLoc(int x, int y)
 	else return false;
 
 }
+//Gets coordinates of corner point 1
+Point CRectangle::GetP1_Rect()
+{
+	return Corner1;
+}
+//Gets coordinates of corner point 2
+Point CRectangle::GetP2_Rect()
+{
+	return Corner2;
+}

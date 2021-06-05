@@ -37,5 +37,8 @@ bool CFigure::checkLoc(int x, int y)
 {
 	return true;
 }
-
+GfxInfo CFigure::GetGFXINFO()
+{
+	return FigGfxInfo;
+}
 

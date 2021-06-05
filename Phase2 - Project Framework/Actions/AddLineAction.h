@@ -18,6 +18,10 @@ public:
 	//Add line to the ApplicationManager
 	virtual void Execute();
 
+	//Get width of rectangle which the line is inscribed in
+	virtual int GetWidth();
+	//Get height of rectangle which the line is inscribed in
+	virtual int GetHeight();
 };
 
 #endif
