@@ -5,8 +5,8 @@
 
 PasteAction::PasteAction(ApplicationManager* pApp):Action(pApp)
 {
-	//Cx=0;
-	//Cy=0;
+	Cx=0;
+	Cy=0;
 }
 PasteAction::~PasteAction()
 {
@@ -37,12 +37,12 @@ void PasteAction::Execute()
 	{
 		if (dynamic_cast<CRectangle*>(fig))
 		{
-			Point CP1 = ((CRectangle*)fig)->GetP1_Rect();
-			Point CP2 = ((CRectangle*)fig)->GetP2_Rect();
-			int NewCP1X =Cx- (CP1.x - CP2.x)/2;
-			int NewCP2X=Cx+ (CP1.x - CP2.x) / 2;
-			int NewCP1Y=Cy- (CP1.y - CP2.y) / 2;
-			int NewCP2Y= Cy + (CP1.y - CP2.y) / 2;
+			Point CP1;
+			Point CP2;
+			int NewCP1X= Cx- (((CRectangle*)fig)->GetWidth_Rect())/2;
+			int NewCP2X= Cx+ (((CRectangle*)fig)->GetWidth_Rect()) / 2;
+			int NewCP1Y= Cy- (((CRectangle*)fig)->GetHeight_Rect()) / 2;
+			int NewCP2Y= Cy + (((CRectangle*)fig)->GetHeight_Rect()) / 2;
 			CP1.x = NewCP1X;
 			CP1.y = NewCP1Y;
 			CP2.x = NewCP2X;
@@ -51,8 +51,8 @@ void PasteAction::Execute()
 			//Checks that the y-coordinate of the clicked point is in the drawing area
 			//if (CP1.y > UI.ToolBarHeight && CP1.y <= (UI.width - UI.StatusBarHeight) && CP2.y > UI.ToolBarHeight && CP2.y <= (UI.width - UI.StatusBarHeight))
 			//{
-				CRectangle* pR = new CRectangle(CP1, CP2, (fig->GetGFXINFO()));
-				pManager->AddFigure(pR);
+			CRectangle* pR = new CRectangle(CP1, CP2, (fig->GetGFXINFO()));
+			pManager->AddFigure(pR);
 			/*}
 			else
 			{

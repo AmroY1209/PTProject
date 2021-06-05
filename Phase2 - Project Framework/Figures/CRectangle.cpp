@@ -79,7 +79,24 @@ Point CRectangle::getFirstPt()
 	P.y = Corner1.y;
 	return P;
 }
-
+//Get width of the drawn rectangle
+int CRectangle::GetWidth_Rect()
+{
+	int w = Corner1.x - Corner2.x;
+	if (w > 0)
+		return w;
+	else
+		return (-w);
+}
+//Get height of the drawn rectangle
+int CRectangle::GetHeight_Rect()
+{
+	int h = Corner1.y - Corner2.y;
+	if (h > 0)
+		return h;
+	else
+		return (-h);
+}
 Point CRectangle::getLastPt()
 {
 	Point P;
