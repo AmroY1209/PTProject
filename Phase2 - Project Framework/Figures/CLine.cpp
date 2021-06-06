@@ -76,3 +76,28 @@ Point CLine::getLastPt()
 	P.y = EndPoint.y;
 	return P;
 }
+
+void CLine::Resize(string scale)
+{
+
+	if (scale == "1/4" || scale == "quarter")
+	{
+		EndPoint.x = (EndPoint.x - StartingPoint.x) / 4 + StartingPoint.x;
+		EndPoint.y = (EndPoint.y - StartingPoint.y) / 4 + StartingPoint.y;
+	}
+	else if (scale == "1/2" || scale == "half")
+	{
+		EndPoint.x = (EndPoint.x - StartingPoint.x) / 2 + StartingPoint.x;
+		EndPoint.y = (EndPoint.y - StartingPoint.y) / 2 + StartingPoint.y;
+	}
+	else if (scale == "2" || scale == "double")
+	{
+		EndPoint.x = (EndPoint.x - StartingPoint.x) * 2 + StartingPoint.x;
+		EndPoint.y = (EndPoint.y - StartingPoint.y) * 2 + StartingPoint.y;
+	}
+	else if (scale == "4" || scale == "quadruple")
+	{
+		EndPoint.x = (EndPoint.x - StartingPoint.x) * 4 + StartingPoint.x;
+		EndPoint.y = (EndPoint.y - StartingPoint.y) * 4 + StartingPoint.y;
+	}
+}

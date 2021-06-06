@@ -20,6 +20,7 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	int getID();
+	void SetID(int);
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	virtual void print(Output* pOut);
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
@@ -32,6 +33,7 @@ public:
 	virtual Point getLastPt() = 0;
 	virtual void Move(int x, int y) = 0;        //Move the figure
 	virtual void Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3)=0;  //Function gets the new corner points to be pasted
+	virtual void Resize(string scale) = 0;					//Resize the figure
 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
@@ -40,7 +42,7 @@ public:
 
 
 	//virtual void Rotate() = 0;	//Rotate the figure
-	//virtual void Resize() = 0;	//Resize the figure
+
 
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file

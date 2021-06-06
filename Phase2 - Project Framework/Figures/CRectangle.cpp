@@ -82,3 +82,27 @@ Point CRectangle::getLastPt()
 	P.y = Corner2.y;
 	return P;
 }
+
+void CRectangle::Resize(string scale)
+{
+	if (scale == "1/4" || scale == "quarter")
+	{
+		Corner2.x =(Corner2.x - Corner1.x) / 4 + Corner1.x;
+		Corner2.y =(Corner2.y - Corner1.y) / 4 + Corner1.y;
+	}
+	else if (scale == "1/2" || scale == "half")
+	{
+		Corner2.x = (Corner2.x - Corner1.x) / 2 + Corner1.x;
+		Corner2.y = (Corner2.y - Corner1.y) / 2 + Corner1.y;
+	}
+	else if (scale == "2" || scale == "double")
+	{
+		Corner2.x = (Corner2.x - Corner1.x) * 2 + Corner1.x;
+		Corner2.y = (Corner2.y - Corner1.y) * 2 + Corner1.y;
+	}
+	else if (scale == "4" || scale == "quadruple")
+	{
+		Corner2.x = (Corner2.x - Corner1.x) * 4 + Corner1.x;
+		Corner2.y = (Corner2.y - Corner1.y) * 4 + Corner1.y;
+	}
+}

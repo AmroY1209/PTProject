@@ -7,6 +7,7 @@
 #include "Actions/CopyAction.h"
 #include "Actions/PasteAction.h"
 #include "Actions\MoveAction.h"
+#include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
@@ -32,6 +33,11 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
+
+	for (int i = 0; i < MaxSelecCount; i++)
+	{
+		SelectedFigList[i] = NULL;
+	}
 }
 
 
@@ -89,7 +95,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case RESIZE:		//Resize a figure(s)
-		//pAct = new RESIZEAction(this);
+		pAct = new ResizeAction(this);
 		break;
 
 	case DEL:			//Delete a figure(s)
@@ -230,6 +236,21 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 	}
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::removeFig(int id)
+{
+	for (int i = id; i < FigCount; i++)
+	{
+		//[1 2 3 4 ] lw 3yzyn nshel 2 hangeb talata n5leha makan 2 ---->[1 3 4] bs 3yzyn n5leha [1 2 3]
+		FigList[i - 1] = FigList[i]; //kda 5alena el 3 b 2
+		FigList[i - 1]->SetID(i - 1); //leeh b2a
+	}
+	FigCount--;
+	FigList[FigCount] = NULL;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
@@ -285,6 +306,18 @@ void ApplicationManager::UpdateInterface() const
 	for (int i = 0; i < FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::clearselcFig()
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		SelectedFigList[i] = NULL;
+	}
+	SelecFigCount = 0;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const

@@ -7,9 +7,10 @@
 class DeleteAction : public Action
 {
 private:
+
 	int DelID;
-	CFigure* *selectedFig;
-	int selecFigCount;
+	int SelecFigCount;
+	CFigure** selectedFig;
 
 
 public:
@@ -19,13 +20,4 @@ public:
 	~DeleteAction();
 };
 
-
-
-
-
-
-
-
-
-// we can use Cfigure for selection
 #endif
