@@ -47,22 +47,4 @@ void AddRectAction::Execute()
 	pManager->AddFigure(R);
 }
 
-/*//Get width of the drawn rectangle
-int AddRectAction::GetWidth()
-{
-	int w =P1.x - P2.x;
-	if (w > 0)
-		return w;
-	else
-		return (-w);
-}
-//Get height of the drawn rectangle
-int AddRectAction::GetHeight()
-{
-	int h = P1.y - P2.y;
-	if (h > 0)
-		return h;
-	else
-		return (-h);
-}*/
 AddRectAction::~AddRectAction(){}

@@ -56,20 +56,16 @@ bool CRectangle::checkLoc(int x, int y)
 	else return false;
 
 }
-//Gets coordinates of corner point 1
-Point CRectangle::GetP1_Rect()
-{
-	return Corner1;
-}
-//Gets coordinates of corner point 2
-Point CRectangle::GetP2_Rect()
-{
-	return Corner2;
-}
 void CRectangle::Move(int x, int y)
 {
 	Corner2.x = x - Corner1.x + Corner2.x; Corner2.y = y - Corner1.y + Corner2.y;
 	Corner1.x = x; Corner1.y = y;
+}
+
+void CRectangle::Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3)
+{
+	temp2.x = x - Corner1.x + Corner2.x; temp2.y = y - Corner1.y + Corner2.y;
+	temp1.x = x; temp1.y = y;
 }
 
 Point CRectangle::getFirstPt()
@@ -78,24 +74,6 @@ Point CRectangle::getFirstPt()
 	P.x = Corner1.x;
 	P.y = Corner1.y;
 	return P;
-}
-//Get width of the drawn rectangle
-int CRectangle::GetWidth_Rect()
-{
-	int w = Corner1.x - Corner2.x;
-	if (w > 0)
-		return w;
-	else
-		return (-w);
-}
-//Get height of the drawn rectangle
-int CRectangle::GetHeight_Rect()
-{
-	int h = Corner1.y - Corner2.y;
-	if (h > 0)
-		return h;
-	else
-		return (-h);
 }
 Point CRectangle::getLastPt()
 {

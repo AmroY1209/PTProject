@@ -22,11 +22,6 @@ public:
 	//Add rectangle to the ApplicationManager
 	virtual void Execute() ;
 	
-	/*//Get width of rectangle drawn
-	virtual int GetWidth();
-	//Get height of rectangle drawn
-	virtual int GetHeight();*/
-	
 	~AddRectAction();
 };
 

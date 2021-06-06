@@ -312,12 +312,12 @@ ApplicationManager::~ApplicationManager()
 //=================================================================================//
 //                 Clipboard used for Copy, Cut & Paste Functions                  //
 //=================================================================================//
-void ApplicationManager::SetClipboard(CFigure* fig)
+void ApplicationManager::SetClipboard(CFigure** fig)
 {
 	IsInClipboard = true;
 	Clipboard = fig;
 }
-CFigure* ApplicationManager::GetClipboard()
+CFigure** ApplicationManager::GetClipboard()
 {
 	if (IsInClipboard)
 		return Clipboard;

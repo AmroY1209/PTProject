@@ -55,6 +55,12 @@ void CLine::Move(int x, int y)
 	StartingPoint.x = x; StartingPoint.y = y;
 }
 
+void CLine::Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3)
+{
+	temp2.x = x - StartingPoint.x + EndPoint.x; temp2.y = y - StartingPoint.y + EndPoint.y;
+	temp1.x = x; temp1.y = y;
+}
+
 Point CLine::getFirstPt()
 {
 	Point P;

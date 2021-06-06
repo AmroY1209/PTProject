@@ -24,7 +24,7 @@ private:
 	Input* pIn;
 	Output* pOut;
 
-	CFigure* Clipboard;      //Clipboard which the selected figures will be copied/cut to
+	CFigure** Clipboard;      //Clipboard which the selected figures will be copied/cut to (array of pointers)
 	bool IsInClipboard;      //Used to check that there is a figure in clipboard or not
 	bool IsFigCut;           //To know whether the figure in Clipboard is cut or copied
 
@@ -54,8 +54,8 @@ public:
 	virtual void printinfo(CFigure* s);
 
 	// -- Clipboard Functions
-	void SetClipboard(CFigure*);
-	CFigure* GetClipboard();
+	void SetClipboard(CFigure**);
+	CFigure** GetClipboard();
 	void SetIsFigCut(bool);
 	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
 
