@@ -16,14 +16,7 @@ public:
 	 Point getFirstPt() ;
 	 Point getLastPt();
 	 void Move(int x, int y) ;        //Move the figure
+	 virtual void Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3) ;  //Function gets the new corner points to be pasted
 	 void Resize(string scale);					//Resize the figure
-	 void Save(ofstream& Outfile);	//Save the figure parameters to the file
-	 //void Load(ifstream& Infile);	//Load the figure parameters to the file
 
-	Point GetP1_Rect();   //Gets coordinates of corner point 1
-	Point GetP2_Rect();   //Gets coordinates of corner point 2
-	//Get width of rectangle drawn
-	virtual int GetWidth_Rect();
-	//Get height of rectangle drawn
-	virtual int GetHeight_Rect();
 };

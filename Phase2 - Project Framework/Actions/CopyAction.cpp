@@ -15,8 +15,10 @@ void CopyAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("Copy Figure: Selected figure has been copied to the Clipboard");
+	pOut->PrintMessage("Copy Figure: Selected figure has been copied to the Clipboard, Click any where to continue");
 
+	SelectedFigList = pManager->GetSelectedFigs();
+	SelecFigCount = pManager->GetSelectedCount();
 	//Wait for User Input
 	pIn->GetPointClicked(Cx, Cy);
 
@@ -26,9 +28,9 @@ void CopyAction::ReadActionParameters()
 void CopyAction::Execute()
 {
 	ReadActionParameters();
-	fig = pManager->GetFigure(Cx, Cy);  //Get the coordinates of the selected figure
-	pManager->SetClipboard(fig);
-	pManager->SetIsFigCut(false);       //The Figure is copied not cut
+	pManager->SetClipboard(SelectedFigList);
+	pManager->SetIsFigCut(false);       //The Figures are copied not cut
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	
 }

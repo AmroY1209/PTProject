@@ -5,7 +5,8 @@ class CopyAction: public Action
 {
 private:
 	int Cx, Cy;
-	CFigure* fig;
+	int SelecFigCount;
+	CFigure** SelectedFigList; //Array of pointers
 
 public:
 	CopyAction(ApplicationManager* pApp);     //Constructor

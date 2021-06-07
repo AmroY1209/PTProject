@@ -35,6 +35,7 @@ public:
 	virtual Point getFirstPt() = 0;
 	virtual Point getLastPt() = 0;
 	virtual void Move(int x, int y) = 0;        //Move the figure
+	virtual void Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3)=0;  //Function gets the new corner points to be pasted
 	virtual void Resize(string scale) = 0;					//Resize the figure
 
 	///The following functions should be supported by the figure class

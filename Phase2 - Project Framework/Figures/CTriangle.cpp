@@ -71,6 +71,13 @@ void CTriangle::Move(int x, int y)
 	Corner1.x = x; Corner1.y = y;
 }
 
+void CTriangle::Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3)
+{
+	temp3.x = x - Corner1.x + Corner3.x; temp3.y = y - Corner1.y + Corner3.y;
+	temp2.x = x - Corner1.x + Corner2.x; temp2.y = y - Corner1.y + Corner2.y;
+	temp1.x = x; temp1.y = y;
+}
+
 Point CTriangle::getFirstPt()
 {
 	Point P;

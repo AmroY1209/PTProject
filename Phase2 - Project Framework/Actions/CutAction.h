@@ -5,7 +5,8 @@ class CutAction :public Action
 {
 private:
 	int Cx, Cy;
-	CFigure* fig;
+	int SelecFigCount;
+	CFigure** SelectedFigList; //Array of pointers
 
 public:
 	CutAction(ApplicationManager* pApp);     //Constructor

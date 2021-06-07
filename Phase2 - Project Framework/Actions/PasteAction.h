@@ -9,7 +9,8 @@ class PasteAction : public Action
 {
 private:
 	int Cx, Cy;  //Center point of the figure
-	CFigure* fig;
+	int SelecFigCount;
+	CFigure** SelectedFigList; //Array of pointers
 public:
 	PasteAction(ApplicationManager* pApp);     //Constructor
 	~PasteAction();     //Destructor
