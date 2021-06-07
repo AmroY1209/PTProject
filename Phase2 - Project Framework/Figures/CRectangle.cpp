@@ -128,3 +128,23 @@ void CRectangle::Resize(string scale)
 		Corner2.y = (Corner2.y - Corner1.y) * 4 + Corner1.y;
 	}
 }
+
+void CRectangle::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "RECT\t" << MYid << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t";
+	Outfile << Corner2.y << "\t" << DrawClr << "\t";
+	if (FigGfxInfo.isFilled)
+	{
+		string FillClr = GetColorName(FigGfxInfo.FillClr);
+		Outfile << FillClr << "\n";
+	}
+	else
+	{
+		Outfile << "NO_FILL\n";
+	}
+}
+//void CRectangle::Load(ifstream& Infile)
+//{
+//
+//}

@@ -95,3 +95,14 @@ void CLine::Resize(string scale)
 		EndPoint.y = (EndPoint.y - StartingPoint.y) * 4 + StartingPoint.y;
 	}
 }
+
+void CLine::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "LINE\t" << MYid << "\t" << StartingPoint.x << "\t" << StartingPoint.y << "\t" << EndPoint.x << "\t";
+	Outfile << EndPoint.y << "\t" << DrawClr << "\n";
+}
+//void CLine::Load(ifstream& Infile)
+//{
+//
+//}

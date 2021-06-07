@@ -118,3 +118,23 @@ void CTriangle::Resize(string scale)
 		Corner3.y = (Corner3.y - Corner1.y) * 4 + Corner1.y;
 	}
 }
+
+void CTriangle::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "TRIANG\t" << MYid << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t";
+	Outfile << Corner2.y << "\t" << Corner3.x << "\t" << Corner3.y << "\t" << DrawClr << "\t";
+	if (FigGfxInfo.isFilled)
+	{
+		string FillClr = GetColorName(FigGfxInfo.FillClr);
+		Outfile << FillClr << "\n";
+	}
+	else
+	{
+		Outfile << "NO_FILL\n";
+	}
+}
+//void CTriangle::Load(ifstream& Infile)
+//{
+//	
+//}

@@ -43,6 +43,7 @@ public:
 	void AddSelectedFigure(CFigure* s);
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	int GetFigCount();
 
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
@@ -54,6 +55,9 @@ public:
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	virtual void printinfo(CFigure* s);
+
+	// -- Save/Load Functions
+	void SaveAll(ofstream &Outfile);
 
 	// -- Clipboard Functions
 	void SetClipboard(CFigure*);

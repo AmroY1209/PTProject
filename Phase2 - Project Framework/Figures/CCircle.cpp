@@ -89,3 +89,24 @@ void CCircle::Resize(string scale)
 		Radius.y = (Radius.y - Center.y) * 4 + Center.y;
 	}
 }
+
+void CCircle::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "CIRCLE\t" << MYid << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t";
+	Outfile << Radius.y << "\t" << DrawClr << "\t";
+	if (FigGfxInfo.isFilled)
+	{
+		string FillClr = GetColorName(FigGfxInfo.FillClr);
+		Outfile << FillClr << "\n";
+	}
+	else
+	{
+		Outfile << "NO_FILL\n";
+	}
+}
+
+//void CCircle::Load(ifstream& Infile)
+//{
+//
+//}

@@ -9,6 +9,7 @@
 #include "Actions\MoveAction.h"
 #include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
+#include "Actions/SaveAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -115,7 +116,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SAVE:			//Save the whole graph to a file
-		//pAct = new SAVEAction(this);
+		pAct = new SaveAction(this);
 		break;
 
 	case LOAD:			//Load a graph from a file
@@ -222,6 +223,10 @@ int ApplicationManager::GetSelectedCount()
 	return SelecFigCount;
 }
 
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
 void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -294,7 +299,17 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 	return NULL;
 }
 
+//==================================================================================//
+//								Save Related Functions								//
+//==================================================================================//
 
+void ApplicationManager::SaveAll(ofstream& Outfile)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->Save(Outfile); //Call Save Function
+	}
+}
 
 //==================================================================================//
 //							Interface Management Functions							//
