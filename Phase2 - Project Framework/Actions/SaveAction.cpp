@@ -15,7 +15,7 @@ void SaveAction::ReadActionParameters()
 	Outfile.open(Filename);
 	if (Outfile.is_open())
 	{
-		pOut->PrintMessage("Your file has been Successfully Saved");
+		pOut->PrintMessage("Your file has been Saved Successfully");
 	}
 	else {
 		pOut->PrintMessage("Unable to save file");
