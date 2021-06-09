@@ -13,7 +13,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	void print(Output* pOut);
 	bool checkLoc(int x, int y);
-
+	bool isValid(Point, Point) const;
 
 	Point getFirstPt();
 	Point getLastPt();

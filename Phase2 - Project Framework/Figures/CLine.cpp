@@ -9,8 +9,12 @@ CLine::CLine(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 
 void CLine::Draw(Output* pOut) const
 {
-	//Call Output::DrawLine to draw a line on the screen	
-	pOut->DrawLine(StartingPoint, EndPoint, FigGfxInfo, Selected);
+	bool x = isValid(StartingPoint, EndPoint);
+	if (x)
+	{
+		pOut->DrawLine(StartingPoint, EndPoint, FigGfxInfo, Selected);
+	}
+	else pOut->PrintMessage("Invalid Drawing Area Please try again");
 }
 
 
@@ -36,6 +40,18 @@ void CLine::print(Output* pOut)
 	pOut->PrintMessage(strl);
 }
 
+bool CLine::isValid(Point p1, Point p2) const
+{
+	if (((p1.y < UI.ToolBarHeight) || (p1.y > (UI.height - UI.StatusBarHeight))) || (((p2.y < UI.ToolBarHeight) || (p2.y > (UI.height - UI.StatusBarHeight)))))
+	{
+		return false;
+	}
+	else if ((p1.x<0 || p1.x >UI.width) || (p2.x<0 || p2.x>UI.width))
+	{
+		return false;
+	}
+	else return true;
+}
 
 bool CLine::checkLoc(int x, int y)
 {

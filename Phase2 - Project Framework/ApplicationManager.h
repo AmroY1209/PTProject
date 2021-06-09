@@ -14,7 +14,7 @@ class ApplicationManager
 	//Max no of figures
 
 private:
-
+	bool filled;
 	int FigCount;		//Actual number of figures
 	int SelecFigCount;	//selected figure counter
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)

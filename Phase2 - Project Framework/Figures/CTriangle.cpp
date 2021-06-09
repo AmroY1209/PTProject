@@ -12,7 +12,12 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 void CTriangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawTri to draw a triangle on the screen	
-	pOut->DrawTriangle(Corner1, Corner2, Corner3, FigGfxInfo, Selected);
+	bool x = isValid(Corner1, Corner2, Corner3);
+	if (x)
+	{
+		pOut->DrawTriangle(Corner1, Corner2, Corner3, FigGfxInfo, Selected);
+	}
+	else pOut->PrintMessage("Invalid Drawing Area Please try again");
 }
 
 
@@ -141,6 +146,24 @@ void CTriangle::Save(ofstream& Outfile)
 		Outfile << "NO_FILL\n";
 	}
 }
+
+
+
+bool CTriangle::isValid(Point p1, Point p2, Point p3) const
+{
+	if ((p1.x<0 || p1.x>UI.width) || (p2.x<0 || p2.x>UI.width) || (p3.x<0 || p3.x>UI.width))
+	{
+		return false;
+	}
+	else if ((p1.y<UI.ToolBarHeight || p1.y >(UI.height - UI.StatusBarHeight)) || (p2.y<UI.ToolBarHeight || p2.y >(UI.height - UI.StatusBarHeight)) || (p3.y<UI.ToolBarHeight || p3.y >(UI.height - UI.StatusBarHeight)))
+	{
+		return false;
+	}
+	else return true;
+}
+
+
+
 //void CTriangle::Load(ifstream& Infile)
 //{
 //	

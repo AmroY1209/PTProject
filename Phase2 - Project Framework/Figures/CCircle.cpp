@@ -9,8 +9,17 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 
 void CCircle::Draw(Output* pOut) const
 {
+	bool x = isValid(Center, Radius);
 	//Call Output::DrawCirc to draw a circle on the screen	
-	pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
+	if (x)
+	{
+		pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
+
+	}
+	else
+	{
+		pOut->PrintMessage("Invalid Drawing Area Please try again");
+	}
 }
 
 
@@ -35,6 +44,19 @@ void CCircle::print(Output* pOut)
 	pOut->PrintMessage(strl);
 }
 
+bool CCircle::isValid(Point Center, Point Radius) const
+{
+	double radius = sqrt((Center.x - Radius.x) * (Center.x - Radius.x) + (Center.y - Radius.y) * (Center.y - Radius.y));
+	if ((Center.x - radius) < 0 || (Center.x + radius) > UI.width)
+	{
+		return false;
+	}
+	else if (((Center.y - radius) < UI.ToolBarHeight) || ((Center.y + radius) > (UI.height - UI.StatusBarHeight)))
+	{
+		return false;
+	}
+	else return true;
+}
 
 bool CCircle::checkLoc(int x, int y)
 {
