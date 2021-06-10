@@ -14,16 +14,8 @@
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
 #include "Figures/CTriangle.h"
-#include "Actions\DrwColorAction.h"
-#include "Actions\FillclrAction.h"
-#include "Actions\BackGrndClrAction.h"
 #include "DEFS.h"
 #include "CMUgraphicsLib/CMUgraphics.h"
-
-
-
-
-
 
 
 int CFigure::ID = 0;
@@ -83,51 +75,60 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCircAction(this, filled);
 		break;
 
-	case CHNG_DRAW_CLR: //Change the drawing color
-		pOut->CreateDrawClrToolBar();
-		pAct = new DrwColorAction(this);
-		break;
 		//case colors for change DRAW COLOR 
 			///////////////////////////////////////////////////////////////////////////////
+
+	case CHNG_DRAW_CLR: //Change the drawing color
+		pOut->CreateDrawClrToolBar();
+		pOut->PrintMessage("Choose color from following");
+		break;
 
 	case COLOR_WHITE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = WHITE;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = BLACK;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_RED:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = RED;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = GREEN;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = BLUE;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = YELLOW;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = PURPLE;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = ORANGE;
+		pOut->ClearStatusBar();
 		break;
 
 		/////////////////////////////////////////////////////////////////////////////////
@@ -135,60 +136,70 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case CHNG_FILL_CLR:	//Change the filling color
 		pOut->CreateFillClrToolBar();
 		filled = true;
-		pAct = new FillClrAction(this);
+		pOut->PrintMessage("Choose color from following");
 		break;
 
 	case FILL_WHITE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = WHITE;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = BLACK;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_RED:
 
 		pOut->CreateDrawToolBar();
 		UI.FillColor = RED;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = GREEN;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = BLUE;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = YELLOW;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = PURPLE;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = ORANGE;
+		pOut->ClearStatusBar();
 		break;
+
 		////////////////////////////////////////////////////////////////////////////////////////////////////
+		//Change background color
 
-
-	case CHNG_BK_CLR:	//Change background color
+	case CHNG_BK_CLR:	
 		pOut->CreateBackClrToolBar();
-		pAct = new BackGrndClrAction(this);
+		pOut->PrintMessage("Choose color from following");
 		break;
 
 	case BCFILL_WHITE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = WHITE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 
 		break;
@@ -196,6 +207,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case BCFILL_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = BLACK;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
@@ -203,41 +215,45 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = RED;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
-	
-
 		break;
 
 	case BCFILL_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = GREEN;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = BLUE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = YELLOW;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = PURPLE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = ORANGE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
-
 		break;
+
 	case SELECT:		//Select an item
 		pAct = new SelectAction(this);
 		break;
