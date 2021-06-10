@@ -44,11 +44,11 @@ public:
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	int GetFigCount();
-
+	void deleteFig();
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
 	void clearselcFig();
-	void removeFig(int id);
+	
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input

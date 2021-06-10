@@ -251,7 +251,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:			//Delete a figure(s)
-		pAct = new DeleteAction(this);
+		deleteFig();
+		pOut->ClearDrawArea();
+		pOut->ClearStatusBar();
+		pOut->PrintMessage("Figure(s) Deleted succesfully");
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -392,20 +395,6 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ApplicationManager::removeFig(int id)
-{
-	for (int i = id; i < FigCount; i++)
-	{
-		//[1 2 3 4 ] lw 3yzyn nshel 2 hangeb talata n5leha makan 2 ---->[1 3 4] bs 3yzyn n5leha [1 2 3]
-		FigList[i - 1] = FigList[i]; //kda 5alena el 3 b 2
-		FigList[i - 1]->SetID(i - 1); //leeh b2a
-	}
-	FigCount--;
-	FigList[FigCount] = NULL;
-}
-
 
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -449,6 +438,31 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 
 	return NULL;
 }
+
+
+void ApplicationManager::deleteFig()
+{
+	int k = 0;
+	for (int i = 0; i < MaxFigCount; i++)
+	{
+		if (!FigList[i - k])
+		{
+			break;
+		}
+		if (FigList[i - k]->IsSelected())
+		{
+			clearselcFig();
+			delete FigList[i - k];
+			FigList[i - k] = FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
+			FigCount--;
+			k++;
+		}
+	}
+}
+
+
+
 
 //==================================================================================//
 //								Save Related Functions								//

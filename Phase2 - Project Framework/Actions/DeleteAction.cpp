@@ -27,24 +27,7 @@ void DeleteAction::Execute()
 	{
 		pOut->PrintMessage("Invalid Action: please select figure first");
 	}
-	else
-	{
-		for (int i = 0; i < SelecFigCount; i++)
-		{
-			DelID = selectedFig[i]->getID();
-
-			pManager->removeFig(DelID);
-
-			delete selectedFig[i];
-
-		}
-		pManager->clearselcFig();
 		pOut->PrintMessage("Figure Deleted");
-		pOut->ClearDrawArea();
-		pManager->UpdateInterface();
-	}
-
-
 }
 
 DeleteAction::~DeleteAction() {}

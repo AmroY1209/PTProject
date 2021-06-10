@@ -8,10 +8,8 @@ class DeleteAction : public Action
 {
 private:
 
-	int DelID;
 	int SelecFigCount;
 	CFigure** selectedFig;
-
 
 public:
 	DeleteAction(ApplicationManager* pApp);
