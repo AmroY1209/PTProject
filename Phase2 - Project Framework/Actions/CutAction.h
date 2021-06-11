@@ -6,7 +6,9 @@ class CutAction :public Action
 private:
 	int Cx, Cy;
 	int SelecFigCount;
-	CFigure** SelectedFigList; //Array of pointers
+	CFigure** SelectedFig_List; //Array of pointers
+	int Temp_Count;
+	int DelID;
 
 public:
 	CutAction(ApplicationManager* pApp);     //Constructor

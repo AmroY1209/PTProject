@@ -1,4 +1,20 @@
 #include "ApplicationManager.h"
+#include "Actions\AddRectAction.h"
+#include "Actions\AddTriAction.h"
+#include "Actions\AddLineAction.h"
+#include "Actions\AddCircAction.h"
+#include "Actions\SelectAction.h"
+#include "Actions\CopyAction.h"
+#include "Actions\PasteAction.h"
+#include "Actions\MoveAction.h"
+#include "Actions\ResizeAction.h"
+#include "Actions\DeleteAction.h"
+#include "Actions\CutAction.h"
+#include "Actions\PickByTypeAction.h"
+#include "Figures\CCircle.h"
+#include "Figures\CRectangle.h"
+#include "Figures\CLine.h"
+#include "Figures\CTriangle.h"
 #include "Actions/AddRectAction.h"
 #include "Actions/AddTriAction.h"
 #include "Actions/AddLineAction.h"
@@ -33,6 +49,7 @@ ApplicationManager::ApplicationManager()
 
 	FigCount = 0;
 	SelecFigCount = 0;
+	ClipboardCount = 0;
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
@@ -275,6 +292,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case COPY:           //Copy an item to Clipboard
+		//ClearClipboard();
 		pAct = new CopyAction(this);
 		break;
 
@@ -283,7 +301,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
-		//pAct = new CUTAction(this);
+		//ClearClipboard();
+		pAct = new CutAction(this);
 		break;
 
 	case SAVE:			//Save the whole graph to a file
@@ -328,6 +347,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case BY_TYPE:    //Pick figures by Type, for play mode
+		pAct = new PickByTypeAction(this);
 		break;
 
 	case BY_COLOR:    //Pick figures by Color, for play mode
@@ -454,6 +474,24 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 	return NULL;
 }
 
+CFigure** ApplicationManager::GetDrawnFigs()
+{
+	return FigList;
+}
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
+void ApplicationManager::ClearFigList()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+	clearselcFig();
+
 void ApplicationManager::deleteFig()
 {
 	int k = 0;
@@ -515,6 +553,13 @@ void ApplicationManager::clearselcFig()
 	SelecFigCount = 0;
 }
 
+void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure without selected figure count
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		SelectedFigList[i] = NULL;
+	}
+
 void ApplicationManager::ClearFigList()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -549,12 +594,27 @@ ApplicationManager::~ApplicationManager()
 	delete pOut;
 }
 
+//Draw all figures on the user interface in the play mode specifically
+void ApplicationManager::UpdateInterface_PlayMode() const
+{
+	pOut->ClearDrawArea();
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->figStatus() == false)
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	}
+}
+
 //=================================================================================//
 //                 Clipboard used for Copy, Cut & Paste Functions                  //
 //=================================================================================//
 void ApplicationManager::SetClipboard(CFigure** fig)
 {
 	IsInClipboard = true;
+	/*for (int i = 0; i < SelecFigCount; i++)
+	{
+		Clipboard[ClipboardCount++] = fig[i];
+	}*/
 	Clipboard = fig;
 }
 
@@ -578,4 +638,19 @@ void ApplicationManager::SetIsFigCut(bool b)
 bool ApplicationManager::GetIsFigCut()
 {
 	return IsFigCut;
+}
+void ApplicationManager::ClearClipboard()
+{
+	for (int i = 0; i < ClipboardCount; i++)
+	{
+		Clipboard[i] = NULL;
+	}
+}
+void ApplicationManager::SetCount(int x)
+{
+	TempCount = x;
+}
+int ApplicationManager::GetCount()
+{
+	return TempCount;
 }

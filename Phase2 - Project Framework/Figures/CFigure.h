@@ -14,6 +14,7 @@ protected:
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	
 	/// Add more parameters if needed.
+	bool fig_status;
 
 public:
 	static int ID;
@@ -31,6 +32,9 @@ public:
 	color GetColor(string RGB);			//Gets the color from its name (load)
 	virtual bool checkLoc(int x, int y);
 	virtual GfxInfo GetGFXINFO();  //Gets graphical info
+	void hide();					//Hides figures in playmode
+	void unHide();					//Unhides figures in playmode
+	bool figStatus();			//Returns true if the figure is hidden and false if not hidden 
 
 	virtual Point getFirstPt() = 0;
 	virtual Point getLastPt() = 0;

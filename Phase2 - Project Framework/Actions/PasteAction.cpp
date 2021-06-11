@@ -19,7 +19,7 @@ void PasteAction::ReadActionParameters()
 
 	pOut->PrintMessage("Paste Figure: Click anywhere to paste");
 
-	SelectedFigList = pManager->GetSelectedFigs();
+	SelectedFigList = pManager->GetSelectedFigs();  //shaklha malhash lazma
 	SelecFigCount = pManager->GetSelectedCount();
 
 	//Wait for User Input
@@ -33,7 +33,7 @@ void PasteAction::Execute()
 	ReadActionParameters();
 	SelectedFigList = pManager->GetClipboard();
 	Output* pOut = pManager->GetOutput();
-	if (SelecFigCount != 0)
+	if (SelecFigCount != 0 )
 	{
 		Point TEMP1, TEMP2, TEMP3;
 		TEMP1.y = 81; TEMP2.y = 81; TEMP3.y = 81;    //Initial value to allow drawing in drawing area only
@@ -43,7 +43,7 @@ void PasteAction::Execute()
 		Dist.y = Cy - SelectedFigList[0]->getFirstPt().y;
 		//Draw first selected figure only
 		//Checks that the y-coordinate of the clicked point is in the drawing area
-		if (TEMP1.y > UI.ToolBarHeight && TEMP1.y <= (UI.height - UI.StatusBarHeight) && TEMP2.y > UI.ToolBarHeight && TEMP2.y <= (UI.height - UI.StatusBarHeight) && TEMP3.y > UI.ToolBarHeight && TEMP3.y <= (UI.height - UI.StatusBarHeight))
+		if ((TEMP1.y >= UI.ToolBarHeight) && (TEMP1.y <= (UI.height - UI.StatusBarHeight)) && (TEMP2.y >= UI.ToolBarHeight) && (TEMP2.y <= (UI.height - UI.StatusBarHeight)) && (TEMP3.y >= UI.ToolBarHeight) && (TEMP3.y <= (UI.height - UI.StatusBarHeight)))
 		{
 			if (dynamic_cast<CRectangle*>(SelectedFigList[0]))
 			{
