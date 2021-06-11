@@ -1,6 +1,5 @@
 #include "CutAction.h"
 #include "..\ApplicationManager.h"
-#include "DeleteAction.h"
 CutAction::CutAction(ApplicationManager* pApp):Action(pApp)
 {
 	Cx = 0;
