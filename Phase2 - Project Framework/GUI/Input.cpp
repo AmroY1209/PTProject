@@ -60,11 +60,6 @@ ActionType Input::GetUserAction() const
 			case ITM_MOVE: return MOVE;
 			case ITM_RESIZE: return RESIZE;
 			case ITM_DEL: return DEL;
-			case ITM_COPY: return COPY;
-			case ITM_PASTE: return PASTE;
-			case ITM_CUT: return CUT;
-			case ITM_SAVE: return SAVE;
-			case ITM_LOAD: return LOAD;
 			case ITM_ZOOMIN: return ZOOM_IN;
 			case ITM_ZOOMOUT: return ZOOM_OUT;
 			case ITM_PLAY: return TO_PLAY;
@@ -73,13 +68,28 @@ ActionType Input::GetUserAction() const
 			default: return EMPTY;	//A click on empty place in design toolbar
 			}
 		}
-		//[2] User clicks on the drawing area
+		//[2] User clicks on utility toolbar area
+		if (x >= UI.width - UI.UtilToolbarWidth && x < UI.width)
+		{
+			int ClickedItemOrder = (y / 70) - 1;
+			switch (ClickedItemOrder)
+			{
+			case ITM_CUT: return CUT;
+			case ITM_COPY: return COPY;
+			case ITM_PASTE: return PASTE;
+			case ITM_SAVE: return SAVE;
+			case ITM_LOAD: return LOAD;
+
+			default: return EMPTY;	//A click on empty place in design toolbar
+			}
+		}
+		//[3] User clicks on the drawing area
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
 		{
 			return DRAWING_AREA;
 		}
 
-		//[3] User clicks on the status bar
+		//[4] User clicks on the status bar
 		return STATUS;
 	}
 	else if (UI.InterfaceMode == MODE_ADDITEM)

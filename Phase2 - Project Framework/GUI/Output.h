@@ -15,6 +15,7 @@ public:
 	void CreateDrawClrToolBar() const;
 	void CreateFillClrToolBar() const;
 	void CreateBackClrToolBar() const;
+	void CreateUtilityToolbar() const;
 	void CreateDrawItemsToolbar() const;	//create draw items toolbar & menu
 	void CreateStatusBar() const;			//create the status bar
 
@@ -22,6 +23,8 @@ public:
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	void ClearToolbarArea() const; //Clears the toolbar
+	void ClearUtilToolbarArea() const;
+	void ClearUtilToolbarArea1() const;
 	// -- Figures Drawing functions
 	void DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected = false) const;  //Draw a rectangle
 	void DrawCirc(Point P1, Point P2, GfxInfo CircGfxInfo, bool selected) const;	    //Draw a circle
