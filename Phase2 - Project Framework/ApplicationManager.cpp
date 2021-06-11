@@ -499,6 +499,15 @@ void ApplicationManager::clearselcFig()
 	SelecFigCount = 0;
 }
 
+void ApplicationManager::ClearFigList()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input* ApplicationManager::GetInput() const

@@ -32,6 +32,7 @@ void LoadAction::Execute()
 	ReadActionParameters();
 	if (Infile.is_open())
 	{
+		pManager->ClearFigList();
 		string Draw_Clr, Fill_Clr, BK_Clr;
 		int NumOfFigs;
 		Infile >> Draw_Clr >> Fill_Clr >> BK_Clr >> NumOfFigs;

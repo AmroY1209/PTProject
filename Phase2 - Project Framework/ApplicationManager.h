@@ -48,6 +48,7 @@ public:
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
 	void clearselcFig();
+	void ClearFigList();
 	
 
 	// -- Interface Management Functions
