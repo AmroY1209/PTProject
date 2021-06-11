@@ -8,7 +8,6 @@
 #include "Actions/PasteAction.h"
 #include "Actions\MoveAction.h"
 #include "Actions\ResizeAction.h"
-#include "Actions\DeleteAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/LoadAction.h"
 #include "Figures/CCircle.h"
