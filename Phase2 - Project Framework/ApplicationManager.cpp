@@ -8,7 +8,6 @@
 #include "Actions\PasteAction.h"
 #include "Actions\MoveAction.h"
 #include "Actions\ResizeAction.h"
-#include "Actions\DeleteAction.h"
 #include "Actions\CutAction.h"
 #include "Actions\PickByTypeAction.h"
 #include "Figures\CCircle.h"
@@ -492,32 +491,32 @@ void ApplicationManager::ClearFigList()
 	FigCount = 0;
 	clearselcFig();
 
-void ApplicationManager::deleteFig()
-{
-	int k = 0;
-	if (SelecFigCount == 0)
+	void ApplicationManager::deleteFig()
 	{
-		pOut->PrintMessage("please select figure first");
-		return;
-	}
-	for (int i = 0; i < MaxFigCount; i++)
-	{
-		if (!FigList[i - k])
+		int k = 0;
+		if (SelecFigCount == 0)
 		{
-			break;
+			pOut->PrintMessage("please select figure first");
+			return;
 		}
-		else if (FigList[i - k]->IsSelected())
+		for (int i = 0; i < MaxFigCount; i++)
 		{
-			clearselcFig();
-			delete FigList[i - k];
-			FigList[i - k] = FigList[FigCount - 1];
-			FigList[FigCount - 1] = NULL;
-			FigCount--;
-			k++;
-			pOut->PrintMessage("Figure(s) deleted successfully");
+			if (!FigList[i - k])
+			{
+				break;
+			}
+			else if (FigList[i - k]->IsSelected())
+			{
+				clearselcFig();
+				delete FigList[i - k];
+				FigList[i - k] = FigList[FigCount - 1];
+				FigList[FigCount - 1] = NULL;
+				FigCount--;
+				k++;
+				pOut->PrintMessage("Figure(s) deleted successfully");
+			}
 		}
 	}
-}
 
 //==================================================================================//
 //								Save Related Functions								//
