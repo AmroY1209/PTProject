@@ -19,7 +19,7 @@
 #include "DEFS.h"
 #include "CMUgraphicsLib/CMUgraphics.h"
 
-
+//comment hen
 
 int CFigure::ID = 0;
 
@@ -530,11 +530,13 @@ Input* ApplicationManager::GetInput() const
 {
 	return pIn;
 }
+
 //Return a pointer to the output
 Output* ApplicationManager::GetOutput() const
 {
 	return pOut;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
@@ -555,6 +557,7 @@ void ApplicationManager::SetClipboard(CFigure** fig)
 	IsInClipboard = true;
 	Clipboard = fig;
 }
+
 CFigure** ApplicationManager::GetClipboard()
 {
 	if (IsInClipboard)
@@ -562,12 +565,16 @@ CFigure** ApplicationManager::GetClipboard()
 	else
 		return NULL;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 void ApplicationManager::SetIsFigCut(bool b)
 {
 	IsFigCut = b;
 }
+
 ////////////////////////////////////////////////////////////////////
+
 bool ApplicationManager::GetIsFigCut()
 {
 	return IsFigCut;
