@@ -514,6 +514,7 @@ void ApplicationManager::ClearFigList()
 	}
 	FigCount = 0;
 	clearselcFig();
+}
 
 	void ApplicationManager::deleteFig()
 	{
@@ -582,6 +583,7 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 	{
 		SelectedFigList[i] = NULL;
 	}
+}
 
 void ApplicationManager::ClearFigList()
 {
