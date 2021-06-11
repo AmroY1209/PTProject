@@ -246,7 +246,7 @@ void Output::CreateBackClrToolBar() const
 
 }
 
-
+/// ///////////////////////////////////////////////////////////////////////////////////////
 
 void Output::ClearDrawArea() const
 {
@@ -255,10 +255,8 @@ void Output::ClearDrawArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight + 7, UI.width, UI.height - UI.StatusBarHeight);
 
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 void Output::ClearToolbarArea() const
 {
@@ -266,6 +264,7 @@ void Output::ClearToolbarArea() const
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
@@ -276,15 +275,15 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintInteger(int i) const	//Prints AN INTEGER ANA MEZAWDHA ~ABDO / HASHISH
+void Output::PrintInteger(int i) const	//Prints AN INTEGER
 {
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawInteger(220, UI.height - (int)(UI.StatusBarHeight / 1.5), i);
 }
-
 
 color Output::getCrntDrawColor() const	//get current drwawing color
 {
@@ -296,19 +295,31 @@ color Output::getCrntFillColor() const	//get current filling color
 {
 	return UI.FillColor;
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
+}
 
 
-
-}color Output::getCrntHightLight() const		//get current pen width
+color Output::getCrntHightLight() const		//get current pen width
 {
 	return UI.HighlightColor;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::StoreImage(image& imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight)
+{
+	pWind->StoreImage(imgThis, usX, usY, usWidth, usHeight);
+}
+
+void Output::DrawImage(const image& imgThis, const int iX, const int iY, const int iWidth, const int iHeight)
+{
+	pWind->DrawImage(imgThis, iX, iY, iWidth, iHeight);
+}
 
 
 //======================================================================================//

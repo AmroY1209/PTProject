@@ -1,29 +1,23 @@
 #include "ApplicationManager.h"
-#include "Actions\AddRectAction.h"
-#include "Actions\AddTriAction.h"
-#include "Actions\AddLineAction.h"
-#include "Actions\AddCircAction.h"
-#include "Actions\SelectAction.h"
+#include "Actions/AddRectAction.h"
+#include "Actions/AddTriAction.h"
+#include "Actions/AddLineAction.h"
+#include "Actions/AddCircAction.h"
+#include "Actions/SelectAction.h"
 #include "Actions/CopyAction.h"
 #include "Actions/PasteAction.h"
-#include "Actions\MoveAction.h"
-#include "Actions\ResizeAction.h"
-#include "Actions\DeleteAction.h"
+#include "Actions/MoveAction.h"
+#include "Actions/ResizeAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/LoadAction.h"
+#include"Actions/ZoomInAction.h"
+#include"Actions/ZoomOutAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
 #include "Figures/CTriangle.h"
-#include "Actions\DrwColorAction.h"
-#include "Actions\FillclrAction.h"
-#include "Actions\BackGrndClrAction.h"
 #include "DEFS.h"
 #include "CMUgraphicsLib/CMUgraphics.h"
-
-
-
-
 
 
 
@@ -86,7 +80,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case CHNG_DRAW_CLR: //Change the drawing color
 		pOut->CreateDrawClrToolBar();
-		pAct = new DrwColorAction(this);
+		pOut->PrintMessage("Choose color from following");
+	
 		break;
 		//case colors for change DRAW COLOR 
 			///////////////////////////////////////////////////////////////////////////////
@@ -94,109 +89,125 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case COLOR_WHITE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = WHITE;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = BLACK;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_RED:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = RED;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = GREEN;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = BLUE;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = YELLOW;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = PURPLE;
+		pOut->ClearStatusBar();
 		break;
 
 	case COLOR_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = ORANGE;
+		pOut->ClearStatusBar();
 		break;
 
-		/////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_FILL_CLR:	//Change the filling color
 		pOut->CreateFillClrToolBar();
+		pOut->PrintMessage("Choose color from following");
 		filled = true;
-		pAct = new FillClrAction(this);
 		break;
 
 	case FILL_WHITE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = WHITE;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = BLACK;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_RED:
 
 		pOut->CreateDrawToolBar();
 		UI.FillColor = RED;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = GREEN;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = BLUE;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = YELLOW;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = PURPLE;
+		pOut->ClearStatusBar();
 		break;
 
 	case FILL_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = ORANGE;
+		pOut->ClearStatusBar();
 		break;
-		////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_BK_CLR:	//Change background color
 		pOut->CreateBackClrToolBar();
-		pAct = new BackGrndClrAction(this);
+		pOut->PrintMessage("Choose color from following");
 		break;
 
 	case BCFILL_WHITE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = WHITE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
-
 		break;
 
 	case BCFILL_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = BLACK;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
@@ -204,40 +215,43 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = RED;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
-	
-
 		break;
 
 	case BCFILL_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = GREEN;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = BLUE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = YELLOW;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = PURPLE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
 
 	case BCFILL_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.BkGrndColor = ORANGE;
+		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
-
 		break;
 	case SELECT:		//Select an item
 		pAct = new SelectAction(this);
@@ -255,7 +269,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		deleteFig();
 		pOut->ClearDrawArea();
 		pOut->ClearStatusBar();
-		pOut->PrintMessage("Figure(s) Deleted succesfully");
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -279,11 +292,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case ZOOM_IN:        //Zooming the whole graph in
-		//pAct = new Zoom_INAction(this);
+		pAct = new ZoomInAction(this);
 		break;
 
 	case ZOOM_OUT:       //Zooming the whole graph out
-		//pAct = new Zoom_OUTAction(this);
+		pAct = new ZoomOutAction(this);
 		break;
 
 	case TO_ADDITEM:
@@ -356,7 +369,6 @@ void ApplicationManager::printinfo(CFigure* pI)
 			pOut->PrintMessage("Number of selected figure: ");
 			pOut->PrintInteger(SelecFigCount);
 		}
-
 	}
 }
 
@@ -403,7 +415,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-	for (int i = 0; i < FigCount; i++)
+	for (int i = FigCount - 1; i >= 0; i--)
 	{
 		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]);
 		if (C != NULL)
@@ -448,6 +460,7 @@ void ApplicationManager::deleteFig()
 	{
 		if (!FigList[i - k])
 		{
+			pOut->PrintMessage("please draw image first");
 			break;
 		}
 		if (FigList[i - k]->IsSelected())
@@ -460,6 +473,7 @@ void ApplicationManager::deleteFig()
 			k++;
 		}
 	}
+	
 }
 
 
