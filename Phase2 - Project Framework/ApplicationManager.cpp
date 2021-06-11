@@ -10,6 +10,7 @@
 #include "Actions\ResizeAction.h"
 #include "Actions\DeleteAction.h"
 #include "Actions/SaveAction.h"
+#include "Actions/LoadAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -274,7 +275,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case LOAD:			//Load a graph from a file
-		//pAct = new LOADAction(this);
+		pAct = new LoadAction(this);
 		break;
 
 	case ZOOM_IN:        //Zooming the whole graph in

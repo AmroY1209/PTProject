@@ -137,6 +137,7 @@
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DrwColorAction.cpp" />
     <ClCompile Include="Actions\FillClrAction.cpp" />
+    <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DrwColorAction.h" />
     <ClInclude Include="Actions\FillClrAction.h" />
+    <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
