@@ -45,14 +45,12 @@ public:
 	void AddSelectedFigure(CFigure* s);
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-	int GetFigCount();
 	void deleteFig();
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
 	void clearselcFig();
 	void OnlyclearselcFig();  //Only clears selected figure without selected figure count
 
-	void removeFig(int id);
 	CFigure** GetDrawnFigs();      //Gets the list of drawn figures
 	int GetFigCount();             //Gets the number of actual drawn figures
 	void ClearFigList();                //Deletes all figures in the list of figures

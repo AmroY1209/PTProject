@@ -63,6 +63,7 @@ void LoadAction::Execute()
 		}
 		Output* pOut= pManager->GetOutput();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 	}
 }
 

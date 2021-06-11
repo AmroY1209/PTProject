@@ -42,6 +42,7 @@ void ZoomOutAction::Execute()
 
 	pOut->ClearDrawArea();
 	pOut->ClearStatusBar();
+	pOut->CreateUtilityToolbar();
 
 }
 
@@ -50,7 +51,7 @@ void ZoomOutAction::ZoomOut(string scale)
 	image img2 = "images\\MenuItems\\zoomtemp.jpg";
 	Output* pOut = pManager->GetOutput();
 	//pOut->StoreImage(img2, 2, UI.ToolBarHeight, UI.width, (UI.height-UI.StatusBarHeight));
-	pOut->StoreImage(img2, 0, UI.ToolBarHeight, UI.width - 15, (UI.height - UI.StatusBarHeight - UI.ToolBarHeight));
+	pOut->StoreImage(img2, 0, UI.ToolBarHeight, UI.width - 15 - UI.UtilToolbarWidth, (UI.height - UI.StatusBarHeight - UI.ToolBarHeight));
 	pOut->ClearDrawArea();
 	if (scale == "1/2" || scale == "half")
 	{
@@ -60,4 +61,5 @@ void ZoomOutAction::ZoomOut(string scale)
 	{
 		pOut->DrawImage(img2, 0, UI.ToolBarHeight + 2, UI.width / 4, UI.height / 4);
 	}
+	pOut->CreateUtilityToolbar();
 }
