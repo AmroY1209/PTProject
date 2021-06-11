@@ -46,6 +46,7 @@ void MoveAction::Execute()
 			SelectedFigList[i]->Move(newPosition.x, newPosition.y);
 		}
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		pManager->UpdateInterface();
 	}
 	else

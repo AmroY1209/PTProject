@@ -4,14 +4,16 @@
 #include "Actions/AddLineAction.h"
 #include "Actions/AddCircAction.h"
 #include "Actions/SelectAction.h"
+#include "Actions/CutAction.h"
 #include "Actions/CopyAction.h"
 #include "Actions/PasteAction.h"
 #include "Actions/MoveAction.h"
 #include "Actions/ResizeAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/LoadAction.h"
-#include"Actions/ZoomInAction.h"
-#include"Actions/ZoomOutAction.h"
+#include "Actions/ZoomInAction.h"
+#include "Actions/ZoomOutAction.h"
+#include "Actions/PickByTypeAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -77,10 +79,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCircAction(this, filled);
 		break;
 
-	//case colors for change DRAW COLOR 
-	///////////////////////////////////////////////////////////////////////////////
+		//case colors for change DRAW COLOR 
+		///////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_DRAW_CLR:
+		pOut->ClearDrawArea();
+		UpdateInterface();
 		pOut->CreateDrawClrToolBar();
 		pOut->PrintMessage("Choose color from following");
 		break;
@@ -141,9 +145,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateUtilityToolbar();
 		break;
 
-	/////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_FILL_CLR:	//Change the filling color
+		pOut->ClearDrawArea();
+		UpdateInterface();
 		pOut->CreateFillClrToolBar();
 		pOut->PrintMessage("Choose color from following");
 		filled = true;
@@ -205,9 +211,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateUtilityToolbar();
 		break;
 
-	////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_BK_CLR:	//Change background color
+		pOut->ClearDrawArea();
+		UpdateInterface();
 		pOut->CreateBackClrToolBar();
 		pOut->PrintMessage("Choose color from following");
 		break;
@@ -276,58 +284,71 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->ClearDrawArea();
 		pOut->CreateUtilityToolbar();
 		break;
-	
-	////////////////////////////////////////////////////////////////////////////////////////
+
+		////////////////////////////////////////////////////////////////////////////////////////
 
 	case SELECT:		//Select an item
 		pAct = new SelectAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case MOVE:			//Move a figure(s)
 		pAct = new MoveAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case RESIZE:		//Resize a figure(s)
 		pAct = new ResizeAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case DEL:			//Delete a figure(s)
 		pOut->ClearStatusBar();
 		deleteFig();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COPY:           //Copy an item to Clipboard
 		//ClearClipboard();
 		pAct = new CopyAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case PASTE:         //Paste an item from Clipboard
 		pAct = new PasteAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
 		pOut->PrintMessage("llll");
-		//pAct = new CutAction(this);
+		pAct = new CutAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case SAVE:			//Save the whole graph to a file
 		pAct = new SaveAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case LOAD:			//Load a graph from a file
 		pAct = new LoadAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case ZOOM_IN:        //Zooming the whole graph in
 		pAct = new ZoomInAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case ZOOM_OUT:       //Zooming the whole graph out
 		pAct = new ZoomOutAction(this);
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case TO_ADDITEM:
+		pOut->ClearDrawArea();
+		UpdateInterface();
 		pOut->CreateDrawItemsToolbar();
 		break;
 
@@ -346,6 +367,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case TO_PLAY:    //Switch to Play Mode, creating Play tool bar
+		pOut->ClearDrawArea();
+		UpdateInterface();
 		pOut->CreatePlayToolBar();
 		break;
 
@@ -415,7 +438,7 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-CFigure* *ApplicationManager::GetSelectedFigs()
+CFigure** ApplicationManager::GetSelectedFigs()
 {
 	return SelectedFigList;
 }
@@ -486,10 +509,7 @@ CFigure** ApplicationManager::GetDrawnFigs()
 {
 	return FigList;
 }
-int ApplicationManager::GetFigCount()
-{
-	return FigCount;
-}
+
 void ApplicationManager::ClearFigList()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -499,6 +519,7 @@ void ApplicationManager::ClearFigList()
 	}
 	FigCount = 0;
 	clearselcFig();
+}
 
 void ApplicationManager::deleteFig()
 {
@@ -567,98 +588,91 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 	{
 		SelectedFigList[i] = NULL;
 	}
+}
 
-void ApplicationManager::ClearFigList()
-{
-	for (int i = 0; i < FigCount; i++)
+
+	////////////////////////////////////////////////////////////////////////////////////
+	//Return a pointer to the input
+	Input* ApplicationManager::GetInput() const
 	{
-		FigList[i] = NULL;
+		return pIn;
 	}
-	FigCount = 0;
-}
 
-////////////////////////////////////////////////////////////////////////////////////
-//Return a pointer to the input
-Input* ApplicationManager::GetInput() const
-{
-	return pIn;
-}
-
-//Return a pointer to the output
-Output* ApplicationManager::GetOutput() const
-{
-	return pOut;
-}
-
-////////////////////////////////////////////////////////////////////////////////////
-//Destructor
-ApplicationManager::~ApplicationManager()
-{
-	for (int i = 0; i < FigCount; i++)
-		delete FigList[i];
-	for (int i = 0; i < SelecFigCount; i++)
-		delete SelectedFigList[i];
-	delete pIn;
-	delete pOut;
-}
-
-//Draw all figures on the user interface in the play mode specifically
-void ApplicationManager::UpdateInterface_PlayMode() const
-{
-	pOut->ClearDrawArea();
-	for (int i = 0; i < FigCount; i++)
+	//Return a pointer to the output
+	Output* ApplicationManager::GetOutput() const
 	{
-		if (FigList[i]->figStatus() == false)
-			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		return pOut;
 	}
-}
 
-//=================================================================================//
-//                 Clipboard used for Copy, Cut & Paste Functions                  //
-//=================================================================================//
-void ApplicationManager::SetClipboard(CFigure** fig)
-{
-	IsInClipboard = true;
-	/*for (int i = 0; i < SelecFigCount; i++)
+	////////////////////////////////////////////////////////////////////////////////////
+	//Destructor
+	ApplicationManager::~ApplicationManager()
 	{
-		Clipboard[ClipboardCount++] = fig[i];
-	}*/
-	Clipboard = fig;
-}
-
-CFigure** ApplicationManager::GetClipboard()
-{
-	if (IsInClipboard)
-		return Clipboard;
-	else
-		return NULL;
-}
-
-////////////////////////////////////////////////////////////////////////////////////
-
-void ApplicationManager::SetIsFigCut(bool b)
-{
-	IsFigCut = b;
-}
-
-////////////////////////////////////////////////////////////////////
-
-bool ApplicationManager::GetIsFigCut()
-{
-	return IsFigCut;
-}
-void ApplicationManager::ClearClipboard()
-{
-	for (int i = 0; i < ClipboardCount; i++)
-	{
-		Clipboard[i] = NULL;
+		for (int i = 0; i < FigCount; i++)
+			delete FigList[i];
+		for (int i = 0; i < SelecFigCount; i++)
+			delete SelectedFigList[i];
+		delete pIn;
+		delete pOut;
 	}
-}
-void ApplicationManager::SetCount(int x)
-{
-	TempCount = x;
-}
-int ApplicationManager::GetCount()
-{
-	return TempCount;
-}
+
+	//Draw all figures on the user interface in the play mode specifically
+	void ApplicationManager::UpdateInterface_PlayMode() const
+	{
+		pOut->ClearDrawArea();
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->figStatus() == false)
+				FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		}
+	}
+
+	//=================================================================================//
+	//                 Clipboard used for Copy, Cut & Paste Functions                  //
+	//=================================================================================//
+	void ApplicationManager::SetClipboard(CFigure * *fig)
+	{
+		IsInClipboard = true;
+		/*for (int i = 0; i < SelecFigCount; i++)
+		{
+			Clipboard[ClipboardCount++] = fig[i];
+		}*/
+		Clipboard = fig;
+	}
+
+	CFigure** ApplicationManager::GetClipboard()
+	{
+		if (IsInClipboard)
+			return Clipboard;
+		else
+			return NULL;
+	}
+
+	////////////////////////////////////////////////////////////////////////////////////
+
+	void ApplicationManager::SetIsFigCut(bool b)
+	{
+		IsFigCut = b;
+	}
+
+	////////////////////////////////////////////////////////////////////
+
+	bool ApplicationManager::GetIsFigCut()
+	{
+		return IsFigCut;
+	}
+	void ApplicationManager::ClearClipboard()
+	{
+		for (int i = 0; i < ClipboardCount; i++)
+		{
+			Clipboard[i] = NULL;
+		}
+	}
+	void ApplicationManager::SetCount(int x)
+	{
+		TempCount = x;
+	}
+	int ApplicationManager::GetCount()
+	{
+		return TempCount;
+	}

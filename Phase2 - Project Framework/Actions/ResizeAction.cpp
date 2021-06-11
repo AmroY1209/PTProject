@@ -39,6 +39,7 @@ void ResizeAction::Execute()
 			SelectedFigList[i]->Resize(scale);
 		}
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		pManager->UpdateInterface();
 	}
 	else

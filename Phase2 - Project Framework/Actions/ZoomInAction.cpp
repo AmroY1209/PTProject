@@ -42,7 +42,7 @@ void ZoomInAction::Execute()
 
 	pOut->ClearDrawArea();
 	pOut->ClearStatusBar();
-
+	pOut->CreateUtilityToolbar();
 }
 
 void ZoomInAction::ZoomIN(string scale)
@@ -58,7 +58,6 @@ void ZoomInAction::ZoomIN(string scale)
 		pOut->StoreImage(img2, 0, UI.ToolBarHeight + 2, UI.width / 4, UI.height / 4);
 	}
 	pOut->ClearDrawArea();
-
 	pOut->DrawImage(img2, 0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
 }
