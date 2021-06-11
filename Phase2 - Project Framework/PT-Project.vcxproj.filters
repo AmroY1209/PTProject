@@ -57,10 +57,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Actions\ResizeAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
-    <ClCompile Include="Actions\BackGrndClrAction.cpp" />
-    <ClCompile Include="Actions\DrwColorAction.cpp" />
-    <ClCompile Include="Actions\FillClrAction.cpp" />
-    <ClCompile Include="Actions\LoadAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircAction.h" />
@@ -106,10 +102,6 @@
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="Actions\ResizeAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
-    <ClInclude Include="Actions\BackGrndClrAction.h" />
-    <ClInclude Include="Actions\DrwColorAction.h" />
-    <ClInclude Include="Actions\FillClrAction.h" />
-    <ClInclude Include="Actions\LoadAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
