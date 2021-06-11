@@ -78,13 +78,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCircAction(this, filled);
 		break;
 
-	case CHNG_DRAW_CLR: //Change the drawing color
+	//case colors for change DRAW COLOR 
+	///////////////////////////////////////////////////////////////////////////////
+
+	case CHNG_DRAW_CLR:
 		pOut->CreateDrawClrToolBar();
 		pOut->PrintMessage("Choose color from following");
-	
 		break;
-		//case colors for change DRAW COLOR 
-			///////////////////////////////////////////////////////////////////////////////
 
 	case COLOR_WHITE:
 		pOut->CreateDrawToolBar();
@@ -155,7 +155,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case FILL_RED:
-
 		pOut->CreateDrawToolBar();
 		UI.FillColor = RED;
 		pOut->ClearStatusBar();
@@ -190,7 +189,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.FillColor = ORANGE;
 		pOut->ClearStatusBar();
 		break;
-	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	////////////////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_BK_CLR:	//Change background color
 		pOut->CreateBackClrToolBar();
@@ -253,6 +253,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
 		break;
+	
+	////////////////////////////////////////////////////////////////////////////////////////
+
 	case SELECT:		//Select an item
 		pAct = new SelectAction(this);
 		break;
@@ -266,9 +269,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:			//Delete a figure(s)
+		pOut->ClearStatusBar();
 		deleteFig();
 		pOut->ClearDrawArea();
-		pOut->ClearStatusBar();
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -355,7 +358,9 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
-////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 void ApplicationManager::printinfo(CFigure* pI)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -379,7 +384,9 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 	if (SelecFigCount < MaxSelecCount)
 		SelectedFigList[SelecFigCount++] = s;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 CFigure* *ApplicationManager::GetSelectedFigs()
 {
 	return SelectedFigList;
@@ -408,7 +415,6 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 	}
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////
 
 CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
@@ -417,7 +423,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 	//if this point (x,y) does not belong to any figure return NULL
 	for (int i = FigCount - 1; i >= 0; i--)
 	{
-		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]);
+		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]); //dynamic casting checking 
 		if (C != NULL)
 		{
 			if (FigList[i]->checkLoc(x, y))
@@ -444,26 +450,25 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 			if (FigList[i]->checkLoc(x, y))
 				return FigList[i];
 		}
-
 	}
-
-	///Add your code here to search for a figure given a point x,y	
-
 	return NULL;
 }
-
 
 void ApplicationManager::deleteFig()
 {
 	int k = 0;
+	if (SelecFigCount == 0)
+	{
+		pOut->PrintMessage("please select figure first");
+		return;
+	}
 	for (int i = 0; i < MaxFigCount; i++)
 	{
 		if (!FigList[i - k])
 		{
-			pOut->PrintMessage("please draw image first");
 			break;
 		}
-		if (FigList[i - k]->IsSelected())
+		else if (FigList[i - k]->IsSelected())
 		{
 			clearselcFig();
 			delete FigList[i - k];
@@ -471,13 +476,10 @@ void ApplicationManager::deleteFig()
 			FigList[FigCount - 1] = NULL;
 			FigCount--;
 			k++;
+			pOut->PrintMessage("Figure(s) deleted successfully");
 		}
 	}
-	
 }
-
-
-
 
 //==================================================================================//
 //								Save Related Functions								//
@@ -543,7 +545,6 @@ ApplicationManager::~ApplicationManager()
 		delete SelectedFigList[i];
 	delete pIn;
 	delete pOut;
-
 }
 
 //=================================================================================//
