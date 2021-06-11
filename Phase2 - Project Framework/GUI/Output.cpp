@@ -15,6 +15,7 @@ Output::Output()
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 70;
 	UI.MenuItemWidth = 80;
+	UI.UtilToolbarWidth = 87;
 
 
 	UI.DrawColor = BLACK;	//Drawing color
@@ -32,6 +33,7 @@ Output::Output()
 	pWind->ChangeTitle("Paint for Kids - Programming Techniques Project");
 
 	CreateDrawToolBar();
+	CreateUtilityToolbar();
 	CreateStatusBar();
 }
 
@@ -93,11 +95,6 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_ZOOMOUT] = "images\\MenuItems\\Menu_Zoom_Out.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Del.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Move.jpg";
-	MenuItemImages[ITM_COPY] = "images\\MenuItems\\Menu_Copy.jpg";
-	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\Menu_Paste.jpg";
-	MenuItemImages[ITM_CUT] = "images\\MenuItems\\Menu_Cut.jpg";
-	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
-	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\Menu_Play.jpeg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
@@ -119,9 +116,33 @@ void Output::CreateDrawToolBar() const
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 
+void Output::CreateUtilityToolbar() const
+{
+	ClearUtilToolbarArea1();
+	UI.InterfaceMode = MODE_DRAW;
+	string MenuItemImages[Util_ITM_COUNT];
+	MenuItemImages[ITM_CUT] = "images\\MenuItems\\Menu_Cut.jpg";
+	MenuItemImages[ITM_COPY] = "images\\MenuItems\\Menu_Copy.jpg";
+	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\Menu_Paste.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+
+	for (int i = 0; i < Util_ITM_COUNT; i++)
+	{
+		pWind->DrawImage(MenuItemImages[i], UI.width - UI.UtilToolbarWidth, UI.ToolBarHeight + 7 +(i * UI.ToolBarHeight), UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	//Draw a line to the left of the toolbar
+	pWind->SetPen(DIMGREY, 7);
+	pWind->DrawLine(UI.width - UI.UtilToolbarWidth -7, UI.ToolBarHeight,UI.width - UI.UtilToolbarWidth - 7, UI.height - UI.StatusBarHeight);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
 void Output::CreatePlayToolBar() const
 {
 	ClearToolbarArea();
+	ClearUtilToolbarArea();
 	UI.InterfaceMode = MODE_PLAY;
 
 	string MenuItemImages[PLAY_ITM_COUNT];
@@ -145,6 +166,7 @@ void Output::CreatePlayToolBar() const
 void Output::CreateDrawItemsToolbar() const
 {
 	ClearToolbarArea();
+	ClearUtilToolbarArea();
 	UI.InterfaceMode = MODE_ADDITEM;
 
 	string MenuItemImages[ADD_ITM_COUNT];
@@ -168,6 +190,7 @@ void Output::CreateDrawItemsToolbar() const
 void Output::CreateDrawClrToolBar() const
 {
 	ClearToolbarArea();
+	ClearUtilToolbarArea();
 	UI.InterfaceMode = MODE_COLORITEM;
 
 	string MenuItemImages[COLOR_ITM_COUNT];
@@ -192,9 +215,11 @@ void Output::CreateDrawClrToolBar() const
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
+
 void Output::CreateFillClrToolBar() const
 {
 	ClearToolbarArea();
+	ClearUtilToolbarArea();
 	UI.InterfaceMode = MODE_FILLITEM;
 
 	string MenuItemImages[FILL_ITM_COUNT];
@@ -223,6 +248,7 @@ void Output::CreateFillClrToolBar() const
 void Output::CreateBackClrToolBar() const
 {
 	ClearToolbarArea();
+	ClearUtilToolbarArea();
 	UI.InterfaceMode = MODE_BACKCLRITEM;
 
 	string MenuItemImages[BACKCLR_ITM_COUNT];
@@ -252,7 +278,7 @@ void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight + 7, UI.width, UI.height - UI.StatusBarHeight);
+	pWind->DrawRectangle(0, UI.ToolBarHeight + 3, UI.width - UI.UtilToolbarWidth -3, UI.height - UI.StatusBarHeight);
 
 }
 
@@ -263,6 +289,21 @@ void Output::ClearToolbarArea() const
 	pWind->SetPen(WHITE, 1);
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::ClearUtilToolbarArea() const
+{
+	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetBrush(UI.BkGrndColor);
+	pWind->DrawRectangle(UI.width - UI.UtilToolbarWidth - 3, UI.ToolBarHeight + 3, UI.width, UI.height - UI.StatusBarHeight);
+}
+void Output::ClearUtilToolbarArea1() const
+{
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(UI.width - UI.UtilToolbarWidth - 3, UI.ToolBarHeight + 3, UI.width, UI.height - UI.StatusBarHeight);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

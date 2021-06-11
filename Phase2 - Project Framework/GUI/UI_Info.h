@@ -32,11 +32,6 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_ZOOMOUT,    //Zoom out item in menu
 	ITM_MOVE,		//Move item in the drawing area in menu
 	ITM_DEL,		//Delete an item
-	ITM_COPY,       //Copy item in menu
-	ITM_PASTE,      //Paste item in menu
-	ITM_CUT,        //Cut item in menu
-	ITM_SAVE,       //Save item in menu
-	ITM_LOAD,       //Load item in menu
 	ITM_PLAY,       //Go to Play toolbar in menu
 	ITM_EXIT,		//Exit item
 
@@ -44,6 +39,18 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 
+};
+
+enum UtilityMenuItem //The items of the Play menu (you should add more items)
+{
+	//Note: Items are ordered here as they appear in menu
+	//If you want to change the menu items order, change the order here
+	ITM_CUT,        //Cut item in menu
+	ITM_COPY,       //Copy item in menu
+	ITM_PASTE,      //Paste item in menu
+	ITM_SAVE,       //Save item in menu
+	ITM_LOAD,       //Load item in menu
+	Util_ITM_COUNT	//no. of menu items ==> This should be the last line in this enum
 };
 
 enum PlayMenuItem //The items of the Play menu (you should add more items)
@@ -131,7 +138,8 @@ struct UI_Info	//User Interface Info.
 		wx, wy,			//Window starting coordinates
 		StatusBarHeight,	//Status Bar Height
 		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-		MenuItemWidth;		//Width of each item in toolbar menu
+		MenuItemWidth,		//Width of each item in toolbar menu
+		UtilToolbarWidth;	//Width of Utility toolbar (distance from the left line of toolbar to the right of the window)
 
 
 	color DrawColor;		//Drawing color

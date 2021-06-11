@@ -34,8 +34,6 @@
 #include "DEFS.h"
 #include "CMUgraphicsLib/CMUgraphics.h"
 
-
-
 int CFigure::ID = 0;
 
 //Constructor
@@ -106,48 +104,56 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = WHITE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = BLACK;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_RED:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = RED;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = GREEN;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = BLUE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = YELLOW;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = PURPLE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case COLOR_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.DrawColor = ORANGE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	/////////////////////////////////////////////////////////////////////////////////
@@ -162,48 +168,56 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateDrawToolBar();
 		UI.FillColor = WHITE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_BLACK:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = BLACK;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_RED:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = RED;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_GREEN:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = GREEN;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_BLUE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = BLUE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_YELLOW:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = YELLOW;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_PURPLE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = PURPLE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case FILL_ORANGE:
 		pOut->CreateDrawToolBar();
 		UI.FillColor = ORANGE;
 		pOut->ClearStatusBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,6 +232,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = WHITE;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_BLACK:
@@ -225,6 +240,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = BLACK;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_RED:
@@ -233,6 +249,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = RED;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_GREEN:
@@ -240,6 +257,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = GREEN;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_BLUE:
@@ -247,6 +265,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = BLUE;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_YELLOW:
@@ -254,6 +273,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = YELLOW;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_PURPLE:
@@ -261,6 +281,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = PURPLE;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BCFILL_ORANGE:
@@ -268,6 +289,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UI.BkGrndColor = ORANGE;
 		pOut->ClearStatusBar();
 		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
 		break;
 	
 	////////////////////////////////////////////////////////////////////////////////////////
@@ -300,8 +322,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
-		//ClearClipboard();
-		pAct = new CutAction(this);
+		pOut->PrintMessage("llll");
+		//pAct = new CutAction(this);
 		break;
 
 	case SAVE:			//Save the whole graph to a file
@@ -335,6 +357,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EMPTY:    //a click on an empty area in the designed tool bar ==> no action
+		pOut->PrintMessage("A click on an empty area! Please click somewhere else");
 		break;
 
 	case TO_PLAY:    //Switch to Play Mode, creating Play tool bar
@@ -343,6 +366,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 	case TO_DRAW:    //Switch to Draw Mode, creating Draw tool bar
 		pOut->CreateDrawToolBar();
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case BY_TYPE:    //Pick figures by Type, for play mode
@@ -436,7 +460,7 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
+CFigure* ApplicationManager::GetFigure(int x, int y) const // for select
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
@@ -574,11 +598,13 @@ Input* ApplicationManager::GetInput() const
 {
 	return pIn;
 }
+
 //Return a pointer to the output
 Output* ApplicationManager::GetOutput() const
 {
 	return pOut;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
@@ -614,6 +640,7 @@ void ApplicationManager::SetClipboard(CFigure** fig)
 	}*/
 	Clipboard = fig;
 }
+
 CFigure** ApplicationManager::GetClipboard()
 {
 	if (IsInClipboard)
@@ -621,12 +648,16 @@ CFigure** ApplicationManager::GetClipboard()
 	else
 		return NULL;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 void ApplicationManager::SetIsFigCut(bool b)
 {
 	IsFigCut = b;
 }
+
 ////////////////////////////////////////////////////////////////////
+
 bool ApplicationManager::GetIsFigCut()
 {
 	return IsFigCut;
