@@ -25,9 +25,11 @@ private:
 	Output* pOut;
 
 	CFigure** Clipboard;      //Clipboard which the selected figures will be copied/cut to (array of pointers)
+	int TempCount;
+	//CFigure* Clipboard[MaxSelecCount];
+	int ClipboardCount;
 	bool IsInClipboard;      //Used to check that there is a figure in clipboard or not
 	bool IsFigCut;           //To know whether the figure in Clipboard is cut or copied
-
 
 public:
 	ApplicationManager();
@@ -48,13 +50,18 @@ public:
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
 	void clearselcFig();
-	void ClearFigList();
-	
+	void OnlyclearselcFig();  //Only clears selected figure without selected figure count
+
+	void removeFig(int id);
+	CFigure** GetDrawnFigs();      //Gets the list of drawn figures
+	int GetFigCount();             //Gets the number of actual drawn figures
+	void ClearFigList();                //Deletes all figures in the list of figures
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface_PlayMode() const; //Redraws all the drawing window in the play mode
 	virtual void printinfo(CFigure* s);
 
 	// -- Save/Load Functions
@@ -63,9 +70,11 @@ public:
 	// -- Clipboard Functions
 	void SetClipboard(CFigure**);
 	CFigure** GetClipboard();
+	void ClearClipboard();  //Clears Clipboard shakly msh mehtagha khals
 	void SetIsFigCut(bool);
 	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
-
+	void SetCount(int x);
+	int GetCount();
 };
 
 #endif

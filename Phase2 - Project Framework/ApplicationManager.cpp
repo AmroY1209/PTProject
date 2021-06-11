@@ -19,8 +19,6 @@
 #include "DEFS.h"
 #include "CMUgraphicsLib/CMUgraphics.h"
 
-
-
 int CFigure::ID = 0;
 
 //Constructor
@@ -33,6 +31,7 @@ ApplicationManager::ApplicationManager()
 
 	FigCount = 0;
 	SelecFigCount = 0;
+	ClipboardCount = 0;
 
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
@@ -78,13 +77,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddCircAction(this, filled);
 		break;
 
-	case CHNG_DRAW_CLR: //Change the drawing color
+	//case colors for change DRAW COLOR 
+	///////////////////////////////////////////////////////////////////////////////
+
+	case CHNG_DRAW_CLR:
 		pOut->CreateDrawClrToolBar();
 		pOut->PrintMessage("Choose color from following");
-	
 		break;
-		//case colors for change DRAW COLOR 
-			///////////////////////////////////////////////////////////////////////////////
 
 	case COLOR_WHITE:
 		pOut->CreateDrawToolBar();
@@ -165,7 +164,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case FILL_RED:
-
 		pOut->CreateDrawToolBar();
 		UI.FillColor = RED;
 		pOut->ClearStatusBar();
@@ -206,7 +204,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->ClearStatusBar();
 		pOut->CreateUtilityToolbar();
 		break;
-	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	////////////////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_BK_CLR:	//Change background color
 		pOut->CreateBackClrToolBar();
@@ -277,6 +276,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->ClearDrawArea();
 		pOut->CreateUtilityToolbar();
 		break;
+	
+	////////////////////////////////////////////////////////////////////////////////////////
+
 	case SELECT:		//Select an item
 		pAct = new SelectAction(this);
 		break;
@@ -290,12 +292,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:			//Delete a figure(s)
+		pOut->ClearStatusBar();
 		deleteFig();
 		pOut->ClearDrawArea();
-		pOut->ClearStatusBar();
 		break;
 
 	case COPY:           //Copy an item to Clipboard
+		//ClearClipboard();
 		pAct = new CopyAction(this);
 		break;
 
@@ -304,8 +307,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
-		//pAct = new CUTAction(this);
 		pOut->PrintMessage("llll");
+		//pAct = new CutAction(this);
 		break;
 
 	case SAVE:			//Save the whole graph to a file
@@ -352,6 +355,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case BY_TYPE:    //Pick figures by Type, for play mode
+		pAct = new PickByTypeAction(this);
 		break;
 
 	case BY_COLOR:    //Pick figures by Color, for play mode
@@ -382,7 +386,9 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
-////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 void ApplicationManager::printinfo(CFigure* pI)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -406,7 +412,9 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 	if (SelecFigCount < MaxSelecCount)
 		SelectedFigList[SelecFigCount++] = s;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 CFigure* *ApplicationManager::GetSelectedFigs()
 {
 	return SelectedFigList;
@@ -435,16 +443,15 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 	}
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////
 
-CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
+CFigure* ApplicationManager::GetFigure(int x, int y) const // for select
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 	for (int i = FigCount - 1; i >= 0; i--)
 	{
-		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]);
+		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]); //dynamic casting checking 
 		if (C != NULL)
 		{
 			if (FigList[i]->checkLoc(x, y))
@@ -471,26 +478,43 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 			if (FigList[i]->checkLoc(x, y))
 				return FigList[i];
 		}
-
 	}
-
-	///Add your code here to search for a figure given a point x,y	
-
 	return NULL;
 }
 
+CFigure** ApplicationManager::GetDrawnFigs()
+{
+	return FigList;
+}
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
+void ApplicationManager::ClearFigList()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		delete FigList[i];
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+	clearselcFig();
 
 void ApplicationManager::deleteFig()
 {
 	int k = 0;
+	if (SelecFigCount == 0)
+	{
+		pOut->PrintMessage("please select figure first");
+		return;
+	}
 	for (int i = 0; i < MaxFigCount; i++)
 	{
 		if (!FigList[i - k])
 		{
-			pOut->PrintMessage("please draw image first");
 			break;
 		}
-		if (FigList[i - k]->IsSelected())
+		else if (FigList[i - k]->IsSelected())
 		{
 			clearselcFig();
 			delete FigList[i - k];
@@ -498,13 +522,10 @@ void ApplicationManager::deleteFig()
 			FigList[FigCount - 1] = NULL;
 			FigCount--;
 			k++;
+			pOut->PrintMessage("Figure(s) deleted successfully");
 		}
 	}
-	
 }
-
-
-
 
 //==================================================================================//
 //								Save Related Functions								//
@@ -540,6 +561,13 @@ void ApplicationManager::clearselcFig()
 	SelecFigCount = 0;
 }
 
+void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure without selected figure count
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		SelectedFigList[i] = NULL;
+	}
+
 void ApplicationManager::ClearFigList()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -555,11 +583,13 @@ Input* ApplicationManager::GetInput() const
 {
 	return pIn;
 }
+
 //Return a pointer to the output
 Output* ApplicationManager::GetOutput() const
 {
 	return pOut;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
@@ -570,7 +600,17 @@ ApplicationManager::~ApplicationManager()
 		delete SelectedFigList[i];
 	delete pIn;
 	delete pOut;
+}
 
+//Draw all figures on the user interface in the play mode specifically
+void ApplicationManager::UpdateInterface_PlayMode() const
+{
+	pOut->ClearDrawArea();
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->figStatus() == false)
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	}
 }
 
 //=================================================================================//
@@ -579,8 +619,13 @@ ApplicationManager::~ApplicationManager()
 void ApplicationManager::SetClipboard(CFigure** fig)
 {
 	IsInClipboard = true;
+	/*for (int i = 0; i < SelecFigCount; i++)
+	{
+		Clipboard[ClipboardCount++] = fig[i];
+	}*/
 	Clipboard = fig;
 }
+
 CFigure** ApplicationManager::GetClipboard()
 {
 	if (IsInClipboard)
@@ -588,13 +633,32 @@ CFigure** ApplicationManager::GetClipboard()
 	else
 		return NULL;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 void ApplicationManager::SetIsFigCut(bool b)
 {
 	IsFigCut = b;
 }
+
 ////////////////////////////////////////////////////////////////////
+
 bool ApplicationManager::GetIsFigCut()
 {
 	return IsFigCut;
+}
+void ApplicationManager::ClearClipboard()
+{
+	for (int i = 0; i < ClipboardCount; i++)
+	{
+		Clipboard[i] = NULL;
+	}
+}
+void ApplicationManager::SetCount(int x)
+{
+	TempCount = x;
+}
+int ApplicationManager::GetCount()
+{
+	return TempCount;
 }

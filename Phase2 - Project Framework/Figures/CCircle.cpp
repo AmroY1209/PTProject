@@ -6,7 +6,6 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	Radius = P2;
 }
 
-
 void CCircle::Draw(Output* pOut) const
 {
 	bool x = isValid(Center, Radius);
@@ -14,14 +13,12 @@ void CCircle::Draw(Output* pOut) const
 	if (x)
 	{
 		pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
-
 	}
 	else
 	{
 		pOut->PrintMessage("Invalid Drawing Area Please try again");
 	}
 }
-
 
 void CCircle::print(Output* pOut)
 {
@@ -141,7 +138,7 @@ void CCircle::Load(ifstream& Infile)
 	Infile >> MYid >> Center.x >> Center.y >> Radius.x >> Radius.y;
 	Infile >> draw_clr >> fill;
 	FigGfxInfo.DrawClr = GetColor(draw_clr);
-	if (fill =="NO_FILL")
+	if (fill == "NO_FILL")
 	{
 		FigGfxInfo.isFilled = false;
 	}

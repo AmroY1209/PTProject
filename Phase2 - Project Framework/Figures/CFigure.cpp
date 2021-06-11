@@ -51,6 +51,22 @@ GfxInfo CFigure::GetGFXINFO()
 	return FigGfxInfo;
 }
 
+ //To hide the picked figure
+void CFigure::hide()
+{
+	fig_status = true;
+}
+//To unhide the picked figure
+void CFigure::unHide()
+{
+	fig_status = false;
+}
+//Returns status of the figure (whether it is hidden or unhidden)
+bool CFigure::figStatus()
+{
+	return fig_status;
+}
+
 string CFigure::GetColorName(color RGB)
 {
 	if (RGB.ucRed == 0 && RGB.ucGreen == 0 && RGB.ucBlue == 0)
