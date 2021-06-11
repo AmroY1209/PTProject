@@ -15,8 +15,25 @@
 #include "Figures\CRectangle.h"
 #include "Figures\CLine.h"
 #include "Figures\CTriangle.h"
-
-
+#include "Actions/AddRectAction.h"
+#include "Actions/AddTriAction.h"
+#include "Actions/AddLineAction.h"
+#include "Actions/AddCircAction.h"
+#include "Actions/SelectAction.h"
+#include "Actions/CopyAction.h"
+#include "Actions/PasteAction.h"
+#include "Actions/MoveAction.h"
+#include "Actions/ResizeAction.h"
+#include "Actions/SaveAction.h"
+#include "Actions/LoadAction.h"
+#include"Actions/ZoomInAction.h"
+#include"Actions/ZoomOutAction.h"
+#include "Figures/CCircle.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CLine.h"
+#include "Figures/CTriangle.h"
+#include "DEFS.h"
+#include "CMUgraphicsLib/CMUgraphics.h"
 
 
 
@@ -26,6 +43,7 @@ int CFigure::ID = 0;
 ApplicationManager::ApplicationManager()
 {
 	//Create Input and output
+	filled = false;
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 
@@ -62,7 +80,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	switch (ActType)
 	{
 	case DRAW_RECT:
-		pAct = new AddRectAction(this);
+		pAct = new AddRectAction(this, filled);
 		break;
 
 	case DRAW_LINE:
@@ -70,24 +88,190 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DRAW_TRI:
-		pAct = new AddTriAction(this);
+		pAct = new AddTriAction(this, filled);
 		break;
 
 	case DRAW_CIRC:
-		pAct = new AddCircAction(this);
+		pAct = new AddCircAction(this, filled);
 		break;
 
-	case CHNG_DRAW_CLR: //Change the drawing color
-		//pAct = new CHNG_DRAW-CLRAction(this);
+	//case colors for change DRAW COLOR 
+	///////////////////////////////////////////////////////////////////////////////
+
+	case CHNG_DRAW_CLR:
+		pOut->CreateDrawClrToolBar();
+		pOut->PrintMessage("Choose color from following");
 		break;
+
+	case COLOR_WHITE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = WHITE;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_BLACK:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = BLACK;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_RED:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = RED;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_GREEN:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = GREEN;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_BLUE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = BLUE;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_YELLOW:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = YELLOW;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_PURPLE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = PURPLE;
+		pOut->ClearStatusBar();
+		break;
+
+	case COLOR_ORANGE:
+		pOut->CreateDrawToolBar();
+		UI.DrawColor = ORANGE;
+		pOut->ClearStatusBar();
+		break;
+
+	/////////////////////////////////////////////////////////////////////////////////
 
 	case CHNG_FILL_CLR:	//Change the filling color
-		//pAct = new CHNG_FILL-CLRAction(this);
+		pOut->CreateFillClrToolBar();
+		pOut->PrintMessage("Choose color from following");
+		filled = true;
 		break;
 
-	case CHNG_BK_CLR:	//Change background color
-		//pAct = new CHNG_BK-CLRAction(this);
+	case FILL_WHITE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = WHITE;
+		pOut->ClearStatusBar();
 		break;
+
+	case FILL_BLACK:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = BLACK;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_RED:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = RED;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_GREEN:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = GREEN;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_BLUE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = BLUE;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_YELLOW:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = YELLOW;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_PURPLE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = PURPLE;
+		pOut->ClearStatusBar();
+		break;
+
+	case FILL_ORANGE:
+		pOut->CreateDrawToolBar();
+		UI.FillColor = ORANGE;
+		pOut->ClearStatusBar();
+		break;
+
+	////////////////////////////////////////////////////////////////////////////////////////////
+
+	case CHNG_BK_CLR:	//Change background color
+		pOut->CreateBackClrToolBar();
+		pOut->PrintMessage("Choose color from following");
+		break;
+
+	case BCFILL_WHITE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = WHITE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_BLACK:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = BLACK;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_RED:
+
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = RED;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_GREEN:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = GREEN;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_BLUE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = BLUE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_YELLOW:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = YELLOW;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_PURPLE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = PURPLE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+
+	case BCFILL_ORANGE:
+		pOut->CreateDrawToolBar();
+		UI.BkGrndColor = ORANGE;
+		pOut->ClearStatusBar();
+		pOut->ClearDrawArea();
+		break;
+	
+	////////////////////////////////////////////////////////////////////////////////////////
 
 	case SELECT:		//Select an item
 		pAct = new SelectAction(this);
@@ -102,7 +286,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DEL:			//Delete a figure(s)
-		pAct = new DeleteAction(this);
+		pOut->ClearStatusBar();
+		deleteFig();
+		pOut->ClearDrawArea();
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -120,19 +306,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case SAVE:			//Save the whole graph to a file
-		//pAct = new SAVEAction(this);
+		pAct = new SaveAction(this);
 		break;
 
 	case LOAD:			//Load a graph from a file
-		//pAct = new LOADAction(this);
+		pAct = new LoadAction(this);
 		break;
 
 	case ZOOM_IN:        //Zooming the whole graph in
-		//pAct = new Zoom_INAction(this);
+		pAct = new ZoomInAction(this);
 		break;
 
 	case ZOOM_OUT:       //Zooming the whole graph out
-		//pAct = new Zoom_OUTAction(this);
+		pAct = new ZoomOutAction(this);
 		break;
 
 	case TO_ADDITEM:
@@ -192,7 +378,9 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
-////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////
+
 void ApplicationManager::printinfo(CFigure* pI)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -206,7 +394,6 @@ void ApplicationManager::printinfo(CFigure* pI)
 			pOut->PrintMessage("Number of selected figure: ");
 			pOut->PrintInteger(SelecFigCount);
 		}
-
 	}
 }
 
@@ -217,7 +404,9 @@ void ApplicationManager::AddSelectedFigure(CFigure* s)
 	if (SelecFigCount < MaxSelecCount)
 		SelectedFigList[SelecFigCount++] = s;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
+
 CFigure* *ApplicationManager::GetSelectedFigs()
 {
 	return SelectedFigList;
@@ -228,6 +417,10 @@ int ApplicationManager::GetSelectedCount()
 	return SelecFigCount;
 }
 
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
 void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -242,30 +435,15 @@ void ApplicationManager::UNSelectFigure(CFigure* s)
 	}
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ApplicationManager::removeFig(int id)
-{
-	for (int i = id; i < FigCount; i++)
-	{
-		//[1 2 3 4 ] lw 3yzyn nshel 2 hangeb talata n5leha makan 2 ---->[1 3 4] bs 3yzyn n5leha [1 2 3]
-		FigList[i - 1] = FigList[i]; //kda 5alena el 3 b 2
-		FigList[i - 1]->SetID(i - 1); //leeh b2a
-	}
-	FigCount--;
-	FigList[FigCount] = NULL;
-}
-
-
 ///////////////////////////////////////////////////////////////////////////////////
 
 CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
-	for (int i = 0; i < FigCount; i++)
+	for (int i = FigCount - 1; i >= 0; i--)
 	{
-		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]);
+		CFigure* C = dynamic_cast<CRectangle*>(FigList[i]); //dynamic casting checking 
 		if (C != NULL)
 		{
 			if (FigList[i]->checkLoc(x, y))
@@ -292,11 +470,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // ll select
 			if (FigList[i]->checkLoc(x, y))
 				return FigList[i];
 		}
-
 	}
-
-	///Add your code here to search for a figure given a point x,y	
-
 	return NULL;
 }
 
@@ -317,6 +491,44 @@ void ApplicationManager::ClearFigList()
 	}
 	FigCount = 0;
 	clearselcFig();
+
+void ApplicationManager::deleteFig()
+{
+	int k = 0;
+	if (SelecFigCount == 0)
+	{
+		pOut->PrintMessage("please select figure first");
+		return;
+	}
+	for (int i = 0; i < MaxFigCount; i++)
+	{
+		if (!FigList[i - k])
+		{
+			break;
+		}
+		else if (FigList[i - k]->IsSelected())
+		{
+			clearselcFig();
+			delete FigList[i - k];
+			FigList[i - k] = FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
+			FigCount--;
+			k++;
+			pOut->PrintMessage("Figure(s) deleted successfully");
+		}
+	}
+}
+
+//==================================================================================//
+//								Save Related Functions								//
+//==================================================================================//
+
+void ApplicationManager::SaveAll(ofstream& Outfile)
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->Save(Outfile); //Call Save Function
+	}
 }
 
 //==================================================================================//
@@ -347,6 +559,14 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 	{
 		SelectedFigList[i] = NULL;
 	}
+
+void ApplicationManager::ClearFigList()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -370,7 +590,6 @@ ApplicationManager::~ApplicationManager()
 		delete SelectedFigList[i];
 	delete pIn;
 	delete pOut;
-
 }
 
 //Draw all figures on the user interface in the play mode specifically

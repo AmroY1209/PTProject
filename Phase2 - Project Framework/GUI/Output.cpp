@@ -165,6 +165,89 @@ void Output::CreateDrawItemsToolbar() const
 }
 /// //////////////////////////////////////////////////////////////////////////////////////
 
+void Output::CreateDrawClrToolBar() const
+{
+	ClearToolbarArea();
+	UI.InterfaceMode = MODE_COLORITEM;
+
+	string MenuItemImages[COLOR_ITM_COUNT];
+	MenuItemImages[ITM_WHITE] = "images\\MenuItems\\Menu_White.jpg";
+	MenuItemImages[ITM_BLACK] = "images\\menuItems\\Menu_Black.jpg";
+	MenuItemImages[ITM_RED] = "images\\menuItems\\Menu_Red.jpg";
+	MenuItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	MenuItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	MenuItemImages[ITM_YELLOW] = "images\\MenuItems\\Menu_Yellow.jpg";
+	MenuItemImages[ITM_PURPLE] = "images\\MenuItems\\Menu_Purple.jpg";
+	MenuItemImages[ITM_ORANGE] = "images\\MenuItems\\Menu_Orange.jpg";
+
+	for (int i = 0; i < COLOR_ITM_COUNT; i++)
+	{
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DIMGREY, 7);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::CreateFillClrToolBar() const
+{
+	ClearToolbarArea();
+	UI.InterfaceMode = MODE_FILLITEM;
+
+	string MenuItemImages[FILL_ITM_COUNT];
+	MenuItemImages[fITM_WHITE] = "images\\MenuItems\\Menu_White.jpg";
+	MenuItemImages[fITM_BLACK] = "images\\menuItems\\Menu_Black.jpg";
+	MenuItemImages[fITM_RED] = "images\\menuItems\\Menu_Red.jpg";
+	MenuItemImages[fITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	MenuItemImages[fITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	MenuItemImages[fITM_YELLOW] = "images\\MenuItems\\Menu_Yellow.jpg";
+	MenuItemImages[fITM_PURPLE] = "images\\MenuItems\\Menu_Purple.jpg";
+	MenuItemImages[fITM_ORANGE] = "images\\MenuItems\\Menu_Orange.jpg";
+
+	for (int i = 0; i < FILL_ITM_COUNT; i++)
+	{
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DIMGREY, 7);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void Output::CreateBackClrToolBar() const
+{
+	ClearToolbarArea();
+	UI.InterfaceMode = MODE_BACKCLRITEM;
+
+	string MenuItemImages[BACKCLR_ITM_COUNT];
+	MenuItemImages[BITM_WHITE] = "images\\MenuItems\\Menu_White.jpg";
+	MenuItemImages[BITM_BLACK] = "images\\menuItems\\Menu_Black.jpg";
+	MenuItemImages[BITM_RED] = "images\\menuItems\\Menu_Red.jpg";
+	MenuItemImages[BITM_GREEN] = "images\\MenuItems\\Menu_Green.jpg";
+	MenuItemImages[BITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	MenuItemImages[BITM_YELLOW] = "images\\MenuItems\\Menu_Yellow.jpg";
+	MenuItemImages[BITM_PURPLE] = "images\\MenuItems\\Menu_Purple.jpg";
+	MenuItemImages[BITM_ORANGE] = "images\\MenuItems\\Menu_Orange.jpg";
+
+	for (int i = 0; i < BACKCLR_ITM_COUNT; i++)
+	{
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	//Draw a line under the toolbar
+	pWind->SetPen(DIMGREY, 7);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
+}
+
+/// ///////////////////////////////////////////////////////////////////////////////////////
+
 void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
@@ -172,14 +255,16 @@ void Output::ClearDrawArea() const
 	pWind->DrawRectangle(0, UI.ToolBarHeight + 7, UI.width, UI.height - UI.StatusBarHeight);
 
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::ClearToolbarArea() const
 {
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::PrintMessage(string msg) const	//Prints a message on status bar
@@ -190,15 +275,15 @@ void Output::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight / 1.5), msg);
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
-void Output::PrintInteger(int i) const	//Prints AN INTEGER ANA MEZAWDHA ~ABDO / HASHISH
+void Output::PrintInteger(int i) const	//Prints AN INTEGER
 {
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
 	pWind->DrawInteger(220, UI.height - (int)(UI.StatusBarHeight / 1.5), i);
 }
-
 
 color Output::getCrntDrawColor() const	//get current drwawing color
 {
@@ -210,19 +295,31 @@ color Output::getCrntFillColor() const	//get current filling color
 {
 	return UI.FillColor;
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 int Output::getCrntPenWidth() const		//get current pen width
 {
 	return UI.PenWidth;
+}
 
 
-
-}color Output::getCrntHightLight() const		//get current pen width
+color Output::getCrntHightLight() const		//get current pen width
 {
 	return UI.HighlightColor;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::StoreImage(image& imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight)
+{
+	pWind->StoreImage(imgThis, usX, usY, usWidth, usHeight);
+}
+
+void Output::DrawImage(const image& imgThis, const int iX, const int iY, const int iWidth, const int iHeight)
+{
+	pWind->DrawImage(imgThis, iX, iY, iWidth, iHeight);
+}
 
 
 //======================================================================================//

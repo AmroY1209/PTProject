@@ -14,7 +14,7 @@ private:
 
 public:
 
-	AddRectAction(ApplicationManager *pApp);
+	AddRectAction(ApplicationManager* pApp, bool filled = false);
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();

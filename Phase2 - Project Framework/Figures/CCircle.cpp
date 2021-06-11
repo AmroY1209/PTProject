@@ -6,13 +6,19 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	Radius = P2;
 }
 
-
 void CCircle::Draw(Output* pOut) const
 {
+	bool x = isValid(Center, Radius);
 	//Call Output::DrawCirc to draw a circle on the screen	
-	pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
+	if (x)
+	{
+		pOut->DrawCirc(Center, Radius, FigGfxInfo, Selected);
+	}
+	else
+	{
+		pOut->PrintMessage("Invalid Drawing Area Please try again");
+	}
 }
-
 
 void CCircle::print(Output* pOut)
 {
@@ -35,6 +41,19 @@ void CCircle::print(Output* pOut)
 	pOut->PrintMessage(strl);
 }
 
+bool CCircle::isValid(Point Center, Point Radius) const
+{
+	double radius = sqrt((Center.x - Radius.x) * (Center.x - Radius.x) + (Center.y - Radius.y) * (Center.y - Radius.y));
+	if ((Center.x - radius) < 0 || (Center.x + radius) > UI.width)
+	{
+		return false;
+	}
+	else if (((Center.y - radius) < UI.ToolBarHeight) || ((Center.y + radius) > (UI.height - UI.StatusBarHeight)))
+	{
+		return false;
+	}
+	else return true;
+}
 
 bool CCircle::checkLoc(int x, int y)
 {
@@ -93,5 +112,38 @@ void CCircle::Resize(string scale)
 	{
 		Radius.x = (Radius.x - Center.x) * 4 + Center.x;
 		Radius.y = (Radius.y - Center.y) * 4 + Center.y;
+	}
+}
+
+void CCircle::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "CIRCLE\t" << MYid << "\t" << Center.x << "\t" << Center.y << "\t" << Radius.x << "\t";
+	Outfile << Radius.y << "\t" << DrawClr << "\t";
+	if (FigGfxInfo.isFilled)
+	{
+		string FillClr = GetColorName(FigGfxInfo.FillClr);
+		Outfile << FillClr << "\n";
+	}
+	else
+	{
+		Outfile << "NO_FILL\n";
+	}
+}
+
+void CCircle::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> Center.x >> Center.y >> Radius.x >> Radius.y;
+	Infile >> draw_clr >> fill;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+	if (fill == "NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.FillClr = GetColor(fill);
 	}
 }

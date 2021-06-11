@@ -14,7 +14,7 @@ class ApplicationManager
 	//Max no of figures
 
 private:
-
+	bool filled;
 	int FigCount;		//Actual number of figures
 	int SelecFigCount;	//selected figure counter
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
@@ -45,7 +45,8 @@ public:
 	void AddSelectedFigure(CFigure* s);
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
-
+	int GetFigCount();
+	void deleteFig();
 	CFigure* *GetSelectedFigs();
 	int  GetSelectedCount();
 	void clearselcFig();
@@ -62,6 +63,9 @@ public:
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	void UpdateInterface_PlayMode() const; //Redraws all the drawing window in the play mode
 	virtual void printinfo(CFigure* s);
+
+	// -- Save/Load Functions
+	void SaveAll(ofstream &Outfile);
 
 	// -- Clipboard Functions
 	void SetClipboard(CFigure**);

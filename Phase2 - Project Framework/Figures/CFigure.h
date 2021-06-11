@@ -3,6 +3,7 @@
 
 #include "..\defs.h"
 #include "..\GUI\Output.h"
+#include <fstream>
 
 //Base class for all figures
 class CFigure
@@ -27,6 +28,8 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	void HighLightClr();	//changes the figure's filling color
+	string GetColorName(color RGB);		//Gets the name of a color (save)
+	color GetColor(string RGB);			//Gets the color from its name (load)
 	virtual bool checkLoc(int x, int y);
 	virtual GfxInfo GetGFXINFO();  //Gets graphical info
 	void hide();					//Hides figures in playmode
@@ -48,8 +51,8 @@ public:
 	//virtual void Rotate() = 0;	//Rotate the figure
 
 
-	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
-	//virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
+	virtual void Save(ofstream &Outfile) = 0;	//Save the figure parameters to the file
+	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };

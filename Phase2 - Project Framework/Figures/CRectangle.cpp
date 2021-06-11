@@ -13,8 +13,13 @@ CRectangle::CRectangle(Point P1, Point P2, GfxInfo FigureGfxInfo):CFigure(Figure
 	
 void CRectangle::Draw(Output* pOut) const
 {
+	bool x = isValid(Corner1, Corner2);
 	//Call Output::DrawRect to draw a rectangle on the screen	
-	pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+	if (x)
+	{
+		pOut->DrawRect(Corner1, Corner2, FigGfxInfo, Selected);
+	}
+	else pOut->PrintMessage("Invalid Drawing Area Please try again");
 }
 
 void CRectangle::print(Output* pOut)
@@ -46,6 +51,18 @@ void CRectangle::print(Output* pOut)
 	pOut->PrintMessage(strl);
 }
 
+bool CRectangle::isValid(Point C1, Point C2) const
+{
+	if ((C1.x < 0 || C1.x>UI.width) || (C2.x<0 || C2.x>UI.width))
+	{
+		return false;
+	}
+	else if ((C1.y<UI.ToolBarHeight || C1.y>(UI.height - UI.StatusBarHeight)) || (C2.y<UI.ToolBarHeight || C2.y>(UI.height - UI.StatusBarHeight)))
+	{
+		return false;
+	}
+	else return true;
+}
 
 bool CRectangle::checkLoc(int x, int y)
 {
@@ -104,5 +121,37 @@ void CRectangle::Resize(string scale)
 	{
 		Corner2.x = (Corner2.x - Corner1.x) * 4 + Corner1.x;
 		Corner2.y = (Corner2.y - Corner1.y) * 4 + Corner1.y;
+	}
+}
+
+void CRectangle::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "RECT\t" << MYid << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t";
+	Outfile << Corner2.y << "\t" << DrawClr << "\t";
+	if (FigGfxInfo.isFilled)
+	{
+		string FillClr = GetColorName(FigGfxInfo.FillClr);
+		Outfile << FillClr << "\n";
+	}
+	else
+	{
+		Outfile << "NO_FILL\n";
+	}
+}
+void CRectangle::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y;
+	Infile >> draw_clr >> fill;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+	if (fill == "NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.FillClr = GetColor(fill);
 	}
 }

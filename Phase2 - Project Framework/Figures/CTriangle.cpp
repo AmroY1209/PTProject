@@ -12,7 +12,12 @@ CTriangle::CTriangle(Point P1, Point P2, Point P3, GfxInfo FigureGfxInfo) :CFigu
 void CTriangle::Draw(Output* pOut) const
 {
 	//Call Output::DrawTri to draw a triangle on the screen	
-	pOut->DrawTriangle(Corner1, Corner2, Corner3, FigGfxInfo, Selected);
+	bool x = isValid(Corner1, Corner2, Corner3);
+	if (x)
+	{
+		pOut->DrawTriangle(Corner1, Corner2, Corner3, FigGfxInfo, Selected);
+	}
+	else pOut->PrintMessage("Invalid Drawing Area Please try again");
 }
 
 
@@ -123,5 +128,55 @@ void CTriangle::Resize(string scale)
 		Corner2.y = (Corner2.y - Corner1.y) * 4 + Corner1.y;
 		Corner3.x = (Corner3.x - Corner1.x) * 4 + Corner1.x;
 		Corner3.y = (Corner3.y - Corner1.y) * 4 + Corner1.y;
+	}
+}
+
+void CTriangle::Save(ofstream& Outfile)
+{
+	string DrawClr = GetColorName(FigGfxInfo.DrawClr);
+	Outfile << "TRIANG\t" << MYid << "\t" << Corner1.x << "\t" << Corner1.y << "\t" << Corner2.x << "\t";
+	Outfile << Corner2.y << "\t" << Corner3.x << "\t" << Corner3.y << "\t" << DrawClr << "\t";
+	if (FigGfxInfo.isFilled)
+	{
+		string FillClr = GetColorName(FigGfxInfo.FillClr);
+		Outfile << FillClr << "\n";
+	}
+	else
+	{
+		Outfile << "NO_FILL\n";
+	}
+}
+
+
+
+bool CTriangle::isValid(Point p1, Point p2, Point p3) const
+{
+	if ((p1.x<0 || p1.x>UI.width) || (p2.x<0 || p2.x>UI.width) || (p3.x<0 || p3.x>UI.width))
+	{
+		return false;
+	}
+	else if ((p1.y<UI.ToolBarHeight || p1.y >(UI.height - UI.StatusBarHeight)) || (p2.y<UI.ToolBarHeight || p2.y >(UI.height - UI.StatusBarHeight)) || (p3.y<UI.ToolBarHeight || p3.y >(UI.height - UI.StatusBarHeight)))
+	{
+		return false;
+	}
+	else return true;
+}
+
+
+
+void CTriangle::Load(ifstream& Infile)
+{
+	string draw_clr;
+	string fill;
+	Infile >> MYid >> Corner1.x >> Corner1.y >> Corner2.x >> Corner2.y >> Corner3.x >> Corner3.y;
+	Infile >> draw_clr >> fill;
+	FigGfxInfo.DrawClr = GetColor(draw_clr);
+	if (fill == "NO_FILL")
+	{
+		FigGfxInfo.isFilled = false;
+	}
+	else
+	{
+		FigGfxInfo.FillClr = GetColor(fill);
 	}
 }

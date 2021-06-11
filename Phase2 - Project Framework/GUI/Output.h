@@ -12,6 +12,9 @@ public:
 	window* CreateWind(int, int, int, int) const; //creates the application window
 	void CreateDrawToolBar() const;			//creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const;			//creates Play mode toolbar & menu
+	void CreateDrawClrToolBar() const;
+	void CreateFillClrToolBar() const;
+	void CreateBackClrToolBar() const;
 	void CreateDrawItemsToolbar() const;	//create draw items toolbar & menu
 	void CreateStatusBar() const;			//create the status bar
 
@@ -27,6 +30,9 @@ public:
 	///Make similar functions for drawing all other figures.
 	void PrintInteger(int i) const;
 	void PrintMessage(string msg) const;	//Print a message on Status bar
+
+	void StoreImage(image& imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight);
+	void DrawImage(const image& imgThis, const int iX, const int iY, const int iWidth, const int iHeight);
 
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
