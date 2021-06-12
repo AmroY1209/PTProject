@@ -60,6 +60,7 @@
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\ZoomInAction.cpp" />
     <ClCompile Include="Actions\ZoomOutAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircAction.h" />
@@ -108,6 +109,7 @@
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\ZoomInAction.h" />
     <ClInclude Include="Actions\ZoomOutAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -12,6 +12,7 @@
 #include "Actions/ResizeAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/LoadAction.h"
+#include "Actions/ExitAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/PickByTypeAction.h"
@@ -66,18 +67,22 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 	case DRAW_RECT:
 		pAct = new AddRectAction(this, filled);
+		IsSaved = false;
 		break;
 
 	case DRAW_LINE:
 		pAct = new AddLineAction(this);
+		IsSaved = false;
 		break;
 
 	case DRAW_TRI:
 		pAct = new AddTriAction(this, filled);
+		IsSaved = false;
 		break;
 
 	case DRAW_CIRC:
 		pAct = new AddCircAction(this, filled);
+		IsSaved = false;
 		break;
 
 		//case colors for change DRAW COLOR 
@@ -88,6 +93,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UpdateInterface();
 		pOut->CreateDrawClrToolBar();
 		pOut->PrintMessage("Choose color from following");
+		IsSaved = false;
 		break;
 
 	case COLOR_WHITE:
@@ -154,6 +160,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateFillClrToolBar();
 		pOut->PrintMessage("Choose color from following");
 		filled = true;
+		IsSaved = false;
 		break;
 
 	case FILL_WHITE:
@@ -219,6 +226,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UpdateInterface();
 		pOut->CreateBackClrToolBar();
 		pOut->PrintMessage("Choose color from following");
+		IsSaved = false;
 		break;
 
 	case BCFILL_WHITE:
@@ -296,11 +304,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case MOVE:			//Move a figure(s)
 		pAct = new MoveAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case RESIZE:		//Resize a figure(s)
 		pAct = new ResizeAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case DEL:			//Delete a figure(s)
@@ -308,6 +318,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		deleteFig();
 		pOut->ClearDrawArea();
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -319,22 +330,26 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case PASTE:         //Paste an item from Clipboard
 		pAct = new PasteAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
 		pOut->PrintMessage("llll");
 		pAct = new CutAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case SAVE:			//Save the whole graph to a file
 		pAct = new SaveAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = true;
 		break;
 
 	case LOAD:			//Load a graph from a file
 		pAct = new LoadAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case ZOOM_IN:        //Zooming the whole graph in
@@ -354,7 +369,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT:			//Exit the application
-		//pAct = new EXITAction(this);
+		
+		pAct = new ExitAction(this);
+		c=((ExitAction*)pAct)->SaveBefExit();
+		if (c == 'n')
+		{
+			pAct = new SaveAction(this);
+		}
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -559,6 +580,11 @@ void ApplicationManager::SaveAll(ofstream& Outfile)
 	{
 		FigList[i]->Save(Outfile); //Call Save Function
 	}
+}
+
+bool ApplicationManager::GetIsSaved()
+{
+	return IsSaved;
 }
 
 //==================================================================================//

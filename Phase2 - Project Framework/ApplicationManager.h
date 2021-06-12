@@ -30,7 +30,8 @@ private:
 	int ClipboardCount;
 	bool IsInClipboard;      //Used to check that there is a figure in clipboard or not
 	bool IsFigCut;           //To know whether the figure in Clipboard is cut or copied
-
+	bool IsSaved;			//To know whether the user saved the file or not
+	char c;
 public:
 	ApplicationManager();
 	~ApplicationManager();
@@ -71,6 +72,7 @@ public:
 	void ClearClipboard();  //Clears Clipboard shakly msh mehtagha khals
 	void SetIsFigCut(bool);
 	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
+	bool GetIsSaved();
 	void SetCount(int x);
 	int GetCount();
 };
