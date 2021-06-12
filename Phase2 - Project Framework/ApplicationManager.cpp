@@ -10,6 +10,7 @@
 #include "Actions/PasteAction.h"
 #include "Actions/MoveAction.h"
 #include "Actions/ResizeAction.h"
+#include "Actions/RotateAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/LoadAction.h"
 #include "Actions/ExitAction.h"

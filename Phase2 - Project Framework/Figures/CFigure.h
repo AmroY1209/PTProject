@@ -48,7 +48,7 @@ public:
 	///Decide the parameters that you should pass to each function	
 
 
-	//virtual void Rotate() = 0;	//Rotate the figure
+	virtual void Rotate(string degree) = 0;	//Rotate the figure
 
 
 	virtual void Save(ofstream &Outfile) = 0;	//Save the figure parameters to the file

@@ -100,6 +100,37 @@ Point CRectangle::getLastPt()
 	return P;
 }
 
+Point CRectangle::getCenter()
+{
+	Point P;
+	P.x = (Corner1.x + Corner2.x) / 2;
+	P.y = (Corner1.y + Corner2.y) / 2;
+}
+void CRectangle::Rotate(string degree)
+{
+	if (degree == "90")
+	{
+		Corner1.x = -(Corner1.y - getCenter().y) + getCenter().x;
+		Corner1.y = (Corner1.x - getCenter().x) + getCenter().y;
+		Corner2.x = -(Corner2.y - getCenter().y) + getCenter().x;
+		Corner2.y = (Corner2.x - getCenter().x) + getCenter().y;
+	}
+	else if (degree == "180")
+	{
+		Corner1.x = -(Corner1.x - getCenter().x) + getCenter().x;
+		Corner1.y = -(Corner1.y - getCenter().y) + getCenter().y;
+		Corner2.x = -(Corner2.x - getCenter().x) + getCenter().x;
+		Corner2.y = -(Corner2.y - getCenter().y) + getCenter().y;
+	}
+	else if (degree == "270")
+	{
+		Corner1.x = (Corner1.y - getCenter().y) + getCenter().x;
+		Corner1.y = -(Corner1.x - getCenter().x) + getCenter().y;
+		Corner2.x = (Corner2.y - getCenter().y) + getCenter().x;
+		Corner2.y = -(Corner2.x - getCenter().x) + getCenter().y;
+	}
+}
+
 void CRectangle::Resize(string scale)
 {
 	if (scale == "1/4" || scale == "quarter")

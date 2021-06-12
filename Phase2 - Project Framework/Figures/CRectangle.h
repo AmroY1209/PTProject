@@ -15,9 +15,11 @@ public:
 
 	 Point getFirstPt() ;
 	 Point getLastPt();
+	 Point getCenter();
 	 void Move(int x, int y) ;        //Move the figure
 	 virtual void Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3) ;  //Function gets the new corner points to be pasted
 	 void Resize(string scale);					//Resize the figure
+	 void Rotate(string degree);
 	 void Save(ofstream& Outfile);	//Save the figure parameters to the file
 	void Load(ifstream& Infile);	//Load the figure parameters to the file
 

@@ -75,6 +75,11 @@ void CCircle::Move(int x, int y)
 	Center.x = x; Center.y = y;
 }
 
+void CCircle::Rotate(string degree)
+{
+
+}
+
 void CCircle::Paste(int x, int y, Point& temp1, Point& temp2, Point& temp3)
 {
 	temp2.x = x - Center.x + Radius.x; temp2.y = y - Center.y + Radius.y;
