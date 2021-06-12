@@ -50,6 +50,16 @@ void CRectangle::print(Output* pOut)
 
 	pOut->PrintMessage(strl);
 }
+float CRectangle::GetArea()
+{
+	int width = Corner2.x - Corner1.x;
+	if (width < 0) { width *= -1; }
+
+	int length = Corner2.y - Corner1.y;
+	if (length < 0) { length *= -1; }
+
+	return length * width;
+}
 
 bool CRectangle::isValid(Point C1, Point C2) const
 {
@@ -111,10 +121,11 @@ void CRectangle::Rotate(string degree)
 {
 	if (degree == "90")
 	{
-		Corner1.x = -(Corner1.y - getCenter().y) + getCenter().x;
-		Corner1.y = (Corner1.x - getCenter().x) + getCenter().y;
-		Corner2.x = -(Corner2.y - getCenter().y) + getCenter().x;
-		Corner2.y = (Corner2.x - getCenter().x) + getCenter().y;
+		Point PT = getCenter();
+		Corner1.x = -(Corner1.y - PT.y) + PT.x;
+		Corner1.y = (Corner1.x - PT.x) + PT.y;
+		Corner2.x = -(Corner2.y - PT.y) + PT.x;
+		Corner2.y = (Corner2.x - PT.x) + PT.y;
 	}
 	else if (degree == "180")
 	{

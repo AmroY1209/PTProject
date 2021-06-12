@@ -17,6 +17,10 @@ void CLine::Draw(Output* pOut) const
 	else pOut->PrintMessage("Invalid Drawing Area Please try again");
 }
 
+float CLine::GetArea()
+{
+	return 0;
+}
 
 void CLine::print(Output* pOut)
 {
@@ -93,35 +97,35 @@ Point CLine::getLastPt()
 	return P;
 }
 
-Point CLine::getCenter()
+void CLine::getCenter(Point &P)
 {
-	Point P;
-	P.x = (StartingPoint.x + EndPoint.x)/2;
-	P.y = (StartingPoint.y + EndPoint.y)/2;
-	return P;
+	P.x = (getFirstPt().x + getLastPt().x)/2.0;
+	P.y = (getFirstPt().y + getLastPt().y)/2.0;
 }
 void CLine::Rotate(string degree)
 {
+	Point P;
+	getCenter(P);
 	if (degree == "90")
 	{
-		StartingPoint.x = -(StartingPoint.y - getCenter().y) + getCenter().x;
-		StartingPoint.y = (StartingPoint.x - getCenter().x) + getCenter().y;
-		EndPoint.x = -(EndPoint.y - getCenter().y) + getCenter().x;
-		EndPoint.y = (EndPoint.x - getCenter().x) + getCenter().y;
+		StartingPoint.x = (P.y-StartingPoint.y) + P.x;
+		StartingPoint.y = (StartingPoint.x - P.x) + P.y;
+		EndPoint.x = (P.y - EndPoint.y)  + P.x;
+		EndPoint.y = (EndPoint.x - P.x)+ P.y;
 	}
 	else if (degree == "180")
 	{
-		StartingPoint.x = -(StartingPoint.x - getCenter().x) + getCenter().x;
-		StartingPoint.y = -(StartingPoint.y - getCenter().y) + getCenter().y;
-		EndPoint.x = -(EndPoint.x - getCenter().x) + getCenter().x;
-		EndPoint.y = -(EndPoint.y - getCenter().y) + getCenter().y;
+		StartingPoint.x = -(StartingPoint.x - P.x) + P.x;
+		StartingPoint.y = -(StartingPoint.y - P.y) + P.y;
+		EndPoint.x = -(EndPoint.x - P.x) + P.x;
+		EndPoint.y = -(EndPoint.y - P.y) + P.y;
 	}
 	else if (degree == "270")
 	{
-		StartingPoint.x = (StartingPoint.y - getCenter().y) + getCenter().x;
-		StartingPoint.y = -(StartingPoint.x - getCenter().x) + getCenter().y;
-		EndPoint.x = (EndPoint.y - getCenter().y) + getCenter().x;
-		EndPoint.y = -(EndPoint.x - getCenter().x) + getCenter().y;
+		StartingPoint.x = (StartingPoint.y - P.y) + P.x;
+		StartingPoint.y = -(StartingPoint.x - P.x) + P.y;
+		EndPoint.x = (EndPoint.y - P.y) + P.x;
+		EndPoint.y = -(EndPoint.x - P.x) + P.y;
 	}
 }
 void CLine::Resize(string scale)

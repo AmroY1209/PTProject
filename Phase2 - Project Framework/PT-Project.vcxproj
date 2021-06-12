@@ -138,6 +138,7 @@
     <ClCompile Include="Actions\LoadAction.cpp" />
     <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\MoveAction.cpp" />
+    <ClCompile Include="Actions\PickByAreaAction.cpp" />
     <ClCompile Include="Actions\PickByTypeAction.cpp" />
     <ClCompile Include="Actions\RotateAction.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Actions\LoadAction.h" />
     <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\MoveAction.h" />
+    <ClInclude Include="Actions\PickByAreaAction.h" />
     <ClInclude Include="Actions\PickByTypeAction.h" />
     <ClInclude Include="Actions\RotateAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />

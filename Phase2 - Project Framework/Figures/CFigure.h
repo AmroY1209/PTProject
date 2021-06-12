@@ -32,6 +32,7 @@ public:
 	color GetColor(string RGB);			//Gets the color from its name (load)
 	virtual bool checkLoc(int x, int y);
 	virtual GfxInfo GetGFXINFO();  //Gets graphical info
+	virtual float GetArea() =0;
 	void hide();					//Hides figures in playmode
 	void unHide();					//Unhides figures in playmode
 	bool figStatus();			//Returns true if the figure is hidden and false if not hidden 

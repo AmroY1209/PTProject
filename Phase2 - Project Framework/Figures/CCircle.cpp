@@ -41,6 +41,11 @@ void CCircle::print(Output* pOut)
 	pOut->PrintMessage(strl);
 }
 
+float CCircle::GetArea()
+{
+	float radius = sqrt((Center.x - Radius.x) * (Center.x - Radius.x) + (Center.y - Radius.y) * (Center.y - Radius.y));
+	return 3.14 * (radius) * (radius);
+}
 bool CCircle::isValid(Point Center, Point Radius) const
 {
 	double radius = sqrt((Center.x - Radius.x) * (Center.x - Radius.x) + (Center.y - Radius.y) * (Center.y - Radius.y));

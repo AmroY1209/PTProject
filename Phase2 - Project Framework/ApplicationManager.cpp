@@ -17,6 +17,7 @@
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/PickByTypeAction.h"
+#include "Actions/PickByAreaAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -453,6 +454,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case BY_AREA:    //Pick figures by Area, for play mode
+		pAct = new PickByAreaAction(this);
 		break;
 	}
 
