@@ -59,10 +59,13 @@ ActionType Input::GetUserAction() const
 			case ITM_SELECT: return SELECT;
 			case ITM_MOVE: return MOVE;
 			case ITM_RESIZE: return RESIZE;
+			case ITM_ROTATE: return ROTATE;
 			case ITM_DEL: return DEL;
 			case ITM_ZOOMIN: return ZOOM_IN;
 			case ITM_ZOOMOUT: return ZOOM_OUT;
 			case ITM_PLAY: return TO_PLAY;
+			case ITM_UNDO: return UNDO;
+			case ITM_REDO: return REDO;
 			case ITM_EXIT: return EXIT;
 
 			default: return EMPTY;	//A click on empty place in design toolbar

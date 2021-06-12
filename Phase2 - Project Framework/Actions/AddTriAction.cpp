@@ -55,4 +55,20 @@ void AddTriAction::Execute()
 	pManager->AddFigure(R);
 }
 
-AddTriAction::~AddTriAction(){}
+void AddTriAction::Undo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	figcount = pManager->GetFigCount();
+	pManager->SetFigCount(--figcount);
+}
+
+void AddTriAction::Redo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	Execute();
+}
+
+
+AddTriAction::~AddTriAction() {}

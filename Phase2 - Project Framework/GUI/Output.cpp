@@ -91,11 +91,14 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_BKCOL] = "images\\MenuItems\\Menu_BKCol.jpg";
 	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Menu_Resize.jpg";
+	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\Menu_Rotate.jpg";
 	MenuItemImages[ITM_ZOOMIN] = "images\\MenuItems\\Menu_Zoom_In.jpg";
 	MenuItemImages[ITM_ZOOMOUT] = "images\\MenuItems\\Menu_Zoom_Out.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\Menu_Del.jpg";
 	MenuItemImages[ITM_MOVE] = "images\\MenuItems\\Menu_Move.jpg";
 	MenuItemImages[ITM_PLAY] = "images\\MenuItems\\Menu_Play.jpeg";
+	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\Menu_Undo.jpg";
+	MenuItemImages[ITM_REDO] = "images\\MenuItems\\Menu_Redo.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -129,12 +132,12 @@ void Output::CreateUtilityToolbar() const
 
 	for (int i = 0; i < Util_ITM_COUNT; i++)
 	{
-		pWind->DrawImage(MenuItemImages[i], UI.width - UI.UtilToolbarWidth, UI.ToolBarHeight + 7 +(i * UI.ToolBarHeight), UI.MenuItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(MenuItemImages[i], UI.width - UI.UtilToolbarWidth, UI.ToolBarHeight + 7 + (i * UI.ToolBarHeight), UI.MenuItemWidth, UI.ToolBarHeight);
 	}
 
 	//Draw a line to the left of the toolbar
 	pWind->SetPen(DIMGREY, 7);
-	pWind->DrawLine(UI.width - UI.UtilToolbarWidth -7, UI.ToolBarHeight,UI.width - UI.UtilToolbarWidth - 7, UI.height - UI.StatusBarHeight);
+	pWind->DrawLine(UI.width - UI.UtilToolbarWidth - 7, UI.ToolBarHeight, UI.width - UI.UtilToolbarWidth - 7, UI.height - UI.StatusBarHeight);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -278,7 +281,7 @@ void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight + 3, UI.width - UI.UtilToolbarWidth -3, UI.height - UI.StatusBarHeight);
+	pWind->DrawRectangle(0, UI.ToolBarHeight + 3, UI.width - UI.UtilToolbarWidth - 3, UI.height - UI.StatusBarHeight);
 
 }
 

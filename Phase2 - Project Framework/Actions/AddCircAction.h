@@ -8,15 +8,19 @@ class AddCircAction : public Action
 {
 private:
 	Point P1, P2; //Circle Center and radius point
+	int figcount;
 	GfxInfo CircGfxInfo;
 public:
-	AddCircAction(ApplicationManager* pApp, bool filled=false);
+	AddCircAction(ApplicationManager* pApp, bool filled = false);
 
 	//Reads circle parameters
 	virtual void ReadActionParameters();
 
 	//Add circle to the ApplicationManager
 	virtual void Execute();
+	virtual void Undo();
+	virtual void Redo();
+
 	~AddCircAction();
 
 };

@@ -11,6 +11,8 @@ public:
 	ExitAction(ApplicationManager* pmanager);
 	virtual void ReadActionParameters();
 	virtual void Execute();
+	virtual void Undo();
+	virtual void Redo();
 	char SaveBefExit();
 	~ExitAction();
 };

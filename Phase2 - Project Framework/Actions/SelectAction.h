@@ -12,7 +12,7 @@ private:
 	Point P; //point clicked
 	CFigure* selectedFig; //pointer to selected fiqure
 
-	
+
 public:
 
 	SelectAction(ApplicationManager* pApp);
@@ -21,6 +21,8 @@ public:
 	virtual void Execute();
 	void Select_Fig();
 	void un_Select();
+	virtual void Undo();
+	virtual void Redo();
 	~SelectAction();
 };
 #endif

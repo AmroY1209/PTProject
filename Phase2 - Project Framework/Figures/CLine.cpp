@@ -98,6 +98,7 @@ Point CLine::getCenter()
 	Point P;
 	P.x = (StartingPoint.x + EndPoint.x)/2;
 	P.y = (StartingPoint.y + EndPoint.y)/2;
+	return P;
 }
 void CLine::Rotate(string degree)
 {

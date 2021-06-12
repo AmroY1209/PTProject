@@ -3,6 +3,7 @@
 
 #include "DEFS.h"
 #include "Figures\CFigure.h"
+#include "Actions/Action.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
 
@@ -11,12 +12,17 @@ class ApplicationManager
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
 	enum { MaxSelecCount = 40 };
+	enum { Maxirri = 100 };
 	//Max no of figures
 
 private:
 	bool filled;
 	int FigCount;		//Actual number of figures
+	int Actcount;
+	int Rcount;
 	int SelecFigCount;	//selected figure counter
+	Action* Uorder[Maxirri];
+	Action* Rorder[Maxirri];
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure* SelectedFigList[MaxSelecCount];	//List of all figures (Array of pointers)
 
@@ -51,11 +57,12 @@ public:
 	int  GetSelectedCount();
 	void clearselcFig();
 	void OnlyclearselcFig();  //Only clears selected figure without selected figure count
-
+	void AddAction(Action* act);
+	void AddReaction(Action* rAct);
 	CFigure** GetDrawnFigs();      //Gets the list of drawn figures
 	int GetFigCount();             //Gets the number of actual drawn figures
 	void ClearFigList();                //Deletes all figures in the list of figures
-
+	void SetFigCount(int);
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output

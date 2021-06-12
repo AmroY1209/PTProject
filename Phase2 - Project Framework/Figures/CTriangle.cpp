@@ -104,6 +104,7 @@ Point CTriangle::getCenter()
 	Point P;
 	P.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
 	P.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
+	return P;
 }
 void CTriangle::Rotate(string degree)
 {

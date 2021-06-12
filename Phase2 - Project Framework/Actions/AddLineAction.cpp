@@ -64,4 +64,20 @@ int AddLineAction::GetHeight()
 		return (-h);
 }
 
-AddLineAction::~AddLineAction(){}
+void AddLineAction::Undo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	figcount = pManager->GetFigCount();
+	pManager->SetFigCount(--figcount);
+}
+
+void AddLineAction::Redo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	Execute();
+}
+
+
+AddLineAction::~AddLineAction() {}

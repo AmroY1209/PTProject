@@ -105,6 +105,7 @@ Point CRectangle::getCenter()
 	Point P;
 	P.x = (Corner1.x + Corner2.x) / 2;
 	P.y = (Corner1.y + Corner2.y) / 2;
+	return P;
 }
 void CRectangle::Rotate(string degree)
 {

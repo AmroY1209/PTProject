@@ -47,7 +47,7 @@ void LoadAction::Execute()
 			Point Dummy_PT1, Dummy_PT2, Dummy_PT3;
 			Dummy_PT1.x = 0; Dummy_PT1.y = 0; Dummy_PT2.x = 0; Dummy_PT2.y = 0; Dummy_PT3.x = 0; Dummy_PT3.y = 0;
 			GfxInfo Dummy_GFX;
-			Dummy_GFX.BorderWdth=3; Dummy_GFX.DrawClr = BLACK; Dummy_GFX.FillClr = BLUE; Dummy_GFX.isFilled = true; Dummy_GFX.HighLightClr = RED;
+			Dummy_GFX.BorderWdth = 3; Dummy_GFX.DrawClr = BLACK; Dummy_GFX.FillClr = BLUE; Dummy_GFX.isFilled = true; Dummy_GFX.HighLightClr = RED;
 
 			if (Shape == "CIRCLE")
 				pFig = new CCircle(Dummy_PT1, Dummy_PT2, Dummy_GFX);
@@ -61,7 +61,7 @@ void LoadAction::Execute()
 			pManager->AddFigure(pFig);
 			pFig->Load(Infile);
 		}
-		Output* pOut= pManager->GetOutput();
+		Output* pOut = pManager->GetOutput();
 		pOut->ClearDrawArea();
 		pOut->CreateUtilityToolbar();
 	}
@@ -78,7 +78,7 @@ color LoadAction::GetColor(string RGB)
 	else if (RGB == "GREEN")
 		return GREEN;
 	else if (RGB == "BLUE")
-		return BLUE;	
+		return BLUE;
 	else if (RGB == "YELLOW")
 		return YELLOW;
 	else if (RGB == "PURPLE")
@@ -86,3 +86,23 @@ color LoadAction::GetColor(string RGB)
 	else if (RGB == "ORANGE")
 		return ORANGE;
 }
+
+void LoadAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void LoadAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
+}
+
+LoadAction::~LoadAction(){}

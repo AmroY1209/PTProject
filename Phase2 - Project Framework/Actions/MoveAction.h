@@ -15,4 +15,7 @@ public:
 	virtual void ReadActionParameters();
 	virtual void Execute();
 
+	virtual void Undo();
+	virtual void Redo();
+	~MoveAction();
 };

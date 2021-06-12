@@ -17,5 +17,7 @@ public:
 	~PickByTypeAction();                     //Destructor
 	void ReadActionParameters();
 	void Execute();
+	virtual void Undo();
+	virtual void Redo();
 	void printScore(int);
 };

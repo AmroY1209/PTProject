@@ -3,10 +3,10 @@
 #include "AddRectAction.h"
 #include "..\Figures\CFigure.h"
 
-PasteAction::PasteAction(ApplicationManager* pApp):Action(pApp)
+PasteAction::PasteAction(ApplicationManager* pApp) :Action(pApp)
 {
-	Cx=0;
-	Cy=0;
+	Cx = 0;
+	Cy = 0;
 }
 PasteAction::~PasteAction()
 {
@@ -33,7 +33,7 @@ void PasteAction::Execute()
 	ReadActionParameters();
 	SelectedFigList = pManager->GetClipboard();
 	Output* pOut = pManager->GetOutput();
-	if (SelecFigCount != 0 )
+	if (SelecFigCount != 0)
 	{
 		Point TEMP1, TEMP2, TEMP3;
 		TEMP1.y = 81; TEMP2.y = 81; TEMP3.y = 81;    //Initial value to allow drawing in drawing area only
@@ -86,7 +86,7 @@ void PasteAction::Execute()
 				}
 				else if (dynamic_cast<CLine*>(SelectedFigList[i]))
 				{
-					CLine* pR= new CLine(TEMP1, TEMP2, (SelectedFigList[i]->GetGFXINFO()));
+					CLine* pR = new CLine(TEMP1, TEMP2, (SelectedFigList[i]->GetGFXINFO()));
 					pManager->AddFigure(pR);
 				}
 				else if (dynamic_cast<CTriangle*>(SelectedFigList[i]))
@@ -109,4 +109,21 @@ void PasteAction::Execute()
 			}
 		}
 	}
+}
+void PasteAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void PasteAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
 }

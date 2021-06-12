@@ -1,6 +1,6 @@
 #include "CutAction.h"
 #include "..\ApplicationManager.h"
-CutAction::CutAction(ApplicationManager* pApp):Action(pApp)
+CutAction::CutAction(ApplicationManager* pApp) :Action(pApp)
 {
 	Cx = 0;
 	Cy = 0;
@@ -19,7 +19,7 @@ void CutAction::ReadActionParameters()
 	SelectedFig_List = pManager->GetSelectedFigs();
 	SelecFigCount = pManager->GetSelectedCount();   //mlosh lazma
 	Temp_Count = SelecFigCount;  //mab2tsh 3ayzo
-	CFigure** TempList= new CFigure* [SelecFigCount];   //Temporary list of figures
+	CFigure** TempList = new CFigure * [SelecFigCount];   //Temporary list of figures
 	for (int i = 0; i < SelecFigCount; i++)
 	{
 		TempList[i] = SelectedFig_List[i];
@@ -54,4 +54,21 @@ void CutAction::Execute()
 	//pManager->SetIsFigCut(true);       //The Figure is cut not copied
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+}
+void CutAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void CutAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
 }

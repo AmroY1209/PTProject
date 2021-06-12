@@ -47,6 +47,15 @@ char ExitAction::SaveBefExit()
 	}
 	return exit;
 }
+void ExitAction::Undo()
+{
+
+}
+void ExitAction::Redo()
+{
+
+}
+
 ExitAction::~ExitAction()
 {
 

@@ -48,5 +48,13 @@ void RotateAction::Execute()
 
 }
 
+void RotateAction::Undo()
+{
+
+}
+void RotateAction::Redo()
+{
+
+}
 RotateAction::~RotateAction()
 {}

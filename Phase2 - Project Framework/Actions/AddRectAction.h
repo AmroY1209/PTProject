@@ -3,13 +3,15 @@
 
 #include "Action.h"
 
+
 //Add Rectangle Action class
 
-class AddRectAction: public Action
+class AddRectAction : public Action
 {
 private:
 
 	Point P1, P2; //Rectangle Corners
+	int figcount;
 	GfxInfo RectGfxInfo;
 
 public:
@@ -18,10 +20,11 @@ public:
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
-	
+
 	//Add rectangle to the ApplicationManager
-	virtual void Execute() ;
-	
+	virtual void Execute();
+	virtual void Undo();
+	virtual void Redo();
 	~AddRectAction();
 };
 

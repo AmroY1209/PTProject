@@ -37,7 +37,9 @@ ApplicationManager::ApplicationManager()
 	FigCount = 0;
 	SelecFigCount = 0;
 	ClipboardCount = 0;
-
+	Actcount = 0;
+	Rcount = 0;
+	ClipboardCount = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
@@ -45,6 +47,11 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxSelecCount; i++)
 	{
 		SelectedFigList[i] = NULL;
+	}
+	for (int i = 0; i < Maxirri; i++)
+	{
+		Uorder[i] = NULL;
+		Rorder[i] = NULL;
 	}
 }
 
@@ -62,28 +69,33 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
+	Action* pAct2 = NULL;
 
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
 	case DRAW_RECT:
 		pAct = new AddRectAction(this, filled);
-		IsSaved = false;
+		pAct2 = new AddRectAction(this, filled);
+		AddAction(pAct2);
 		break;
 
 	case DRAW_LINE:
 		pAct = new AddLineAction(this);
-		IsSaved = false;
+		pAct2 = new AddLineAction(this);
+		AddAction(pAct2);
 		break;
 
 	case DRAW_TRI:
 		pAct = new AddTriAction(this, filled);
-		IsSaved = false;
+		pAct2 = new AddTriAction(this, filled);
+		AddAction(pAct2);
 		break;
 
 	case DRAW_CIRC:
 		pAct = new AddCircAction(this, filled);
-		IsSaved = false;
+		pAct2 = new AddCircAction(this, filled);
+		AddAction(pAct2);
 		break;
 
 		//case colors for change DRAW COLOR 
@@ -314,6 +326,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		IsSaved = false;
 		break;
 
+	case ROTATE:		//Resize a figure(s)
+		pAct = new RotateAction(this);
+		pOut->CreateUtilityToolbar();
+		IsSaved = false;
+		break;
+
 	case DEL:			//Delete a figure(s)
 		pOut->ClearStatusBar();
 		deleteFig();
@@ -379,6 +397,30 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		}
 		break;
 
+	case UNDO:
+		pAct2 = Uorder[Actcount - 1];
+		if (Actcount != 0)
+		{
+			pAct2->Undo();
+			AddReaction(pAct2);
+			Actcount--;
+		}
+		else pOut->PrintMessage("no action excuted");
+		pOut->CreateUtilityToolbar();
+		break;
+
+	case REDO:
+		pAct2 = Rorder[Rcount - 1];
+		if (Rcount != 0)
+		{
+			Rcount--;
+			Actcount++;
+			pAct2->Redo();
+		}
+		else pOut->PrintMessage("no action to be redone");
+		pOut->CreateUtilityToolbar();
+		break;
+
 	case STATUS:	//a click on the status bar ==> no action
 		return;
 
@@ -433,6 +475,20 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 		FigList[FigCount++] = pFig;
 }
 
+
+void ApplicationManager::AddAction(Action* act)
+{
+	if (Actcount < Maxirri)
+		Uorder[Actcount++] = act;
+}
+
+void ApplicationManager::AddReaction(Action* rAct)
+{
+	if (Rcount < Maxirri)
+		Rorder[Rcount++] = rAct;
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////
 
 void ApplicationManager::printinfo(CFigure* pI)
@@ -475,6 +531,14 @@ int ApplicationManager::GetFigCount()
 {
 	return FigCount;
 }
+
+
+void ApplicationManager::SetFigCount(int f)
+{
+	FigCount = f;
+}
+
+
 void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -640,6 +704,10 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 			delete FigList[i];
 		for (int i = 0; i < SelecFigCount; i++)
 			delete SelectedFigList[i];
+		for (int i = 0; i < Actcount; i++)
+			delete Uorder[i];
+		for (int i = 0; i < Rcount; i++)
+			delete Rorder[i];
 		delete pIn;
 		delete pOut;
 	}
