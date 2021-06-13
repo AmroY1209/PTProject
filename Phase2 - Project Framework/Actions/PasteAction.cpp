@@ -109,7 +109,7 @@ void PasteAction::Execute()
 			}
 		}
 		if (pManager->getCut() == true)
-		{ 
+		{
 			int SelecCountSubtractor = 0;
 			for (int i = 0; i < SelecFigCount; i++)
 			{
@@ -121,20 +121,10 @@ void PasteAction::Execute()
 		}
 	}
 }
-void PasteAction::Undo()
+
+void  PasteAction::Undo()
 {
-
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
-
-void PasteAction::Redo()
+void  PasteAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }

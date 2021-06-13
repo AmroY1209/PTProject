@@ -53,7 +53,7 @@ public:
 	void UNSelectFigure(CFigure* s);
 	CFigure* GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	void deleteFig();
-	CFigure* *GetSelectedFigs();
+	CFigure** GetSelectedFigs();
 	int  GetSelectedCount();
 	void clearselcFig();
 	void OnlyclearselcFig();  //Only clears selected figure without selected figure count
@@ -75,7 +75,7 @@ public:
 	virtual void printinfo(CFigure* s);
 
 	// -- Save/Load Functions
-	void SaveAll(ofstream &Outfile);
+	void SaveAll(ofstream& Outfile);
 
 	// -- Clipboard Functions
 	void SetClipboard(CFigure**);

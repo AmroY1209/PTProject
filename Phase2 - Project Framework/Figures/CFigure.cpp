@@ -1,7 +1,7 @@
 #include "CFigure.h"
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
-{ 
+{
 	MYid = ++ID;
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
@@ -11,10 +11,14 @@ void CFigure::print(Output* pOut)
 {}
 
 void CFigure::SetSelected(bool s)
-{	Selected = s; }
+{
+	Selected = s;
+}
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{
+	return Selected;
+}
 
 
 void CFigure::SetID(int id)
@@ -29,12 +33,14 @@ int CFigure::getID()
 }
 
 void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
+{
+	FigGfxInfo.DrawClr = Dclr;
+}
 
 void CFigure::ChngFillClr(color Fclr)
-{	
+{
 	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.FillClr = Fclr;
 }
 void CFigure::HighLightClr()
 {
@@ -51,7 +57,7 @@ GfxInfo CFigure::GetGFXINFO()
 	return FigGfxInfo;
 }
 
- //To hide the picked figure
+//To hide the picked figure
 void CFigure::hide()
 {
 	fig_status = true;
@@ -86,7 +92,7 @@ string CFigure::GetColorName(color RGB)
 	else if (RGB.ucRed == 255 && RGB.ucGreen == 165 && RGB.ucBlue == 0)
 		return "ORANGE";
 }
- color CFigure::GetColor(string RGB)
+color CFigure::GetColor(string RGB)
 {
 	if (RGB == "BLACK")
 		return BLACK;

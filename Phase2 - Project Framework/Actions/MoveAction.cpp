@@ -58,20 +58,9 @@ void MoveAction::Execute()
 
 void MoveAction::Undo()
 {
-
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
 
 void MoveAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }
-
-MoveAction::~MoveAction() {}
+	MoveAction::~MoveAction() {}

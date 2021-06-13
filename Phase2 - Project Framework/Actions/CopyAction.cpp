@@ -19,7 +19,7 @@ void CopyAction::ReadActionParameters()
 
 	SelectedFigList = pManager->GetSelectedFigs();
 	SelecFigCount = pManager->GetSelectedCount();
-	
+
 }
 void CopyAction::Execute()
 {
@@ -27,19 +27,12 @@ void CopyAction::Execute()
 	pManager->SetClipboard(SelectedFigList);
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+
 }
+
 void CopyAction::Undo()
 {
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
-
 void CopyAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }

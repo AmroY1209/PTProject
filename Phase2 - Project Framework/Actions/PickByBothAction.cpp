@@ -157,7 +157,7 @@ void PickByBothAction::ReadActionParameters()
 				num_of_combinations[33]++;
 			else
 				num_of_combinations[34]++;
-		}    
+		}
 		fig[i]->unHide();
 	}
 	//Wait for User Input
@@ -425,7 +425,7 @@ void PickByBothAction::Execute()
 				CFigure* selectedFigure = pManager->GetFigure(Cx, Cy);
 				if (selectedFigure != NULL)
 				{
-					if (operator==(selectedFigure->GetGFXINFO().FillClr, WHITE) && (dynamic_cast<CRectangle*>(selectedFigure)) && wR == 1) 
+					if (operator==(selectedFigure->GetGFXINFO().FillClr, WHITE) && (dynamic_cast<CRectangle*>(selectedFigure)) && wR == 1)
 					{
 						printScore(1);
 						selectedFigure->hide();
@@ -593,7 +593,7 @@ void PickByBothAction::Execute()
 						pManager->UpdateInterface_PlayMode();
 						no_to_pick--;
 					}
-					else if (operator==(selectedFigure->GetGFXINFO().DrawClr, WHITE) && (dynamic_cast<CLine*>(selectedFigure)) && wL == 25) 
+					else if (operator==(selectedFigure->GetGFXINFO().DrawClr, WHITE) && (dynamic_cast<CLine*>(selectedFigure)) && wL == 25)
 					{
 						printScore(1);
 						selectedFigure->hide();
@@ -688,7 +688,7 @@ void PickByBothAction::Execute()
 		}
 	}
 	else
-	pOut->PrintMessage("You must draw at least two figures to play!");
+		pOut->PrintMessage("You must draw at least two figures to play!");
 	for (int i = 0; i < no_of_figs; i++)
 	{
 		fig[i]->unHide();

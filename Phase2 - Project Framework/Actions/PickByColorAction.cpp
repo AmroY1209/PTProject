@@ -73,22 +73,22 @@ void PickByColorAction::ReadActionParameters()
 		}
 		else if (dynamic_cast<CLine*>(fig[i]))
 		{
-				if (operator==(fig[i]->GetGFXINFO().DrawClr, WHITE))
-					num_of_each_color[0]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, BLACK))
-					num_of_each_color[1]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, RED))
-					num_of_each_color[2]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, GREEN))
-					num_of_each_color[3]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, BLUE))
-					num_of_each_color[4]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, YELLOW))
-					num_of_each_color[5]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, PURPLE))
-					num_of_each_color[6]++;
-				else if (operator==(fig[i]->GetGFXINFO().DrawClr, ORANGE))
-					num_of_each_color[7]++;
+			if (operator==(fig[i]->GetGFXINFO().DrawClr, WHITE))
+				num_of_each_color[0]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, BLACK))
+				num_of_each_color[1]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, RED))
+				num_of_each_color[2]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, GREEN))
+				num_of_each_color[3]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, BLUE))
+				num_of_each_color[4]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, YELLOW))
+				num_of_each_color[5]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, PURPLE))
+				num_of_each_color[6]++;
+			else if (operator==(fig[i]->GetGFXINFO().DrawClr, ORANGE))
+				num_of_each_color[7]++;
 		}
 		else
 			num_of_each_color[8]++;    //number of uncolored figures  (not line & not colored)
@@ -226,7 +226,7 @@ void PickByColorAction::Execute()
 				CFigure* selectedFigure = pManager->GetFigure(Cx, Cy);
 				if (selectedFigure != NULL)
 				{
-					if (operator==(selectedFigure->GetGFXINFO().FillClr, WHITE) && !(dynamic_cast<CLine*>(selectedFigure)) && w==1)
+					if (operator==(selectedFigure->GetGFXINFO().FillClr, WHITE) && !(dynamic_cast<CLine*>(selectedFigure)) && w == 1)
 					{
 						printScore(1);
 						selectedFigure->hide();
@@ -282,7 +282,7 @@ void PickByColorAction::Execute()
 						pManager->UpdateInterface_PlayMode();
 						no_to_pick--;
 					}
-					else if (operator==(selectedFigure->GetGFXINFO().DrawClr, WHITE) && (dynamic_cast<CLine*>(selectedFigure)) && w == 1) 
+					else if (operator==(selectedFigure->GetGFXINFO().DrawClr, WHITE) && (dynamic_cast<CLine*>(selectedFigure)) && w == 1)
 					{
 						printScore(1);
 						selectedFigure->hide();
@@ -338,7 +338,7 @@ void PickByColorAction::Execute()
 						pManager->UpdateInterface_PlayMode();
 						no_to_pick--;
 					}
-					else if ((selectedFigure->GetGFXINFO().isFilled==false) && uncolored == 9)
+					else if ((selectedFigure->GetGFXINFO().isFilled == false) && uncolored == 9)
 					{
 						printScore(1);
 						selectedFigure->hide();
@@ -363,7 +363,7 @@ void PickByColorAction::Execute()
 		}
 	}
 	else
-	pOut->PrintMessage("You must draw at least two figures to play!");
+		pOut->PrintMessage("You must draw at least two figures to play!");
 	for (int i = 0; i < no_of_figs; i++)
 	{
 		fig[i]->unHide();

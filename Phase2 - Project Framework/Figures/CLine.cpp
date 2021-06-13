@@ -97,10 +97,10 @@ Point CLine::getLastPt()
 	return P;
 }
 
-void CLine::getCenter(Point &P)
+void CLine::getCenter(Point& P)
 {
-	P.x = (getFirstPt().x + getLastPt().x)/2.0;
-	P.y = (getFirstPt().y + getLastPt().y)/2.0;
+	P.x = (getFirstPt().x + getLastPt().x) / 2.0;
+	P.y = (getFirstPt().y + getLastPt().y) / 2.0;
 }
 void CLine::Rotate(string degree)
 {
@@ -108,10 +108,10 @@ void CLine::Rotate(string degree)
 	getCenter(P);
 	if (degree == "90")
 	{
-		StartingPoint.x = (P.y-StartingPoint.y) + P.x;
+		StartingPoint.x = (P.y - StartingPoint.y) + P.x;
 		StartingPoint.y = (StartingPoint.x - P.x) + P.y;
-		EndPoint.x = (P.y - EndPoint.y)  + P.x;
-		EndPoint.y = (EndPoint.x - P.x)+ P.y;
+		EndPoint.x = (P.y - EndPoint.y) + P.x;
+		EndPoint.y = (EndPoint.x - P.x) + P.y;
 	}
 	else if (degree == "180")
 	{

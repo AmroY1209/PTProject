@@ -1,23 +1,25 @@
 #pragma once
 #include "Action.h"
-#include "..\\Figures\CFigure.h"
+#include "..\Figures\CFigure.h"
 class CopyAction : public Action
 {
 private:
-	int Cx, Cy;
-	int SelecFigCount;
-	CFigure** SelectedFigList; //Array of pointers
+    int Cx, Cy;
+    int SelecFigCount;
+    CFigure** SelectedFigList; //Array of pointers
 
 public:
-	CopyAction(ApplicationManager* pApp);     //Constructor
-	~CopyAction();     //Destructor
+    CopyAction(ApplicationManager* pApp);     //Constructor
+    ~CopyAction();     //Destructor
 
-	//Reads parameters needed for the execution
-	virtual void ReadActionParameters();
+    //Reads parameters needed for the execution
+    virtual void ReadActionParameters();
 
-	//Execute action
-	virtual void Execute();
-	virtual void Undo();
-	virtual void Redo();
+    //Execute action
+    virtual void Execute();
+
+    virtual void Undo();
+    virtual void Redo();
+
 
 };

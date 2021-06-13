@@ -169,18 +169,8 @@ void PickByTypeAction::Execute()
 }
 void PickByTypeAction::Undo()
 {
-
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
 
 void PickByTypeAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }

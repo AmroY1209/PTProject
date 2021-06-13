@@ -389,9 +389,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT:			//Exit the application
-		
+
 		pAct = new ExitAction(this);
-		c=((ExitAction*)pAct)->SaveBefExit();
+		c = ((ExitAction*)pAct)->SaveBefExit();
 		if (c == 'n')
 		{
 			pAct = new SaveAction(this);
@@ -597,7 +597,7 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // for select
 }
 
 //Function takes the ID of the figures to be removed
-void ApplicationManager::remove_Fig(int ID) 
+void ApplicationManager::remove_Fig(int ID)
 {
 	for (int i = ID; i < FigCount - 1; i++)   //Sorts the array without the selected figure
 	{
@@ -624,42 +624,42 @@ void ApplicationManager::ClearFigList()
 	clearselcFig();
 }
 
-	void ApplicationManager::deleteFig()
+void ApplicationManager::deleteFig()
+{
+	int k = 0;
+	if (SelecFigCount == 0)
 	{
-		int k = 0;
-		if (SelecFigCount == 0)
+		pOut->PrintMessage("please select figure first");
+		return;
+	}
+	for (int i = 0; i < MaxFigCount; i++)
+	{
+		if (!FigList[i - k])
 		{
-			pOut->PrintMessage("please select figure first");
-			return;
+			break;
 		}
-		for (int i = 0; i < MaxFigCount; i++)
+		else if (FigList[i - k]->IsSelected())
 		{
-			if (!FigList[i - k])
-			{
-				break;
-			}
-			else if (FigList[i - k]->IsSelected())
-			{
-				clearselcFig();
-				delete FigList[i - k];
-				FigList[i - k] = FigList[FigCount - 1];
-				FigList[FigCount - 1] = NULL;
-				FigCount--;
-				k++;
-				pOut->PrintMessage("Figure(s) deleted successfully");
-			}
+			clearselcFig();
+			delete FigList[i - k];
+			FigList[i - k] = FigList[FigCount - 1];
+			FigList[FigCount - 1] = NULL;
+			FigCount--;
+			k++;
+			pOut->PrintMessage("Figure(s) deleted successfully");
 		}
 	}
-	
-	//Clears the selected figure
-	void ApplicationManager::ClrSelectFig() 
+}
+
+//Clears the selected figure
+void ApplicationManager::ClrSelectFig()
+{
+	for (int i = 0; i < SelecFigCount; i++)
 	{
-		for (int i = 0; i < SelecFigCount; i++)
-		{
-			SelectedFigList[i] = NULL;
-		}
-		SelecFigCount = 0;
+		SelectedFigList[i] = NULL;
 	}
+	SelecFigCount = 0;
+}
 //==================================================================================//
 //								Save Related Functions								//
 //==================================================================================//
@@ -708,103 +708,103 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 }
 
 
-	////////////////////////////////////////////////////////////////////////////////////
-	//Return a pointer to the input
-	Input* ApplicationManager::GetInput() const
-	{
-		return pIn;
-	}
+////////////////////////////////////////////////////////////////////////////////////
+//Return a pointer to the input
+Input* ApplicationManager::GetInput() const
+{
+	return pIn;
+}
 
-	//Return a pointer to the output
-	Output* ApplicationManager::GetOutput() const
-	{
-		return pOut;
-	}
+//Return a pointer to the output
+Output* ApplicationManager::GetOutput() const
+{
+	return pOut;
+}
 
-	////////////////////////////////////////////////////////////////////////////////////
-	//Destructor
-	ApplicationManager::~ApplicationManager()
-	{
-		for (int i = 0; i < FigCount; i++)
-			delete FigList[i];
-		for (int i = 0; i < SelecFigCount; i++)
-			delete SelectedFigList[i];
-		for (int i = 0; i < Actcount; i++)
-			delete Uorder[i];
-		for (int i = 0; i < Rcount; i++)
-			delete Rorder[i];
-		delete pIn;
-		delete pOut;
-		ClearClipboard();
-	}
+////////////////////////////////////////////////////////////////////////////////////
+//Destructor
+ApplicationManager::~ApplicationManager()
+{
+	for (int i = 0; i < FigCount; i++)
+		delete FigList[i];
+	for (int i = 0; i < SelecFigCount; i++)
+		delete SelectedFigList[i];
+	for (int i = 0; i < Actcount; i++)
+		delete Uorder[i];
+	for (int i = 0; i < Rcount; i++)
+		delete Rorder[i];
+	delete pIn;
+	delete pOut;
+	ClearClipboard();
+}
 
-	//Draw all figures on the user interface in the play mode specifically
-	void ApplicationManager::UpdateInterface_PlayMode() const
+//Draw all figures on the user interface in the play mode specifically
+void ApplicationManager::UpdateInterface_PlayMode() const
+{
+	pOut->ClearDrawArea();
+	for (int i = 0; i < FigCount; i++)
 	{
-		pOut->ClearDrawArea();
-		for (int i = 0; i < FigCount; i++)
+		if (FigList[i]->figStatus() == false)
+			FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	}
+}
+
+//=================================================================================//
+//                 Clipboard used for Copy, Cut & Paste Functions                  //
+//=================================================================================//
+void ApplicationManager::SetClipboard(CFigure** fig)
+{
+	IsInClipboard = true;
+	Clipboard = fig;
+}
+
+CFigure** ApplicationManager::GetClipboard()
+{
+	if (IsInClipboard)
+		return Clipboard;
+	else
+		return NULL;
+}
+
+void ApplicationManager::setCut(bool b)
+{
+	IsFigCut = b;
+}
+
+bool ApplicationManager::getCut()
+{
+	return IsFigCut;
+}
+////////////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::ClearClipboard()
+{
+	for (int i = 0; i < ClipboardCount; i++)
+	{
+		Clipboard[i] = NULL;
+	}
+}
+void ApplicationManager::SetCount(int x)
+{
+	TempCount = x;
+}
+int ApplicationManager::GetCount()
+{
+	return TempCount;
+}
+
+void ApplicationManager::setSelectedCount(int c)
+{
+	SelecFigCount = c;
+}
+void ApplicationManager::UNSelect_whenPaste(CFigure* s)
+{
+	for (int i = 0; i < SelecFigCount; i++)
+	{
+		if (SelectedFigList[i] == s)
 		{
-			if (FigList[i]->figStatus() == false)
-				FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+			SelectedFigList[i] = NULL;
+			break;
 		}
 	}
-
-	//=================================================================================//
-	//                 Clipboard used for Copy, Cut & Paste Functions                  //
-	//=================================================================================//
-	void ApplicationManager::SetClipboard(CFigure * *fig)
-	{
-		IsInClipboard = true;
-		Clipboard = fig;
-	}
-
-	CFigure** ApplicationManager::GetClipboard()
-	{
-		if (IsInClipboard)
-			return Clipboard;
-		else
-			return NULL;
-	}
-
-	void ApplicationManager::setCut(bool b)
-	{
-		IsFigCut = b;
-	}
-
-	bool ApplicationManager::getCut()
-	{
-		return IsFigCut;
-	}
-	////////////////////////////////////////////////////////////////////////////////////
-
-	void ApplicationManager::ClearClipboard()
-	{
-		for (int i = 0; i < ClipboardCount; i++)
-		{
-			Clipboard[i] = NULL;
-		}
-	}
-	void ApplicationManager::SetCount(int x)
-	{
-		TempCount = x;
-	}
-	int ApplicationManager::GetCount()
-	{
-		return TempCount;
-	}
-
-	void ApplicationManager::setSelectedCount(int c)
-	{
-		SelecFigCount = c;
-	}
-	void ApplicationManager::UNSelect_whenPaste(CFigure* s)
-	{
-		for (int i = 0; i < SelecFigCount; i++)
-		{
-			if (SelectedFigList[i] == s)
-			{
-				SelectedFigList[i] = NULL;
-				break;
-			}
-		}
-	}
+}

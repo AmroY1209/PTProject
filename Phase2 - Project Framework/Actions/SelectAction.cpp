@@ -56,20 +56,10 @@ void SelectAction::un_Select()
 }
 void SelectAction::Undo()
 {
-
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
 
 void SelectAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }
 
 SelectAction::~SelectAction() {} //destructor 

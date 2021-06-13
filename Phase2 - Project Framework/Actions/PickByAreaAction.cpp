@@ -63,7 +63,7 @@ void PickByAreaAction::ReadActionParameters()
 	MaxArea = pFig->GetArea();
 	for (int i = 0; i < no_of_figs; i++)
 	{
-		if (fig[i]->GetArea()<MaxArea)
+		if (fig[i]->GetArea() < MaxArea)
 		{
 			no_to_pick++;
 		}
@@ -80,58 +80,58 @@ void PickByAreaAction::Execute()
 	ReadActionParameters();
 	if (no_to_pick >= 1)
 	{
-			pOut->PrintMessage("You have to pick all figures smaller than the one you chose!");
-			while (no_to_pick > 0)
+		pOut->PrintMessage("You have to pick all figures smaller than the one you chose!");
+		while (no_to_pick > 0)
+		{
+			pIn->GetPointClicked(Cx, Cy);
+			if (Cy > UI.ToolBarHeight || Cx > (UI.MenuItemWidth * PLAY_ITM_COUNT))
 			{
-				pIn->GetPointClicked(Cx, Cy);
-				if (Cy > UI.ToolBarHeight || Cx > (UI.MenuItemWidth * PLAY_ITM_COUNT))
+				CFigure* selectedFigure = pManager->GetFigure(Cx, Cy);
+				CFigure* SecondMaxFig = NULL;
+				float SecondMaxArea = -10;
+				if (selectedFigure != NULL)
 				{
-					CFigure* selectedFigure = pManager->GetFigure(Cx, Cy);
-					CFigure* SecondMaxFig = NULL;
-					float SecondMaxArea = -10;
-					if (selectedFigure != NULL)
+					for (int i = 0; i < no_of_figs; i++)
 					{
-						for (int i = 0; i < no_of_figs; i++)
+						if (fig[i]->GetArea() < MaxArea && fig[i]->figStatus() == false && fig[i]->GetArea() > SecondMaxArea)
 						{
-							if (fig[i]->GetArea() < MaxArea && fig[i]->figStatus() == false && fig[i]->GetArea() > SecondMaxArea)
-							{
-								SecondMaxFig = fig[i];
-								SecondMaxArea = fig[i]->GetArea();
-							}
+							SecondMaxFig = fig[i];
+							SecondMaxArea = fig[i]->GetArea();
 						}
-						if (selectedFigure == SecondMaxFig)
-						{
-							IsCorrect = true;
-						}
-						else
-							IsCorrect = false;
+					}
+					if (selectedFigure == SecondMaxFig)
+					{
+						IsCorrect = true;
+					}
+					else
+						IsCorrect = false;
 
-						if (IsCorrect == true)
+					if (IsCorrect == true)
+					{
+						printScore(1);
+						selectedFigure->hide();
+						pManager->UpdateInterface_PlayMode();
+						no_to_pick--;
+					}
+					else if (IsCorrect == false)
+					{
+						printScore(2);
+						if (selectedFigure->GetArea() > MaxArea)
 						{
-							printScore(1);
 							selectedFigure->hide();
 							pManager->UpdateInterface_PlayMode();
-							no_to_pick--;
-						}
-						else if (IsCorrect == false)
-						{
-							printScore(2);
-							if (selectedFigure->GetArea() > MaxArea)
-							{
-								selectedFigure->hide();
-								pManager->UpdateInterface_PlayMode();
-							}
 						}
 					}
 				}
-				else
-				{
-					pOut->PrintMessage("Toolbar clicked, you stopped the game");
-					no_to_pick = -1;
-				}
-				if (no_to_pick == 0)
-					printScore(3);
 			}
+			else
+			{
+				pOut->PrintMessage("Toolbar clicked, you stopped the game");
+				no_to_pick = -1;
+			}
+			if (no_to_pick == 0)
+				printScore(3);
+		}
 	}
 	else if (no_of_figs <= 1)
 	{
@@ -154,6 +154,6 @@ void PickByAreaAction::Undo()
 }
 
 void PickByAreaAction::Redo()
-	{
+{
 
-	}
+}

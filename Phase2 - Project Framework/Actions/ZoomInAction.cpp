@@ -63,18 +63,8 @@ void ZoomInAction::ZoomIN(string scale)
 }
 void ZoomInAction::Undo()
 {
-
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
 
 void ZoomInAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }

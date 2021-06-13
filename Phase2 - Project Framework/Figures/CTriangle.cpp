@@ -54,7 +54,7 @@ float CTriangle::getarea(Point C1, Point C2, int x, int y)
 
 float CTriangle::GetArea()
 {
-return (0.5) * abs(Corner1.x * (Corner2.y - Corner3.y) + Corner2.x * (Corner3.y - Corner1.y) + Corner3.x * (Corner1.y - Corner2.y));
+	return (0.5) * abs(Corner1.x * (Corner2.y - Corner3.y) + Corner2.x * (Corner3.y - Corner1.y) + Corner3.x * (Corner1.y - Corner2.y));
 }
 
 bool CTriangle::checkLoc(int x, int y)

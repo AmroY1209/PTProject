@@ -89,20 +89,10 @@ color LoadAction::GetColor(string RGB)
 
 void LoadAction::Undo()
 {
-
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//figcount = pManager->GetFigCount();
-	//pManager->SetFigCount(--figcount);
 }
 
 void LoadAction::Redo()
 {
-
-	//Output* pOut = pManager->GetOutput();
-	//pOut->ClearDrawArea();
-	//Execute();
 }
 
-LoadAction::~LoadAction(){}
+LoadAction::~LoadAction() {}
