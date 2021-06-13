@@ -8,6 +8,7 @@ class AddLineAction : public Action
 {
 private:
 	Point P1, P2; //Line Corners
+	int figcount;
 	GfxInfo LineGfxInfo;
 public:
 	AddLineAction(ApplicationManager* pApp);
@@ -22,7 +23,8 @@ public:
 	virtual int GetWidth();
 	//Get height of rectangle which the line is inscribed in
 	virtual int GetHeight();
-
+	virtual void Undo();
+	virtual void Redo();
 	~AddLineAction();
 };
 

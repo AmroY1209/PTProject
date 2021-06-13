@@ -9,13 +9,16 @@
 #include "Actions/PasteAction.h"
 #include "Actions/MoveAction.h"
 #include "Actions/ResizeAction.h"
+#include "Actions/RotateAction.h"
 #include "Actions/SaveAction.h"
 #include "Actions/LoadAction.h"
+#include "Actions/ExitAction.h"
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/PickByTypeAction.h"
 #include "Actions/PickByColorAction.h"
 #include "Actions/PickByBothAction.h"
+#include "Actions/PickByAreaAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -36,7 +39,9 @@ ApplicationManager::ApplicationManager()
 	FigCount = 0;
 	SelecFigCount = 0;
 	ClipboardCount = 0;
-
+	Actcount = 0;
+	Rcount = 0;
+	ClipboardCount = 0;
 	//Create an array of figure pointers and set them to NULL		
 	for (int i = 0; i < MaxFigCount; i++)
 		FigList[i] = NULL;
@@ -44,6 +49,11 @@ ApplicationManager::ApplicationManager()
 	for (int i = 0; i < MaxSelecCount; i++)
 	{
 		SelectedFigList[i] = NULL;
+	}
+	for (int i = 0; i < Maxirri; i++)
+	{
+		Uorder[i] = NULL;
+		Rorder[i] = NULL;
 	}
 }
 
@@ -61,24 +71,33 @@ ActionType ApplicationManager::GetUserAction() const
 void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
+	Action* pAct2 = NULL;
 
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
 	case DRAW_RECT:
 		pAct = new AddRectAction(this, filled);
+		pAct2 = new AddRectAction(this, filled);
+		AddAction(pAct2);
 		break;
 
 	case DRAW_LINE:
 		pAct = new AddLineAction(this);
+		pAct2 = new AddLineAction(this);
+		AddAction(pAct2);
 		break;
 
 	case DRAW_TRI:
 		pAct = new AddTriAction(this, filled);
+		pAct2 = new AddTriAction(this, filled);
+		AddAction(pAct2);
 		break;
 
 	case DRAW_CIRC:
 		pAct = new AddCircAction(this, filled);
+		pAct2 = new AddCircAction(this, filled);
+		AddAction(pAct2);
 		break;
 
 		//case colors for change DRAW COLOR 
@@ -89,6 +108,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UpdateInterface();
 		pOut->CreateDrawClrToolBar();
 		pOut->PrintMessage("Choose color from following");
+		IsSaved = false;
 		break;
 
 	case COLOR_WHITE:
@@ -155,6 +175,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateFillClrToolBar();
 		pOut->PrintMessage("Choose color from following");
 		filled = true;
+		IsSaved = false;
 		break;
 
 	case FILL_WHITE:
@@ -220,6 +241,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		UpdateInterface();
 		pOut->CreateBackClrToolBar();
 		pOut->PrintMessage("Choose color from following");
+		IsSaved = false;
 		break;
 
 	case BCFILL_WHITE:
@@ -297,11 +319,19 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case MOVE:			//Move a figure(s)
 		pAct = new MoveAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case RESIZE:		//Resize a figure(s)
 		pAct = new ResizeAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
+		break;
+
+	case ROTATE:		//Resize a figure(s)
+		pAct = new RotateAction(this);
+		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case DEL:			//Delete a figure(s)
@@ -309,6 +339,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		deleteFig();
 		pOut->ClearDrawArea();
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case COPY:           //Copy an item to Clipboard
@@ -320,21 +351,25 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case PASTE:         //Paste an item from Clipboard
 		pAct = new PasteAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
 		pAct = new CutAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case SAVE:			//Save the whole graph to a file
 		pAct = new SaveAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = true;
 		break;
 
 	case LOAD:			//Load a graph from a file
 		pAct = new LoadAction(this);
 		pOut->CreateUtilityToolbar();
+		IsSaved = false;
 		break;
 
 	case ZOOM_IN:        //Zooming the whole graph in
@@ -354,7 +389,37 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case EXIT:			//Exit the application
-		//pAct = new EXITAction(this);
+		
+		pAct = new ExitAction(this);
+		c=((ExitAction*)pAct)->SaveBefExit();
+		if (c == 'n')
+		{
+			pAct = new SaveAction(this);
+		}
+		break;
+
+	case UNDO:
+		pAct2 = Uorder[Actcount - 1];
+		if (Actcount != 0)
+		{
+			pAct2->Undo();
+			AddReaction(pAct2);
+			Actcount--;
+		}
+		else pOut->PrintMessage("no action excuted");
+		pOut->CreateUtilityToolbar();
+		break;
+
+	case REDO:
+		pAct2 = Rorder[Rcount - 1];
+		if (Rcount != 0)
+		{
+			Rcount--;
+			Actcount++;
+			pAct2->Redo();
+		}
+		else pOut->PrintMessage("no action to be redone");
+		pOut->CreateUtilityToolbar();
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -391,6 +456,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case BY_AREA:    //Pick figures by Area, for play mode
+		pAct = new PickByAreaAction(this);
 		break;
 	}
 
@@ -412,6 +478,20 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
 }
+
+
+void ApplicationManager::AddAction(Action* act)
+{
+	if (Actcount < Maxirri)
+		Uorder[Actcount++] = act;
+}
+
+void ApplicationManager::AddReaction(Action* rAct)
+{
+	if (Rcount < Maxirri)
+		Rorder[Rcount++] = rAct;
+}
+
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -455,6 +535,14 @@ int ApplicationManager::GetFigCount()
 {
 	return FigCount;
 }
+
+
+void ApplicationManager::SetFigCount(int f)
+{
+	FigCount = f;
+}
+
+
 void ApplicationManager::UNSelectFigure(CFigure* s)
 {
 	for (int i = 0; i < SelecFigCount; i++)
@@ -584,6 +672,11 @@ void ApplicationManager::SaveAll(ofstream& Outfile)
 	}
 }
 
+bool ApplicationManager::GetIsSaved()
+{
+	return IsSaved;
+}
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -636,6 +729,10 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 			delete FigList[i];
 		for (int i = 0; i < SelecFigCount; i++)
 			delete SelectedFigList[i];
+		for (int i = 0; i < Actcount; i++)
+			delete Uorder[i];
+		for (int i = 0; i < Rcount; i++)
+			delete Rorder[i];
 		delete pIn;
 		delete pOut;
 		ClearClipboard();

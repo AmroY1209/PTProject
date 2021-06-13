@@ -50,4 +50,20 @@ void AddCircAction::Execute()
 	pManager->AddFigure(R);
 }
 
-AddCircAction::~AddCircAction(){}
+void AddCircAction::Undo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	figcount = pManager->GetFigCount();
+	pManager->SetFigCount(--figcount);
+}
+
+void AddCircAction::Redo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	Execute();
+}
+
+
+AddCircAction::~AddCircAction() {}

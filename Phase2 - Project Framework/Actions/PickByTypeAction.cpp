@@ -61,7 +61,7 @@ void PickByTypeAction::ReadActionParameters()
 			num_of_each_fig[1]++;    //To get number of lines drawn
 		else if (dynamic_cast<CTriangle*>(fig[i]))
 			num_of_each_fig[2]++;    //To get number of triangles drawn
-		else 
+		else
 			num_of_each_fig[3]++;    //To get number of circles drawn
 
 		fig[i]->unHide();
@@ -114,28 +114,28 @@ void PickByTypeAction::Execute()
 				CFigure* selectedFigure = pManager->GetFigure(Cx, Cy);
 				if (selectedFigure != NULL)
 				{
-					if (dynamic_cast<CRectangle*>(selectedFigure) && r==1)
+					if (dynamic_cast<CRectangle*>(selectedFigure) && r == 1)
 					{
 						printScore(1);
 						selectedFigure->hide();
 						pManager->UpdateInterface_PlayMode();
 						no_to_pick--;
 					}
-					else if (dynamic_cast<CLine*>(selectedFigure) && l==2)
+					else if (dynamic_cast<CLine*>(selectedFigure) && l == 2)
 					{
 						printScore(1);
 						selectedFigure->hide();
 						pManager->UpdateInterface_PlayMode();
 						no_to_pick--;
 					}
-					else if (dynamic_cast<CTriangle*>(selectedFigure) && t==3)
+					else if (dynamic_cast<CTriangle*>(selectedFigure) && t == 3)
 					{
 						printScore(1);
 						selectedFigure->hide();
 						pManager->UpdateInterface_PlayMode();
 						no_to_pick--;
 					}
-					else if (dynamic_cast<CCircle*>(selectedFigure) && c==4)
+					else if (dynamic_cast<CCircle*>(selectedFigure) && c == 4)
 					{
 						printScore(1);
 						selectedFigure->hide();
@@ -166,4 +166,21 @@ void PickByTypeAction::Execute()
 		fig[i]->unHide();
 		pManager->UpdateInterface_PlayMode();
 	}
+}
+void PickByTypeAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void PickByTypeAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
 }

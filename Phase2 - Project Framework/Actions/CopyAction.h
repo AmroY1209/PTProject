@@ -1,7 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "..\\Figures\CFigure.h"
-class CopyAction: public Action
+class CopyAction : public Action
 {
 private:
 	int Cx, Cy;
@@ -17,6 +17,7 @@ public:
 
 	//Execute action
 	virtual void Execute();
-
+	virtual void Undo();
+	virtual void Redo();
 
 };

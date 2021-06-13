@@ -62,6 +62,9 @@
     <ClCompile Include="Actions\ZoomOutAction.cpp" />
     <ClCompile Include="Actions\PickByColorAction.cpp" />
     <ClCompile Include="Actions\PickByBothAction.cpp" />
+    <ClCompile Include="Actions\ExitAction.cpp" />
+    <ClCompile Include="Actions\RotateAction.cpp" />
+    <ClCompile Include="Actions\PickByAreaAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actions\AddCircAction.h" />
@@ -112,6 +115,9 @@
     <ClInclude Include="Actions\ZoomOutAction.h" />
     <ClInclude Include="Actions\PickByColorAction.h" />
     <ClInclude Include="Actions\PickByBothAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
+    <ClInclude Include="Actions\RotateAction.h" />
+    <ClInclude Include="Actions\PickByAreaAction.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

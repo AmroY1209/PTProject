@@ -1,21 +1,20 @@
+#pragma once
 #include "..\Figures\CFigure.h"
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
 #include "Action.h"
 
-class MoveAction : public Action
+class RotateAction : public Action
 {
-	Point P;
 	int SelecFigCount;
 	CFigure** SelectedFigList; //Array of pointers
 
 public:
-	MoveAction(ApplicationManager* pmanager);
+	RotateAction(ApplicationManager* pmanager);
 	virtual void ReadActionParameters();
 	virtual void Execute();
-
 	virtual void Undo();
 	virtual void Redo();
-	~MoveAction();
+	~RotateAction();
 };

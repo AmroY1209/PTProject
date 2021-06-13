@@ -32,10 +32,11 @@ public:
 	color GetColor(string RGB);			//Gets the color from its name (load)
 	virtual bool checkLoc(int x, int y);
 	virtual GfxInfo GetGFXINFO();  //Gets graphical info
+	virtual float GetArea() =0;
 	void hide();					//Hides figures in playmode
 	void unHide();					//Unhides figures in playmode
 	bool figStatus();			//Returns true if the figure is hidden and false if not hidden 
-
+	
 	virtual Point getFirstPt() = 0;
 	virtual Point getLastPt() = 0;
 	virtual void Move(int x, int y) = 0;        //Move the figure
@@ -48,7 +49,7 @@ public:
 	///Decide the parameters that you should pass to each function	
 
 
-	//virtual void Rotate() = 0;	//Rotate the figure
+	virtual void Rotate(string degree) = 0;	//Rotate the figure
 
 
 	virtual void Save(ofstream &Outfile) = 0;	//Save the figure parameters to the file

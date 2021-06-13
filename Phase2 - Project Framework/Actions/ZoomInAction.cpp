@@ -61,3 +61,20 @@ void ZoomInAction::ZoomIN(string scale)
 	pOut->DrawImage(img2, 0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
 }
+void ZoomInAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void ZoomInAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
+}

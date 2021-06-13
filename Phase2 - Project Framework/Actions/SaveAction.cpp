@@ -38,14 +38,14 @@ void SaveAction::Execute()
 		pManager->SaveAll(Outfile);
 		Outfile.close();
 	}
-	
-	
+
+
 }
 
 string SaveAction::GetColorName(color RGB)
 {
 	if (RGB.ucRed == 0 && RGB.ucGreen == 0 && RGB.ucBlue == 0)
-	return "BLACK";
+		return "BLACK";
 	else if (RGB.ucRed == 255 && RGB.ucGreen == 255 && RGB.ucBlue == 255)
 		return "WHITE";
 	else if (RGB.ucRed == 255 && RGB.ucGreen == 0 && RGB.ucBlue == 0)
@@ -60,4 +60,21 @@ string SaveAction::GetColorName(color RGB)
 		return "PURPLE";
 	else if (RGB.ucRed == 255 && RGB.ucGreen == 165 && RGB.ucBlue == 0)
 		return "ORANGE";
+}
+void SaveAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void SaveAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
 }

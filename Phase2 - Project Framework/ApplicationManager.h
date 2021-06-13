@@ -3,6 +3,7 @@
 
 #include "DEFS.h"
 #include "Figures\CFigure.h"
+#include "Actions/Action.h"
 #include "GUI\input.h"
 #include "GUI\output.h"
 
@@ -11,12 +12,17 @@ class ApplicationManager
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
 	enum { MaxSelecCount = 40 };
+	enum { Maxirri = 100 };
 	//Max no of figures
 
 private:
 	bool filled;
 	int FigCount;		//Actual number of figures
+	int Actcount;
+	int Rcount;
 	int SelecFigCount;	//selected figure counter
+	Action* Uorder[Maxirri];
+	Action* Rorder[Maxirri];
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 	CFigure* SelectedFigList[MaxSelecCount];	//List of all figures (Array of pointers)
 
@@ -30,7 +36,8 @@ private:
 	int ClipboardCount;
 	bool IsInClipboard;      //Used to check that there is a figure in clipboard or not
 	bool IsFigCut;           //To know whether the figure in Clipboard is cut or copied
-
+	bool IsSaved;			//To know whether the user saved the file or not
+	char c;
 public:
 	ApplicationManager();
 	~ApplicationManager();
@@ -57,6 +64,12 @@ public:
 	void ClearFigList();                //Deletes all figures in the list of figures
 	void ClrSelectFig();
 
+	void AddAction(Action* act);
+	void AddReaction(Action* rAct);
+	CFigure** GetDrawnFigs();      //Gets the list of drawn figures
+	int GetFigCount();             //Gets the number of actual drawn figures
+	void ClearFigList();                //Deletes all figures in the list of figures
+	void SetFigCount(int);
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
 	Output* GetOutput() const; //Return pointer to the output
@@ -73,6 +86,10 @@ public:
 	void setCut(bool);
 	bool getCut();
 	void ClearClipboard();  //Clears Clipboard
+	void SetIsFigCut(bool);
+	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
+	bool GetIsSaved();
+
 	void SetCount(int x);
 	int GetCount();
 	void setSelectedCount(int);

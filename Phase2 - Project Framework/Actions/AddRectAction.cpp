@@ -4,20 +4,21 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\input.h"
 #include "..\GUI\Output.h"
+#include <stack>
 
 AddRectAction::AddRectAction(ApplicationManager* pApp, bool filled) :Action(pApp)
 {
 	RectGfxInfo.isFilled = filled;
 }
 
-void AddRectAction::ReadActionParameters() 
-{	
+void AddRectAction::ReadActionParameters()
+{
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("New Rectangle: Click at first corner");
-	
+
 	//Read 1st corner and store in point P1
 	pIn->GetPointClicked(P1.x, P1.y);
 
@@ -37,16 +38,31 @@ void AddRectAction::ReadActionParameters()
 }
 
 //Execute the action
-void AddRectAction::Execute() 
+void AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	
+
 	//Create a rectangle with the parameters read from the user
-	CRectangle *R=new CRectangle(P1, P2, RectGfxInfo);
+	CRectangle* R = new CRectangle(P1, P2, RectGfxInfo);
 
 	//Add the rectangle to the list of figures
 	pManager->AddFigure(R);
 }
 
-AddRectAction::~AddRectAction(){}
+void AddRectAction::Undo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	figcount = pManager->GetFigCount();
+	pManager->SetFigCount(--figcount);
+}
+
+void AddRectAction::Redo()
+{
+	Output* pOut = pManager->GetOutput();
+	pOut->ClearDrawArea();
+	Execute();
+}
+
+AddRectAction::~AddRectAction() {}

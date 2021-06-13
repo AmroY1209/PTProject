@@ -63,3 +63,20 @@ void ZoomOutAction::ZoomOut(string scale)
 	}
 	pOut->CreateUtilityToolbar();
 }
+void ZoomOutAction::Undo()
+{
+
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//figcount = pManager->GetFigCount();
+	//pManager->SetFigCount(--figcount);
+}
+
+void ZoomOutAction::Redo()
+{
+
+	//Output* pOut = pManager->GetOutput();
+	//pOut->ClearDrawArea();
+	//Execute();
+}

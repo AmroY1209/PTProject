@@ -28,10 +28,13 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_BKCOL,		//Change background color in menu
 	ITM_SELECT,		//Select Shape
 	ITM_RESIZE,		//Resize a drawing area item in menu
+	ITM_ROTATE,
 	ITM_ZOOMIN,     //Zoom in item in menu
 	ITM_ZOOMOUT,    //Zoom out item in menu
 	ITM_MOVE,		//Move item in the drawing area in menu
 	ITM_DEL,		//Delete an item
+	ITM_UNDO,
+	ITM_REDO,
 	ITM_PLAY,       //Go to Play toolbar in menu
 	ITM_EXIT,		//Exit item
 

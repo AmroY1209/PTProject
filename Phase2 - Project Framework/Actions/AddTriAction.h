@@ -8,6 +8,7 @@ class AddTriAction : public Action
 {
 private:
 	Point P1, P2, P3; //Triangle Corners
+	int figcount;
 	GfxInfo TriGfxInfo;
 public:
 	AddTriAction(ApplicationManager* pApp, bool filled = false);
@@ -17,6 +18,8 @@ public:
 
 	//Add triangle to the ApplicationManager
 	virtual void Execute();
+	virtual void Undo();
+	virtual void Redo();
 	~AddTriAction();
 };
 

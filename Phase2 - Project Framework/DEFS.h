@@ -54,6 +54,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	SELECT,			//Select an item
 	MOVE,			//Move a figure(s)
 	RESIZE,			//Resize a figure(s)
+	ROTATE,
 	DEL,			//Delete a figure(s)
 	COPY,           //Copy an item to Clipboard
 	PASTE,          //Paste an item from Clipboard
@@ -62,6 +63,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	LOAD,			//Load a graph from a file
 	ZOOM_IN,        //Zooming the whole graph in
 	ZOOM_OUT,       //Zooming the whole graph out
+	UNDO,
+	REDO,
 	EXIT,			//Exit the application
 
 	DRAWING_AREA,	//A click on the drawing area

@@ -52,6 +52,11 @@ float CTriangle::getarea(Point C1, Point C2, int x, int y)
 	return A;
 }
 
+float CTriangle::GetArea()
+{
+return (0.5) * abs(Corner1.x * (Corner2.y - Corner3.y) + Corner2.x * (Corner3.y - Corner1.y) + Corner3.x * (Corner1.y - Corner2.y));
+}
+
 bool CTriangle::checkLoc(int x, int y)
 {
 	float radius;
@@ -97,6 +102,44 @@ Point CTriangle::getLastPt()
 	P.x = Corner3.x;
 	P.y = Corner3.y;
 	return P;
+}
+
+Point CTriangle::getCenter()
+{
+	Point P;
+	P.x = (Corner1.x + Corner2.x + Corner3.x) / 3;
+	P.y = (Corner1.y + Corner2.y + Corner3.y) / 3;
+	return P;
+}
+void CTriangle::Rotate(string degree)
+{
+	if (degree == "90")
+	{
+		Corner1.x = -(Corner1.y - getCenter().y) + getCenter().x;
+		Corner1.y = (Corner1.x - getCenter().x) + getCenter().y;
+		Corner2.x = -(Corner2.y - getCenter().y) + getCenter().x;
+		Corner2.y = (Corner2.x - getCenter().x) + getCenter().y;
+		Corner3.x = -(Corner3.y - getCenter().y) + getCenter().x;
+		Corner3.y = (Corner3.x - getCenter().x) + getCenter().y;
+	}
+	else if (degree == "180")
+	{
+		Corner1.x = -(Corner1.x - getCenter().x) + getCenter().x;
+		Corner1.y = -(Corner1.y - getCenter().y) + getCenter().y;
+		Corner2.x = -(Corner2.x - getCenter().x) + getCenter().x;
+		Corner2.y = -(Corner2.y - getCenter().y) + getCenter().y;
+		Corner3.x = -(Corner3.x - getCenter().x) + getCenter().x;
+		Corner3.y = -(Corner3.y - getCenter().y) + getCenter().y;
+	}
+	else if (degree == "270")
+	{
+		Corner1.x = (Corner1.y - getCenter().y) + getCenter().x;
+		Corner1.y = -(Corner1.x - getCenter().x) + getCenter().y;
+		Corner2.x = (Corner2.y - getCenter().y) + getCenter().x;
+		Corner2.y = -(Corner2.x - getCenter().x) + getCenter().y;
+		Corner3.x = (Corner3.y - getCenter().y) + getCenter().x;
+		Corner3.y = -(Corner3.x - getCenter().x) + getCenter().y;
+	}
 }
 
 void CTriangle::Resize(string scale)
