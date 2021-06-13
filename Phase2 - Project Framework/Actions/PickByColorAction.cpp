@@ -370,3 +370,12 @@ void PickByColorAction::Execute()
 		pManager->UpdateInterface_PlayMode();
 	}
 }
+
+void PickByColorAction::Undo()
+{
+
+}
+void PickByColorAction::Redo()
+{
+
+}

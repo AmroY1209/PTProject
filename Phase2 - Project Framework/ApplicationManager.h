@@ -66,9 +66,6 @@ public:
 
 	void AddAction(Action* act);
 	void AddReaction(Action* rAct);
-	CFigure** GetDrawnFigs();      //Gets the list of drawn figures
-	int GetFigCount();             //Gets the number of actual drawn figures
-	void ClearFigList();                //Deletes all figures in the list of figures
 	void SetFigCount(int);
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
@@ -86,8 +83,6 @@ public:
 	void setCut(bool);
 	bool getCut();
 	void ClearClipboard();  //Clears Clipboard
-	void SetIsFigCut(bool);
-	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
 	bool GetIsSaved();
 
 	void SetCount(int x);

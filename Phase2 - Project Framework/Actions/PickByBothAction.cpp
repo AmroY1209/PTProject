@@ -695,3 +695,13 @@ void PickByBothAction::Execute()
 		pManager->UpdateInterface_PlayMode();
 	}
 }
+
+
+void  PickByBothAction::Undo()
+{
+
+}
+void PickByBothAction::Redo()
+{
+
+}
