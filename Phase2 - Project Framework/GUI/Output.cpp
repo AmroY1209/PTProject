@@ -19,7 +19,7 @@ Output::Output()
 
 
 	UI.DrawColor = BLACK;	//Drawing color
-	UI.FillColor = ORANGE;		//Filling color
+	UI.FillColor = WHITE;		//Filling color
 	UI.MsgColor = WHITE;		//Messages color
 	UI.BkGrndColor = WHITE;	//Background color
 	UI.HighlightColor = VIOLET;	//This color should NOT be used to draw figures. use if for highlight only

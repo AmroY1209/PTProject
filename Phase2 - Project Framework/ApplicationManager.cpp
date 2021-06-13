@@ -1,5 +1,4 @@
 #include "ApplicationManager.h"
-
 #include "Actions/AddRectAction.h"
 #include "Actions/AddTriAction.h"
 #include "Actions/AddLineAction.h"
@@ -15,6 +14,8 @@
 #include "Actions/ZoomInAction.h"
 #include "Actions/ZoomOutAction.h"
 #include "Actions/PickByTypeAction.h"
+#include "Actions/PickByColorAction.h"
+#include "Actions/PickByBothAction.h"
 #include "Figures/CCircle.h"
 #include "Figures/CRectangle.h"
 #include "Figures/CLine.h"
@@ -322,7 +323,6 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case CUT:            //Cut an item and have it in Clipboard
-		pOut->PrintMessage("llll");
 		pAct = new CutAction(this);
 		pOut->CreateUtilityToolbar();
 		break;
@@ -383,9 +383,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case BY_COLOR:    //Pick figures by Color, for play mode
+		pAct = new PickByColorAction(this);
 		break;
 
 	case BY_BOTH:    //Pick figures by both Type and Color, for play mode
+		pAct = new PickByBothAction(this);
 		break;
 
 	case BY_AREA:    //Pick figures by Area, for play mode
@@ -506,6 +508,18 @@ CFigure* ApplicationManager::GetFigure(int x, int y) const // for select
 	return NULL;
 }
 
+//Function takes the ID of the figures to be removed
+void ApplicationManager::remove_Fig(int ID) 
+{
+	for (int i = ID; i < FigCount - 1; i++)   //Sorts the array without the selected figure
+	{
+		FigList[i] = FigList[i + 1];
+		FigList[i]->SetID(i);
+	}
+	FigCount--;
+	FigList[FigCount] = NULL;
+}
+
 CFigure** ApplicationManager::GetDrawnFigs()
 {
 	return FigList;
@@ -548,7 +562,16 @@ void ApplicationManager::ClearFigList()
 			}
 		}
 	}
-
+	
+	//Clears the selected figure
+	void ApplicationManager::ClrSelectFig() 
+	{
+		for (int i = 0; i < SelecFigCount; i++)
+		{
+			SelectedFigList[i] = NULL;
+		}
+		SelecFigCount = 0;
+	}
 //==================================================================================//
 //								Save Related Functions								//
 //==================================================================================//
@@ -615,6 +638,7 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 			delete SelectedFigList[i];
 		delete pIn;
 		delete pOut;
+		ClearClipboard();
 	}
 
 	//Draw all figures on the user interface in the play mode specifically
@@ -634,10 +658,6 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 	void ApplicationManager::SetClipboard(CFigure * *fig)
 	{
 		IsInClipboard = true;
-		/*for (int i = 0; i < SelecFigCount; i++)
-		{
-			Clipboard[ClipboardCount++] = fig[i];
-		}*/
 		Clipboard = fig;
 	}
 
@@ -649,19 +669,17 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 			return NULL;
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////
-
-	void ApplicationManager::SetIsFigCut(bool b)
+	void ApplicationManager::setCut(bool b)
 	{
 		IsFigCut = b;
 	}
 
-	////////////////////////////////////////////////////////////////////
-
-	bool ApplicationManager::GetIsFigCut()
+	bool ApplicationManager::getCut()
 	{
 		return IsFigCut;
 	}
+	////////////////////////////////////////////////////////////////////////////////////
+
 	void ApplicationManager::ClearClipboard()
 	{
 		for (int i = 0; i < ClipboardCount; i++)
@@ -676,4 +694,20 @@ void ApplicationManager::OnlyclearselcFig()  //Only clears selected figure witho
 	int ApplicationManager::GetCount()
 	{
 		return TempCount;
+	}
+
+	void ApplicationManager::setSelectedCount(int c)
+	{
+		SelecFigCount = c;
+	}
+	void ApplicationManager::UNSelect_whenPaste(CFigure* s)
+	{
+		for (int i = 0; i < SelecFigCount; i++)
+		{
+			if (SelectedFigList[i] == s)
+			{
+				SelectedFigList[i] = NULL;
+				break;
+			}
+		}
 	}

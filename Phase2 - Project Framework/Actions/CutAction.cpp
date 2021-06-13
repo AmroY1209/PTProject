@@ -14,44 +14,31 @@ void CutAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("Cut Figure: Selected figure has been cut to the Clipboard, Click any where to continue");
-
 	SelectedFig_List = pManager->GetSelectedFigs();
-	SelecFigCount = pManager->GetSelectedCount();   //mlosh lazma
-	Temp_Count = SelecFigCount;  //mab2tsh 3ayzo
-	CFigure** TempList= new CFigure* [SelecFigCount];   //Temporary list of figures
-	for (int i = 0; i < SelecFigCount; i++)
-	{
-		TempList[i] = SelectedFig_List[i];
-	}
-	pManager->SetClipboard(TempList);
-	for (int i = 0; i < SelecFigCount; i++)
-	{
-		/*DelID = SelectedFig_List[i]->getID();
-
-		pManager->removeFig(DelID);*/
-
-		delete SelectedFig_List[i];
-
-	}
-	//emsah el selected figure hena ya youssef
-	//DeleteAction Temp(pManager);
-	//Temp.Execute();
-	pManager->OnlyclearselcFig();
-	pOut->ClearDrawArea();
-	pManager->UpdateInterface();
-	//Wait for User Input
-	pIn->GetPointClicked(Cx, Cy);
-
-	//Clear Status Bar
-	pOut->ClearStatusBar();
+	SelecFigCount = pManager->GetSelectedCount();
+	if (SelectedFig_List[0])
+		pOut->PrintMessage("Cut Figure: Selected figure has been cut to the Clipboard");
+	else if (!SelectedFig_List[0])
+		pOut->PrintMessage("Cut Figure: Please select a figure first to cut");
+	 
 }
 void CutAction::Execute()
 {
-	ReadActionParameters();
-	//fig = pManager->GetFigure(Cx, Cy);  //Get the coordinates of the selected figure
-	//pManager->SetClipboard(fig);
-	//pManager->SetIsFigCut(true);       //The Figure is cut not copied
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	ReadActionParameters();
+	if (SelectedFig_List[0] != NULL)
+	{
+		for (int i = 0; i < SelecFigCount; i++)
+			SelectedFig_List[i]->SetSelected(false);
+		pManager->SetClipboard(SelectedFig_List);
+
+		for (int i = 0; i < SelecFigCount; i++)
+		{
+			pManager->remove_Fig(SelectedFig_List[i]->getID());
+		}
+		pOut->ClearDrawArea();
+		pOut->CreateUtilityToolbar();
+		pManager->setCut(true);   //Indication that the figure is cut
+	}
 }

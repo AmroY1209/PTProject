@@ -108,5 +108,16 @@ void PasteAction::Execute()
 				pIn->GetPointClicked(Cx, Cy);
 			}
 		}
+		if (pManager->getCut() == true)
+		{ 
+			int SelecCountSubtractor = 0;
+			for (int i = 0; i < SelecFigCount; i++)
+			{
+				pManager->UNSelect_whenPaste(SelectedFigList[i]);
+				SelecCountSubtractor--;
+			}
+			SelecFigCount = SelecFigCount + SelecCountSubtractor;
+			pManager->setSelectedCount(SelecFigCount);
+		}
 	}
 }

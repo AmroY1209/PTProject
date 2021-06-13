@@ -50,10 +50,12 @@ public:
 	int  GetSelectedCount();
 	void clearselcFig();
 	void OnlyclearselcFig();  //Only clears selected figure without selected figure count
+	void remove_Fig(int);        //Removes figures using its ID
 
 	CFigure** GetDrawnFigs();      //Gets the list of drawn figures
 	int GetFigCount();             //Gets the number of actual drawn figures
 	void ClearFigList();                //Deletes all figures in the list of figures
+	void ClrSelectFig();
 
 	// -- Interface Management Functions
 	Input* GetInput() const; //Return pointer to the input
@@ -68,11 +70,13 @@ public:
 	// -- Clipboard Functions
 	void SetClipboard(CFigure**);
 	CFigure** GetClipboard();
-	void ClearClipboard();  //Clears Clipboard shakly msh mehtagha khals
-	void SetIsFigCut(bool);
-	bool GetIsFigCut();    //To know whether the figure in Clipboard is cut or copied
+	void setCut(bool);
+	bool getCut();
+	void ClearClipboard();  //Clears Clipboard
 	void SetCount(int x);
 	int GetCount();
+	void setSelectedCount(int);
+	void UNSelect_whenPaste(CFigure*);
 };
 
 #endif
